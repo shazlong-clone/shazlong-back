@@ -1,0 +1,12 @@
+exports.doctorModel = require('./doctorModel');
+exports.userModel = require('./userModel');
+exports.adminModel = require('./adminModel');
+exports.articleModel = require('./articleModel');
+exports.resultModel = require('./resultModel');
+exports.questionnaireModel = require('./questionnaireModel');
+exports.clinicModel = require('./clinicModel');
+exports.slotModel = require('./slotModel');
+exports.questionnaireCategoryModel = require('./questionnaireCategoryModel');
+exports.followUpRequestModel = require('./followUpRequestModel');
+exports.reviewModel = require('./reviewModel');
+exports.questionnaireGroupResultModel = require('./questionnaireGroupResultModel');
