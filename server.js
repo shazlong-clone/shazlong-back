@@ -1,36 +1,16 @@
 const dotenv = require('dotenv');
 
-// eslint-disable-next-line no-unused-vars
-const colors = require('colors');
+require('colors');
 const http = require('http');
-const path = require('path')
-// const cors = require('cors');
-const socketIo = require('socket.io');
-const peer = require('peer');
+const path = require('path');
 
-dotenv.config({ path: path.join(__dirname, '/config/config.env')});
+dotenv.config({ path: path.join(__dirname, '/config/config.env') });
 const app = require('./app');
-const { socketEvents } = require('./controllers');
 const connectDB = require('./config/db');
 
 connectDB();
 
 const server = http.createServer(app);
-const io = socketIo(server, {
-  cors: {
-    origin: true,
-  },
-});
-io.on('connection', socketEvents);
-const peerPort = process.env.PEERPORT || 9000;
-const { PeerServer } = peer;
-const peerServer = PeerServer({ port: peerPort, path: '/myapp' });
-peerServer.on('connection', (client) => {
-  console.log('client connected ');
-});
-peerServer.on('disconnect', (client) => {
-  console.log('client disconnected ');
-});
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => console.log(`Listening on port ${PORT}`.yellow.bold));
 
