@@ -28,7 +28,7 @@ exports.logIn = asyncHandler(async (req, res, next) => {
   //get search query
   const query = getQuery.getSearchObject(value); // {email:"+20100514723 or email:"xx@mail.com" , password:"1236344ss"}
 
-  //1)get the doctor
+  //1)get the user
   const user = await userModel.findOne(query).select('+password');
   //2)check if there is no user or check if the password is not correct
   if (
