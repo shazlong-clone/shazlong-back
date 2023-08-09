@@ -1,119 +1,86 @@
-const { userModel, followUpRequestModel, resultModel } = require('../models');
-const { asyncHandler, responseHandler } = require('../middleware');
-const { userValidators } = require('../validators');
-const { AppError } = require('../utils');
+const User = require('./../models/userModel');
+const catchAsync = require('./../utils/catchAsync');
+const AppError = require('./../utils/appError');
 
-exports.getAllUsers = asyncHandler(async (req, res, next) => {
-  const allUsers = await userModel.find();
-  responseHandler.sendResponse(res, 200, 'success', allUsers, null, null);
-});
-exports.getUserTests = asyncHandler(async (req, res, next) => {
-  const userId = req.user._id;
-  const allUserTests = await resultModel.find({
-    user: userId,
+const filterObj = (obj, ...allowedFields) => {
+  const newObj = {};
+  Object.keys(obj).forEach(el => {
+    if (allowedFields.includes(el)) newObj[el] = obj[el];
   });
-  responseHandler.sendResponse(res, 200, 'success', allUserTests, null, null);
-});
-exports.getUserTest = asyncHandler(async (req, res, next) => {
-  const resultid = req.params.resultID;
+  return newObj;
+};
 
-  const UserTest = await resultModel.findById(resultid);
+exports.getAllUsers = catchAsync(async (req, res, next) => {
+  const users = await User.find();
 
-  if (!UserTest) {
-    return next(new AppError(`No result with the id of ${req.params.id}`, 404));
-  }
-  if (UserTest.user.toString() !== req.user.id) {
-    return next(new AppError(`Not authorized to view the result`, 401));
-  }
-  responseHandler.sendResponse(res, 200, 'success', UserTest, null, null);
-});
-exports.doctorFollowUpRequest = asyncHandler(async (req, res, next) => {
-  const userId = req.user._id;
-  const { doctorId } = req.body;
-  const followUpRequest = await followUpRequestModel.create({
-    user: userId,
-    doctor: doctorId,
+  // SEND RESPONSE
+  res.status(200).json({
+    status: 'success',
+    results: users.length,
+    data: {
+      users
+    }
   });
-  responseHandler.sendResponse(
-    res,
-    201,
-    'success',
-    followUpRequest,
-    null,
-    null
-  );
 });
 
-exports.getFollowUpRequestStatus = asyncHandler(async (req, res, next) => {
-  const userId = req.user._id;
-  const followUpRequest = await followUpRequestModel.findOne({
-    user: userId,
-  });
-  responseHandler.sendResponse(
-    res,
-    200,
-    'success',
-    { status: followUpRequest.status },
-    null,
-    null
-  );
-});
-
-exports.revokeFollowUpRequest = asyncHandler(async (req, res, next) => {
-  const userId = req.user._id;
-  const followUpRequest = await followUpRequestModel.findOneAndUpdate(
-    { user: userId },
-    { status: 'revoked' },
-    { new: true }
-  );
-
-  if (!followUpRequest) {
-    return new AppError(
-      "Couldn't find follow up request with this specialist",
-      400
+exports.updateMe = catchAsync(async (req, res, next) => {
+  // 1) Create error if user POSTs password data
+  if (req.body.password || req.body.passwordConfirm) {
+    return next(
+      new AppError(
+        'This route is not for password updates. Please use /updateMyPassword.',
+        400
+      )
     );
   }
 
-  await userModel.findByIdAndUpdate(userId, {
-    $set: {
-      doctorId: null,
-    },
-  });
+  // 2) Filtered out unwanted fields names that are not allowed to be updated
+  const filteredBody = filterObj(req.body, 'name', 'email');
 
-  responseHandler.sendResponse(
-    res,
-    200,
-    'success',
-    followUpRequest,
-    null,
-    null
-  );
-});
-
-exports.getUserProfile = asyncHandler(async (req, res, next) => {
-  const user = await userModel
-    .findById(req.user.id)
-    .select('name email picture createdAt address phone sex maritalStatus age');
-
-  responseHandler.sendResponse(res, 200, 'success', user, null, null);
-});
-
-exports.updateUserProfile = asyncHandler(async (req, res, next) => {
-  const user = await userModel.findById(req.user.id);
-
-  if (!user) {
-    return next(new AppError(`No user with the id of ${req.user.id}`, 404));
-  }
-
-  const { error, value } = userValidators.editUserProfile.validate(req.body);
-
-  if (error) {
-    return next(new AppError(error.details[0].message, 400));
-  }
-
-  const editedUser = await userModel.findByIdAndUpdate(req.user.id, value, {
+  // 3) Update user document
+  const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
     new: true,
-    runValidators: true,
+    runValidators: true
   });
-  responseHandler.sendResponse(res, 200, 'success', editedUser, null, null);
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user: updatedUser
+    }
+  });
 });
+
+exports.deleteMe = catchAsync(async (req, res, next) => {
+  await User.findByIdAndUpdate(req.user.id, { active: false });
+
+  res.status(204).json({
+    status: 'success',
+    data: null
+  });
+});
+
+exports.getUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not yet defined!'
+  });
+};
+exports.createUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not yet defined!'
+  });
+};
+exports.updateUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not yet defined!'
+  });
+};
+exports.deleteUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not yet defined!'
+  });
+};
