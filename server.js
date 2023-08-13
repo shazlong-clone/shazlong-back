@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+require('colors');
 
 process.on('uncaughtException', err => {
   console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
@@ -23,14 +24,15 @@ if (process.env.NODE_ENV === 'production') {
 mongoose
   .connect(DB, {
     useNewUrlParser: true,
+    useUnifiedTopology: true,
     useCreateIndex: true,
-    useFindAndModify: false
+    useFindAndModify: true
   })
-  .then(() => console.log('DB connection successful!'));
+  .then(() => console.log('DB connection successful!'.yellow.bold));
 
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
-  console.log(`App running on port ${port}...`);
+  console.log(`App running on port ${port}...`.blue.bold);
 });
 
 process.on('unhandledRejection', err => {

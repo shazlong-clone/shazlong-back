@@ -2,12 +2,23 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
+const { gender } = require('../utils/constants');
 
-const userSchema = new mongoose.Schema({
+const doctorSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'Please tell us your name!']
   },
+  full_ar_name: String,
+  full_en_name: String,
+  experience_years: Number,
+  gender: {
+    type: String,
+    enum: gender
+  },
+  country: String,
+  languages: String,
+  prefix: String,
   email: {
     type: String,
     required: [true, 'Please provide your email'],
@@ -19,7 +30,7 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     enum: ['user', 'doctor'],
-    default: 'user'
+    default: 'doctor'
   },
   password: {
     type: String,
@@ -28,6 +39,10 @@ const userSchema = new mongoose.Schema({
     select: false
   },
   birthDate: Date,
+  cv: {
+    type: String,
+    require: [true, 'Please provide your cv']
+  },
   passwordConfirm: {
     type: String,
     required: [true, 'Please confirm your password'],
@@ -46,10 +61,11 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
     select: false
-  }
+  },
+  verificationCodeToken: String
 });
 
-userSchema.pre('save', async function(next) {
+doctorSchema.pre('save', async function(next) {
   // Only run this function if password was actually modified
   if (!this.isModified('password')) return next();
 
@@ -61,27 +77,27 @@ userSchema.pre('save', async function(next) {
   next();
 });
 
-userSchema.pre('save', function(next) {
+doctorSchema.pre('save', function(next) {
   if (!this.isModified('password') || this.isNew) return next();
 
   this.passwordChangedAt = Date.now() - 1000;
   next();
 });
 
-userSchema.pre(/^find/, function(next) {
+doctorSchema.pre(/^find/, function(next) {
   // this points to the current query
   this.find({ active: { $ne: false } });
   next();
 });
 
-userSchema.methods.correctPassword = async function(
+doctorSchema.methods.correctPassword = async function(
   candidatePassword,
   userPassword
 ) {
   return await bcrypt.compare(candidatePassword, userPassword);
 };
 
-userSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
+doctorSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
   if (this.passwordChangedAt) {
     const changedTimestamp = parseInt(
       this.passwordChangedAt.getTime() / 1000,
@@ -95,19 +111,27 @@ userSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
   return false;
 };
 
-userSchema.methods.createPasswordResetToken = function() {
+doctorSchema.methods.createVerificationCode = function() {
+  const verificationCode = crypto.randomBytes(32).toString('hex');
+  this.verificationCodeToken = crypto
+    .createHash('sha256')
+    .update(verificationCode)
+    .digest('hex');
+  return verificationCode;
+};
+
+doctorSchema.methods.createPasswordResetToken = function() {
   const resetToken = crypto.randomBytes(32).toString('hex');
 
   this.passwordResetToken = crypto
     .createHash('sha256')
     .update(resetToken)
     .digest('hex');
-
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 
   return resetToken;
 };
 
-const User = mongoose.model('User', userSchema);
+const Doctor = mongoose.model('Doctor', doctorSchema);
 
-module.exports = User;
+module.exports = Doctor;
