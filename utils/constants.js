@@ -1,1 +1,1 @@
-exports.gender = ['Mal', 'Femal'];
+exports.gender = ['Male', 'Female'];

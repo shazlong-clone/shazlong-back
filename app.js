@@ -5,6 +5,8 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const path = require('path');
+const { I18n } = require('i18n');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -13,7 +15,15 @@ const doctorRouter = require('./routes/doctorRouters');
 
 const app = express();
 
-// 1) GLOBAL MIDDLEWARES
+//  loacal MIDDLEWARES
+const i18n = new I18n({
+  locales: ['en', 'ar'],
+  directory: path.join(__dirname, 'locales'),
+  defaultLocale: 'en'
+});
+app.use(i18n.init);
+
+// GLOBAL MIDDLEWARES
 // Set security HTTP headers
 app.use(helmet());
 
@@ -65,7 +75,7 @@ app.use((req, res, next) => {
 
 // 3) ROUTES
 app.use('/api/v1/users', userRouter);
-app.use('/api/v1/doctor', doctorRouter);
+app.use('/api/v1/doctors', doctorRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

@@ -1,0 +1,18 @@
+{
+  "verification_code_sent": "تم ارسال لنك التأكيد في الايميل",
+  "server_error": "حدث خطأ ما !",
+  "password_required": "الرجاء تعبئة الرقم السري",
+  "password_or_email_wrong": "البريد الالكتروني او الرقم السري خطأ",
+  "not_logedin": "الرجاء تسجل الدخول اولا",
+  "user_nolong_exits": "المستخدم التابع لهذا التوكين لم يعد مسجل",
+  "password_changed": "لوقد قمت مؤخرا بتغير كلمة السر",
+  "authorization_error": "كمستخدم ليس مسموح بعمل هذا الامر",
+  "email_removed": "لايوجد مستخدم بهذا البريد الالكتروني",
+  "token_sent": "الرجاء فحص الايميل تم ارسال رابط",
+  "email_sending_error": "حدث حطأ اثناء الارسال",
+  "token_error": "التوكين غير صالحة او منتهية",
+  "password_wrong": "كلمة سر خاطئة",
+  "verification_error": "رمز التأكيد مطلوب",
+  "doctor_not_exits": "الدكتور غير مسجل",
+  "profile_updated": "تم التحديث"
+}

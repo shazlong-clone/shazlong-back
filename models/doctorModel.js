@@ -63,8 +63,7 @@ const doctorSchema = new mongoose.Schema(
       default: true,
       select: false
     },
-    verificationHash: String,
-    code: String
+    verificationHash: String
   },
   {
     toJSON: { virtuals: true },
@@ -126,7 +125,6 @@ doctorSchema.methods.createVerificationCode = function() {
     .createHash('sha256')
     .update(verificationCode)
     .digest('hex');
-  this.code = verificationCode;
   return verificationCode;
 };
 
