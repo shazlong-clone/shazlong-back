@@ -9,7 +9,7 @@ const path = require('path');
 const { I18n } = require('i18n');
 
 const AppError = require('./utils/appError');
-const globalErrorHandler = require('./controllers/errorController');
+const globalErrorHandler = require('./controllers/error/errorController');
 const userRouter = require('./routes/userRoutes');
 const doctorRouter = require('./routes/doctorRouters');
 

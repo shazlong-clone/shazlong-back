@@ -20,5 +20,6 @@
   "and": "و",
   "invalid_input": "Invalid Input",
   "invalid_token": "Invalid token. Please log in again!",
-  "expoired_token": "Expired token. Please log in again!"
+  "expoired_token": "Expired token. Please log in again!",
+  "not_right_route": "This route is not for password updates. Please use /updateMyPassword."
 }
