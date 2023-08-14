@@ -15,10 +15,10 @@ exports.signup = catchAsync(async (req, res, next) => {
     passwordConfirm: req.body.passwordConfirm
   });
   await doctor.validate();
-  const verticationToken = doctor.createVerificationCode();
+  const verticationCode = doctor.createVerificationCode();
   const url = `${req.protocol}://${req.get(
     'host'
-  )}/api/v1/doctor/verify-email-registration/${verticationToken}`;
+  )}/api/v1/doctor/verify-email-registration/${verticationCode}`;
   const message = `Please Compleate Your Profile with This link: ${url}`;
   // await sendEmail({
   //   email: req.body.email,
@@ -194,5 +194,37 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 });
 
 exports.verifyEmailRegistration = catchAsync(async (req, res, next) => {
-  res.send('saeed');
+  const params = {
+    fullArName: req.body.fullArName,
+    fullEnName: req.body.fullEnName,
+    experienceYears: req.body.experienceYears,
+    gender: req.body.gender,
+    country: req.body.country,
+    languages: req.body.languages,
+    prefix: req.body.prefix,
+    cv: req.body.cv
+  };
+  for (const param in params) {
+    if (!params[param]) return next(new AppError(`${param} is required`, 400));
+  }
+  const verificationCode = req.query['verofovation-code'];
+
+  const verificationHash = crypto
+    .createHash('sha256')
+    .update(verificationCode)
+    .digest('hex');
+
+  if (!verificationCode) {
+    return next(new AppError('verification Code equired', 400));
+  }
+  const doctor = await Doctor.findOne({ verificationHash });
+  if (!doctor) {
+    return next(new AppError('no doctor Found', 400));
+  }
+  doctor.verificationHash = '';
+  await doctor.updateOne(params);
+  res.status(200).json({
+    status: 'success',
+    message: 'your account updated successfuly'
+  });
 });

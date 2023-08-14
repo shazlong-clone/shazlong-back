@@ -1,27 +1,36 @@
 const express = require('express');
 const userController = require('./../controllers/userController');
-const authController = require('../controllers/authDoctorController');
+const authDoctorController = require('../controllers/authDoctorController');
 
 const router = express.Router();
 
-router.post('/signup', authController.signup);
-router.post('/login', authController.login);
+router.post('/signup', authDoctorController.signup);
+router.post('/login', authDoctorController.login);
 router.post(
   '/verify-email-registration',
-  authController.verifyEmailRegistration
+  authDoctorController.verifyEmailRegistration
 );
+router.patch('/verification', authDoctorController.verifyEmailRegistration);
 
-router.post('/forgotPassword', authController.forgotPassword);
-router.patch('/resetPassword/:token', authController.resetPassword);
+router.post('/forgotPassword', authDoctorController.forgotPassword);
+router.patch('/resetPassword/:token', authDoctorController.resetPassword);
 
 router.patch(
   '/updateMyPassword',
-  authController.protect,
-  authController.updatePassword
+  authDoctorController.protect,
+  authDoctorController.updatePassword
 );
 
-router.patch('/updateMe', authController.protect, userController.updateMe);
-router.delete('/deleteMe', authController.protect, userController.deleteMe);
+router.patch(
+  '/updateMe',
+  authDoctorController.protect,
+  userController.updateMe
+);
+router.delete(
+  '/deleteMe',
+  authDoctorController.protect,
+  userController.deleteMe
+);
 
 router
   .route('/')

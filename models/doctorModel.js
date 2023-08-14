@@ -4,66 +4,75 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const { gender } = require('../utils/constants');
 
-const doctorSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'Please tell us your name!']
+const doctorSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, 'Please tell us your name!']
+    },
+    fullArName: String,
+    fullEnName: String,
+    experienceYears: Number,
+    gender: {
+      type: String,
+      enum: gender
+    },
+    country: String,
+    languages: String,
+    prefix: String,
+    email: {
+      type: String,
+      required: [true, 'Please provide your email'],
+      unique: true,
+      lowercase: true,
+      validate: [validator.isEmail, 'Please provide a valid email']
+    },
+    photo: String,
+    role: {
+      type: String,
+      enum: ['user', 'doctor'],
+      default: 'doctor'
+    },
+    password: {
+      type: String,
+      required: [true, 'Please provide a password'],
+      minlength: 8,
+      select: false
+    },
+    birthDate: Date,
+    cv: {
+      type: String,
+      require: [true, 'Please provide your cv']
+    },
+    passwordConfirm: {
+      type: String,
+      required: [true, 'Please confirm your password'],
+      validate: {
+        // This only works on CREATE and SAVE!!!
+        validator: function(el) {
+          return el === this.password;
+        },
+        message: 'Passwords are not the same!'
+      }
+    },
+    passwordChangedAt: Date,
+    passwordResetToken: String,
+    passwordResetExpires: Date,
+    active: {
+      type: Boolean,
+      default: true,
+      select: false
+    },
+    verificationHash: String,
+    code: String
   },
-  full_ar_name: String,
-  full_en_name: String,
-  experience_years: Number,
-  gender: {
-    type: String,
-    enum: gender
-  },
-  country: String,
-  languages: String,
-  prefix: String,
-  email: {
-    type: String,
-    required: [true, 'Please provide your email'],
-    unique: true,
-    lowercase: true,
-    validate: [validator.isEmail, 'Please provide a valid email']
-  },
-  photo: String,
-  role: {
-    type: String,
-    enum: ['user', 'doctor'],
-    default: 'doctor'
-  },
-  password: {
-    type: String,
-    required: [true, 'Please provide a password'],
-    minlength: 8,
-    select: false
-  },
-  birthDate: Date,
-  cv: {
-    type: String,
-    require: [true, 'Please provide your cv']
-  },
-  passwordConfirm: {
-    type: String,
-    required: [true, 'Please confirm your password'],
-    validate: {
-      // This only works on CREATE and SAVE!!!
-      validator: function(el) {
-        return el === this.password;
-      },
-      message: 'Passwords are not the same!'
-    }
-  },
-  passwordChangedAt: Date,
-  passwordResetToken: String,
-  passwordResetExpires: Date,
-  active: {
-    type: Boolean,
-    default: true,
-    select: false
-  },
-  verificationCodeToken: String
-});
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+    timestamps: true,
+    versionKey: false
+  }
+);
 
 doctorSchema.pre('save', async function(next) {
   // Only run this function if password was actually modified
@@ -113,10 +122,11 @@ doctorSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
 
 doctorSchema.methods.createVerificationCode = function() {
   const verificationCode = crypto.randomBytes(32).toString('hex');
-  this.verificationCodeToken = crypto
+  this.verificationHash = crypto
     .createHash('sha256')
     .update(verificationCode)
     .digest('hex');
+  this.code = verificationCode;
   return verificationCode;
 };
 
