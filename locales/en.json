@@ -14,5 +14,11 @@
   "password_wrong": "Your current password is wrong.",
   "verification_error": "Verification code required",
   "doctor_not_exits": "No Doctor Found",
-  "profile_updated": "Your profile updated successfuly"
+  "profile_updated": "Your profile updated successfuly",
+  "invalid": "Invalid",
+  "duplicated_err": "Duplicate field",
+  "and": "و",
+  "invalid_input": "Invalid Input",
+  "invalid_token": "Invalid token. Please log in again!",
+  "expoired_token": "Expired token. Please log in again!"
 }

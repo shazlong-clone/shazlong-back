@@ -10,9 +10,15 @@
   "email_removed": "لايوجد مستخدم بهذا البريد الالكتروني",
   "token_sent": "الرجاء فحص الايميل تم ارسال رابط",
   "email_sending_error": "حدث حطأ اثناء الارسال",
-  "token_error": "التوكين غير صالحة او منتهية",
+  "token_error": "التوكين غير صالحة او منتهية سجل دخول مرة اخري",
   "password_wrong": "كلمة سر خاطئة",
   "verification_error": "رمز التأكيد مطلوب",
   "doctor_not_exits": "الدكتور غير مسجل",
-  "profile_updated": "تم التحديث"
+  "profile_updated": "تم التحديث",
+  "invalid": "غير صالح",
+  "duplicated_err": "مكرر",
+  "and": "و",
+  "invalid_input": "حقل غير صالح",
+  "invalid_token": "التوكين غير صالح سجل دخول مرة اخري ",
+  "expoired_token": "التوكين منتهي سجل دخول مرة اخري "
 }

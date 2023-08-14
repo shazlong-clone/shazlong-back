@@ -211,6 +211,6 @@ exports.verifyEmailRegistration = catchAsync(async (req, res, next) => {
   await doctor.updateOne(params);
   res.status(200).json({
     status: 'success',
-    message: 'your account updated successfuly'
+    message: res.__('profile_updated')
   });
 });
