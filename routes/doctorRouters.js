@@ -2,6 +2,8 @@ const express = require('express');
 const doctorController = require('../controllers/doctor/doctorController');
 const authDoctorController = require('../controllers/doctor/authDoctorController');
 const { protect } = require('../middleware/authenticate');
+const { DOCTOR } = require('../utils/constants');
+const { restrictTo } = require('../middleware/authorize');
 
 const router = express.Router();
 
@@ -18,8 +20,8 @@ router.patch('/resetPassword/:token', authDoctorController.resetPassword);
 
 router.patch('/updateMyPassword', protect, authDoctorController.updatePassword);
 
-router.patch('/updateMe', protect, doctorController.updateMe);
-router.delete('/deleteMe', protect, doctorController.deleteMe);
+router.patch('/updateMe', protect,restrictTo(DOCTOR) , doctorController.updateMe);
+router.delete('/deleteMe', protect,restrictTo(DOCTOR) ,doctorController.deleteMe);
 
 router.route('/').get(doctorController.getAllDoctors);
 
