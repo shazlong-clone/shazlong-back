@@ -63,7 +63,11 @@ const doctorSchema = new mongoose.Schema(
       default: true,
       select: false
     },
-    verificationHash: String
+    verificationHash: String,
+    verified: {
+      Type: Boolean,
+      default: false
+    }
   },
   {
     toJSON: { virtuals: true },

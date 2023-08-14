@@ -1,14 +1,7 @@
 const Doctor = require('../../models/doctorModel');
 const catchAsync = require('../../utils/catchAsync');
 const AppError = require('../../utils/appError');
-
-const filterObj = (obj, ...allowedFields) => {
-  const newObj = {};
-  Object.keys(obj).forEach(el => {
-    if (allowedFields.includes(el)) newObj[el] = obj[el];
-  });
-  return newObj;
-};
+const filterObj = require('../../utils/filterObject');
 
 exports.getAllDoctors = catchAsync(async (req, res, next) => {
   const doctors = await Doctor.find();
