@@ -2,6 +2,7 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
+const { USER, DOCTOR } = require('../utils/constants');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -18,8 +19,8 @@ const userSchema = new mongoose.Schema({
   photo: String,
   role: {
     type: String,
-    enum: ['user', 'doctor'],
-    default: 'user'
+    enum: [USER, DOCTOR],
+    default: USER
   },
   password: {
     type: String,

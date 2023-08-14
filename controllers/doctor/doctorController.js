@@ -10,15 +10,15 @@ const filterObj = (obj, ...allowedFields) => {
   return newObj;
 };
 
-exports.getAllUsers = catchAsync(async (req, res, next) => {
-  const users = await Doctor.find();
+exports.getAllDoctors = catchAsync(async (req, res, next) => {
+  const doctors = await Doctor.find();
 
   // SEND RESPONSE
   res.status(200).json({
     status: 'success',
-    results: users.length,
+    results: doctors.length,
     data: {
-      users
+      doctors
     }
   });
 });

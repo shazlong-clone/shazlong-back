@@ -1,6 +1,7 @@
 const express = require('express');
 const doctorController = require('../controllers/doctor/doctorController');
 const authDoctorController = require('../controllers/doctor/authDoctorController');
+const { protect } = require('../middleware/authenticate');
 
 const router = express.Router();
 
@@ -15,26 +16,11 @@ router.patch('/verification', authDoctorController.verifyEmailRegistration);
 router.post('/forgotPassword', authDoctorController.forgotPassword);
 router.patch('/resetPassword/:token', authDoctorController.resetPassword);
 
-router.patch(
-  '/updateMyPassword',
-  authDoctorController.protect,
-  authDoctorController.updatePassword
-);
+router.patch('/updateMyPassword', protect, authDoctorController.updatePassword);
 
-router.patch(
-  '/updateMe',
-  authDoctorController.protect,
-  doctorController.updateMe
-);
-router.delete(
-  '/deleteMe',
-  authDoctorController.protect,
-  doctorController.deleteMe
-);
+router.patch('/updateMe', protect, doctorController.updateMe);
+router.delete('/deleteMe', protect, doctorController.deleteMe);
 
-router
-  .route('/')
-  .get(doctorController.getAllUsers)
-  .post(doctorController.createUser);
+router.route('/').get(doctorController.getAllDoctors);
 
 module.exports = router;
