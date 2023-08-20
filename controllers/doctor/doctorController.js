@@ -4,8 +4,7 @@ const AppError = require('../../utils/appError');
 const filterObj = require('../../utils/filterObject');
 
 exports.getAllDoctors = catchAsync(async (req, res, next) => {
-  const doctors = await Doctor.find();
-
+  const doctors = await Doctor.find({});
   // SEND RESPONSE
   res.status(200).json({
     status: 'success',
@@ -23,7 +22,14 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   }
 
   // 2) Filtered out unwanted fields names that are not allowed to be updated
-  const filteredBody = filterObj(req.body, 'role', 'email', 'password', 'passwordConfirm', 'verified');
+  const filteredBody = filterObj(
+    req.body,
+    'role',
+    'email',
+    'password',
+    'passwordConfirm',
+    'verified'
+  );
 
   // 3) Update user document
   const updatedUser = await Doctor.findByIdAndUpdate(

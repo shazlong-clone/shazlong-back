@@ -20,9 +20,19 @@ router.patch('/resetPassword/:token', authDoctorController.resetPassword);
 
 router.patch('/updateMyPassword', protect, authDoctorController.updatePassword);
 
-router.patch('/updateMe', protect,restrictTo(DOCTOR) , doctorController.updateMe);
-router.delete('/deleteMe', protect,restrictTo(DOCTOR) ,doctorController.deleteMe);
+router.patch(
+  '/updateMe',
+  protect,
+  restrictTo(DOCTOR),
+  doctorController.updateMe
+);
+router.delete(
+  '/deleteMe',
+  protect,
+  restrictTo(DOCTOR),
+  doctorController.deleteMe
+);
 
-router.route('/').get(doctorController.getAllDoctors);
+router.route('/getAllDoctors').get(doctorController.getAllDoctors);
 
 module.exports = router;
