@@ -3,8 +3,9 @@ const jwt = require('jsonwebtoken');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 const Doctor = require('../models/doctorModel');
-const { DOCTOR } = require('../utils/constants');
+const { DOCTOR, USER, ADMIN } = require('../utils/constants');
 const User = require('../models/userModel');
+const Admin = require('../models/adminModel');
 
 exports.protect = catchAsync(async (req, res, next) => {
   // 1) Getting token and check of it's there
@@ -22,12 +23,17 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   // 2) Verification token
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+
   // 3) Check if user still exists
   let currentUser;
   if (decoded.role === DOCTOR) {
     currentUser = await Doctor.findById(decoded.id);
-  } else {
+  }
+  if (decoded.role === USER) {
     currentUser = await User.findById(decoded.id);
+  }
+  if (decoded.role === ADMIN) {
+    currentUser = await Admin.findById(decoded.id);
   }
   if (!currentUser) {
     return next(new AppError(res.__('user_nolong_exits'), 401));

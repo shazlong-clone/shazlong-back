@@ -5,7 +5,6 @@ exports.restrictTo = (...roles) => {
     if (!roles.includes(req.user.role)) {
       return next(new AppError(res.__('authorization_error'), 403));
     }
-
     next();
   };
 };

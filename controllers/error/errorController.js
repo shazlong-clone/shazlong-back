@@ -4,20 +4,21 @@ const handleCastErrorDB = (err, res) => {
   const message = `${res.__('invalid')} ${err.path}: ${err.value}`;
   return new AppError(message, 400);
 };
-const handelValidationErrors = (err, res) =>{
+const handelValidationErrors = (err, res) => {
   let message = Object.values(err.errors).map(el => {
-    if (el.reason){
+    if (el.reason) {
       return `${res.__('invalid')} ${el.path}: ${el.value} `;
-    }if (el.name === 'ValidatorError'){
+    }
+    if (el.name === 'ValidatorError') {
       return el.message;
     }
-      return res.__('validation_error')
+    return res.__('validation_error');
   });
   if (message.length > 1) {
-    message = message.join(` ${res.__('and')} `)
+    message = message.join(` ${res.__('and')} `);
   }
   return new AppError(message, 400);
-}
+};
 
 const handleDuplicateFieldsDB = (err, res) => {
   const duplicatedkeys = Object.keys(err.keyPattern).join(res.__('and'));
@@ -67,15 +68,12 @@ const sendErrorProd = (err, res) => {
 };
 
 module.exports = (err, req, res, next) => {
-  // console.log(err.stack);
-
   err.statusCode = err.statusCode || 500;
   err.status = err.status || 'error';
-
   if (process.env.NODE_ENV === 'development') {
     sendErrorDev(err, res);
   } else if (process.env.NODE_ENV === 'production') {
-    let error = { ...err };
+    let error = { ...err, message: err.message || '' };
 
     if (error.name === 'CastError') error = handleCastErrorDB(error, res);
     if (error.code === 11000) error = handleDuplicateFieldsDB(error, res);
