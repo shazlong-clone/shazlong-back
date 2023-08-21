@@ -4,7 +4,9 @@ const router = express.Router();
 const { protect } = require('../middleware/authenticate');
 const { restrictTo } = require('../middleware/authorize');
 const { USER } = require('../utils/constants');
-const { bookSlot } = require('../controllers/booking/bookingController');
+const { bookSlot, cancelBooking } = require('../controllers/booking/bookingController');
 
+router.route('/cancel').post(protect, restrictTo(USER), cancelBooking);
 router.route('/').post(protect, restrictTo(USER), bookSlot);
+
 module.exports = router;
