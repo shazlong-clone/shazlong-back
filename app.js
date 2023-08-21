@@ -10,9 +10,12 @@ const { I18n } = require('i18n');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/error/errorController');
-const userRouter = require('./routes/userRoutes');
-const doctorRouter = require('./routes/doctorRouters');
-const adminRouter = require('./routes/adminRouters');
+const {
+  userRouter,
+  doctorRouter,
+  adminRouter,
+  slotRouter
+} = require('./routes');
 
 const app = express();
 
@@ -78,6 +81,7 @@ app.use((req, res, next) => {
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/doctors', doctorRouter);
 app.use('/api/v1/admins', adminRouter);
+app.use('/api/v1/slots', slotRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
