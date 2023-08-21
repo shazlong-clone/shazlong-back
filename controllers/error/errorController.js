@@ -1,9 +1,23 @@
 const AppError = require('../../utils/appError');
 
 const handleCastErrorDB = (err, res) => {
-  const message = `${res.__('invalid')} ${err.path}: ${err.value}.`;
+  const message = `${res.__('invalid')} ${err.path}: ${err.value}`;
   return new AppError(message, 400);
 };
+const handelValidationErrors = (err, res) =>{
+  let message = Object.values(err.errors).map(el => {
+    if (el.reason){
+      return `${res.__('invalid')} ${el.path}: ${el.value} `;
+    }if (el.name === 'ValidatorError'){
+      return el.message;
+    }
+      return res.__('validation_error')
+  });
+  if (message.length > 1) {
+    message = message.join(` ${res.__('and')} `)
+  }
+  return new AppError(message, 400);
+}
 
 const handleDuplicateFieldsDB = (err, res) => {
   const duplicatedkeys = Object.keys(err.keyPattern).join(res.__('and'));
@@ -69,6 +83,7 @@ module.exports = (err, req, res, next) => {
       error = handleValidationErrorDB(error, res);
     if (error.name === 'JsonWebTokenError') error = handleJWTError(res);
     if (error.name === 'TokenExpiredError') error = handleJWTExpiredError(res);
+    if (error.errors) error = handelValidationErrors(error, res);
 
     sendErrorProd(error, res);
   }

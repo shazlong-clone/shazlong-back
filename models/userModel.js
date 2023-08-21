@@ -2,12 +2,12 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
-const { USER, DOCTOR } = require('../utils/constants');
+const {GENDERS, USER, DOCTOR } = require('../utils/constants');
 
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'Please tell us your name!']
+    required: [true, 'Please tell us your name']
   },
   email: {
     type: String,
@@ -18,8 +18,9 @@ const userSchema = new mongoose.Schema({
   },
   phone: {
     type:String,
-    required: [true, 'Please provide your email']
+    required: [true, 'Please provide your phone number']
   },
+  
   countryId: {
     type: Number,
     required: [true, 'Please provide your country']
@@ -47,6 +48,11 @@ const userSchema = new mongoose.Schema({
       },
       message: 'Passwords are not the same!'
     }
+  },
+  gender: {
+    type: String,
+    required:[true, 'Please provide a gender'],
+    enum: GENDERS
   },
   passwordChangedAt: Date,
   passwordResetToken: String,

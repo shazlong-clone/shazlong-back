@@ -21,5 +21,6 @@
   "invalid_input": "حقل غير صالح",
   "invalid_token": "التوكين غير صالح سجل دخول مرة اخري ",
   "expoired_token": "التوكين منتهي سجل دخول مرة اخري ",
-  "not_right_route": "روت غير صالح لتغير كلمة السر"
+  "not_right_route": "روت غير صالح لتغير كلمة السر",
+  "validation_error":"حقل غير صالح"
 }

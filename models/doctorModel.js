@@ -2,7 +2,7 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
-const { gender, DOCTOR, USER } = require('../utils/constants');
+const { GENDERS, DOCTOR, USER } = require('../utils/constants');
 
 const doctorSchema = new mongoose.Schema(
   {
@@ -15,7 +15,7 @@ const doctorSchema = new mongoose.Schema(
     experienceYears: Number,
     gender: {
       type: String,
-      enum: gender
+      enum: GENDERS
     },
     country: String,
     languages: String,

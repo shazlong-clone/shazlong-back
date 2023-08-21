@@ -1,4 +1,4 @@
-exports.gender = ['Male', 'Female'];
+exports.GENDERS = ['Male', 'Female'];
 
 exports.USER = 'user';
 exports.DOCTOR = 'doctor';
