@@ -14,7 +14,8 @@ const {
   userRouter,
   doctorRouter,
   adminRouter,
-  slotRouter
+  slotRouter,
+  bookingRouter
 } = require('./routes');
 
 const app = express();
@@ -82,6 +83,7 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/doctors', doctorRouter);
 app.use('/api/v1/admins', adminRouter);
 app.use('/api/v1/slots', slotRouter);
+app.use('/api/v1/booking', bookingRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

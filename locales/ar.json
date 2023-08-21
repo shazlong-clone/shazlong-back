@@ -22,5 +22,13 @@
   "invalid_token": "التوكين غير صالح سجل دخول مرة اخري ",
   "expoired_token": "التوكين منتهي سجل دخول مرة اخري ",
   "not_right_route": "روت غير صالح لتغير كلمة السر",
-  "validation_error":"حقل غير صالح"
+  "validation_error": "حقل غير صالح",
+  "no_slots": "لا يوجد فترة مسجلة",
+  "reserved_slot_cant_updated": "لايمكن التعديل علي الفترة المحجوزة",
+  "id_not_valid": "رقم تعريفي غير صالح",
+  "no_booking_found": "لايوجد حجز",
+  "cant_upadte_past_booking": "لقد مر معاد الحز لا يمكن تحديثة",
+  "reserved_slot": "هذه الفترة محجوزة من قبل",
+  "cant_cancel_past_solt": "لايمكن الغاء فترة مضت",
+  "cant_reserve_past_solt": "لايمكن حجز فترة مضت"
 }

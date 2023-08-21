@@ -62,7 +62,8 @@ const sendErrorProd = (err, res) => {
     // 2) Send generic message
     res.status(500).json({
       status: 'error',
-      message: res.__('server_error')
+      // message: res.__('server_error')
+      message: err
     });
   }
 };
@@ -75,7 +76,8 @@ module.exports = (err, req, res, next) => {
   } else if (process.env.NODE_ENV === 'production') {
     let error = { ...err, message: err.message || '' };
 
-    if (error.name === 'CastError') error = handleCastErrorDB(error, res);
+    if (error.reason && error.reason.code === 'ERR_ASSERTION')
+      error = handleCastErrorDB(error, res);
     if (error.code === 11000) error = handleDuplicateFieldsDB(error, res);
     if (error.name === 'ValidationError')
       error = handleValidationErrorDB(error, res);

@@ -17,13 +17,9 @@ const slotsSchema = mongoose.Schema({
   reserved: {
     type: Boolean,
     default: false
-  },
-  reservedBy: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
   }
 });
 
-const Slots = mongoose.model('Slots', slotsSchema);
+const Slot = mongoose.model('Slot', slotsSchema);
 
-module.exports = Slots;
+module.exports = Slot;

@@ -72,8 +72,7 @@ const doctorSchema = new mongoose.Schema(
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
-    timestamps: true,
-    versionKey: false
+    timestamps: true
   }
 );
 
