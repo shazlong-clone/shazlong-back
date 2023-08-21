@@ -16,6 +16,14 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     validate: [validator.isEmail, 'Please provide a valid email']
   },
+  phone: {
+    type:String,
+    required: [true, 'Please provide your email']
+  },
+  countryId: {
+    type: Number,
+    required: [true, 'Please provide your country']
+  },
   photo: String,
   role: {
     type: String,
