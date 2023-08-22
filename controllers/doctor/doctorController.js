@@ -2,9 +2,15 @@ const Doctor = require('../../models/doctorModel');
 const catchAsync = require('../../utils/catchAsync');
 const AppError = require('../../utils/appError');
 const filterObj = require('../../utils/filterObject');
+const APIFeatures = require('../../utils/apiFeatures');
 
 exports.getAllDoctors = catchAsync(async (req, res, next) => {
-  const doctors = await Doctor.find({});
+  const features = new APIFeatures(Doctor.find(), req.query)
+    .filter()
+    .sort()
+    .limitFields()
+    .paginate();
+  const doctors = await features.query;
   // SEND RESPONSE
   res.status(200).json({
     status: 'success',

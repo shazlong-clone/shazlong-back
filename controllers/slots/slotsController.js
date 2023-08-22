@@ -3,15 +3,22 @@ const Slot = require('../../models/slotModel');
 const catchAsync = require('../../utils/catchAsync');
 const AppError = require('../../utils/appError');
 const APIFeatures = require('../../utils/apiFeatures');
+const Doctor = require('../../models/doctorModel');
 
 exports.createSlot = catchAsync(async (req, res, next) => {
-  const slots = req.body.slots.map(el => {
-    return { ...el, doctorId: req.user.id };
-  });
-  const slot = await Slot.insertMany(slots);
+  const doctor = await Doctor.findOneAndUpdate(
+    req.user.id,
+    {
+      $push: { slots: { $each: req.body.slots } }
+    },
+    {
+      runValidators: true,
+      new: true
+    }
+  );
   res.status(200).json({
     status: 'success',
-    data: slot
+    data: doctor
   });
 });
 
