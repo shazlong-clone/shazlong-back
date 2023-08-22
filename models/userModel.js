@@ -2,67 +2,72 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
-const {GENDERS, USER, DOCTOR } = require('../utils/constants');
+const { GENDERS, USER, DOCTOR } = require('../utils/constants');
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'Please tell us your name']
-  },
-  email: {
-    type: String,
-    required: [true, 'Please provide your email'],
-    unique: true,
-    lowercase: true,
-    validate: [validator.isEmail, 'Please provide a valid email']
-  },
-  phone: {
-    type:String,
-    required: [true, 'Please provide your phone number']
-  },
-  
-  countryId: {
-    type: Number,
-    required: [true, 'Please provide your country']
-  },
-  photo: String,
-  role: {
-    type: String,
-    enum: [USER, DOCTOR],
-    default: USER
-  },
-  password: {
-    type: String,
-    required: [true, 'Please provide a password'],
-    minlength: 8,
-    select: false
-  },
-  birthDate: Date,
-  passwordConfirm: {
-    type: String,
-    required: [true, 'Please confirm your password'],
-    validate: {
-      // This only works on CREATE and SAVE!!!
-      validator: function(el) {
-        return el === this.password;
-      },
-      message: 'Passwords are not the same!'
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, 'Please tell us your name']
+    },
+    email: {
+      type: String,
+      required: [true, 'Please provide your email'],
+      unique: true,
+      lowercase: true,
+      validate: [validator.isEmail, 'Please provide a valid email']
+    },
+    phone: {
+      type: String,
+      required: [true, 'Please provide your phone number']
+    },
+
+    countryId: {
+      type: Number,
+      required: [true, 'Please provide your country']
+    },
+    photo: String,
+    role: {
+      type: String,
+      enum: [USER, DOCTOR],
+      default: USER
+    },
+    password: {
+      type: String,
+      required: [true, 'Please provide a password'],
+      minlength: 8,
+      select: false
+    },
+    birthDate: Date,
+    passwordConfirm: {
+      type: String,
+      required: [true, 'Please confirm your password'],
+      validate: {
+        // This only works on CREATE and SAVE!!!
+        validator: function(el) {
+          return el === this.password;
+        },
+        message: 'Passwords are not the same!'
+      }
+    },
+    gender: {
+      type: String,
+      required: [true, 'Please provide a gender'],
+      enum: GENDERS
+    },
+    passwordChangedAt: Date,
+    passwordResetToken: String,
+    passwordResetExpires: Date,
+    active: {
+      type: Boolean,
+      default: true,
+      select: false
     }
   },
-  gender: {
-    type: String,
-    required:[true, 'Please provide a gender'],
-    enum: GENDERS
-  },
-  passwordChangedAt: Date,
-  passwordResetToken: String,
-  passwordResetExpires: Date,
-  active: {
-    type: Boolean,
-    default: true,
-    select: false
+  {
+    timestamps: true
   }
-});
+);
 
 userSchema.pre('save', async function(next) {
   // Only run this function if password was actually modified

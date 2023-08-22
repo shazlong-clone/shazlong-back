@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Slot = require('../../models/slotModel');
 const catchAsync = require('../../utils/catchAsync');
 const AppError = require('../../utils/appError');
+const APIFeatures = require('../../utils/apiFeatures');
 
 exports.createSlot = catchAsync(async (req, res, next) => {
   const slots = req.body.slots.map(el => {
@@ -31,5 +32,15 @@ exports.updateSlot = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     data: upatedSlot
+  });
+});
+
+exports.getDoctorSlots = catchAsync(async (req, res, next) => {
+  const features = new APIFeatures(Slot.find(), req.query).filter();
+  const slots = await features.query;
+  if (!slots) return next(new AppError(res.__('no_slots'), 400));
+  res.status(200).json({
+    status: 'success',
+    data: slots
   });
 });

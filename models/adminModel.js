@@ -3,40 +3,45 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const { ADMIN } = require('../utils/constants');
 
-const adminSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'Please provide your name']
-  },
-  email: {
-    type: String,
-    unique: true,
-    required: [true, 'Please provide your email'],
+const adminSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, 'Please provide your name']
+    },
+    email: {
+      type: String,
+      unique: true,
+      required: [true, 'Please provide your email'],
 
-    validate: [validator.isEmail, 'Please provide a valid email']
+      validate: [validator.isEmail, 'Please provide a valid email']
+    },
+    password: {
+      type: String,
+      required: [true, 'Please provide your password'],
+      minlength: 8,
+      select: false
+    },
+    role: {
+      type: String,
+      default: ADMIN
+    },
+    confirmPassword: {
+      type: String,
+      required: [true, 'Please provide confirmPassword'],
+      validator: {
+        validate: function(confirmPassword) {
+          return this.pasword === confirmPassword;
+        },
+        message: 'Passwords are not the same!'
+      }
+    },
+    passwordChangedAt: Date
   },
-  password: {
-    type: String,
-    required: [true, 'Please provide your password'],
-    minlength: 8,
-    select: false
-  },
-  role: {
-    type: String,
-    default: ADMIN
-  },
-  confirmPassword: {
-    type: String,
-    required: [true, 'Please provide confirmPassword'],
-    validator: {
-      validate: function(confirmPassword) {
-        return this.pasword === confirmPassword;
-      },
-      message: 'Passwords are not the same!'
-    }
-  },
-  passwordChangedAt: Date
-});
+  {
+    timestamps: true
+  }
+);
 
 adminSchema.pre(/^save/, async function(next) {
   if (!this.isModified) return next();
