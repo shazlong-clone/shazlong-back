@@ -4,6 +4,11 @@ const handleCastErrorDB = (err, res) => {
   const message = `${res.__('invalid')} ${err.path}: ${err.value}`;
   return new AppError(message, 400);
 };
+const handelObjectIdErrors = (err, res) => {
+  const message = `${res.__('invalid')} ${err.path}: ${err.value}`;
+  return new AppError(message, 400);
+};
+
 const handelValidationErrors = (err, res) => {
   let message = Object.values(err.errors).map(el => {
     if (el.reason) {
@@ -83,6 +88,7 @@ module.exports = (err, req, res, next) => {
     if (error.name === 'JsonWebTokenError') error = handleJWTError(res);
     if (error.name === 'TokenExpiredError') error = handleJWTExpiredError(res);
     if (error.errors) error = handelValidationErrors(error, res);
+    if (error.kind === 'ObjectId') error = handelObjectIdErrors(error, res);
 
     sendErrorProd(error, res);
   }

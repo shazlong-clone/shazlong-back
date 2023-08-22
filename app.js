@@ -24,7 +24,8 @@ const app = express();
 const i18n = new I18n({
   locales: ['en', 'ar'],
   directory: path.join(__dirname, 'locales'),
-  defaultLocale: 'en'
+  defaultLocale: 'en',
+  updateFiles: false
 });
 app.use(i18n.init);
 

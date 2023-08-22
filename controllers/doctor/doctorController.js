@@ -5,6 +5,7 @@ const filterObj = require('../../utils/filterObject');
 const APIFeatures = require('../../utils/apiFeatures');
 
 exports.getAllDoctors = catchAsync(async (req, res, next) => {
+  const total = await Doctor.countDocuments();
   const features = new APIFeatures(Doctor.find(), req.query)
     .filter()
     .sort()
@@ -14,7 +15,7 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
   // SEND RESPONSE
   res.status(200).json({
     status: 'success',
-    results: doctors.length,
+    total,
     data: {
       doctors
     }
