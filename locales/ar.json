@@ -30,5 +30,8 @@
   "cant_upadte_past_booking": "لقد مر معاد الحز لا يمكن تحديثة",
   "reserved_slot": "هذه الفترة محجوزة من قبل",
   "cant_cancel_past_solt": "لايمكن الغاء فترة مضت",
-  "cant_reserve_past_solt": "لايمكن حجز فترة مضت"
+  "cant_reserve_past_solt": "لايمكن حجز فترة مضت",
+  "from_must_be_less_than_to": "الفترة من والي غير صحيحة",
+  "fail": "خطأ",
+  "error": "حدث خطأ ما الرجاء المحاولة لاحقا"
 }

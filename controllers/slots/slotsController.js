@@ -36,7 +36,14 @@ exports.updateSlot = catchAsync(async (req, res, next) => {
 });
 
 exports.getDoctorSlots = catchAsync(async (req, res, next) => {
-  const features = new APIFeatures(Slot.find(), req.query).filter();
+  const features = new APIFeatures(
+    Slot.find({ doctorId: req.user.id }),
+    req.query
+  )
+    .filter()
+    .sort()
+    .paginate()
+    .limitFields();
   const slots = await features.query;
   if (!slots) return next(new AppError(res.__('no_slots'), 400));
   res.status(200).json({

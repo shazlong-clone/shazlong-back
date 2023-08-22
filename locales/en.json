@@ -30,5 +30,8 @@
   "cant_upadte_past_booking": "cant upadte past booking",
   "reserved_slot": "Reserved slot",
   "cant_cancel_past_solt": "Cant cancel past solt",
-  "cant_reserve_past_solt": "Cant reserve past solt"
+  "cant_reserve_past_solt": "Cant reserve past solt",
+  "from_must_be_less_than_to": "From must be less than To",
+  "fail": "Fail",
+  "error": "Internal server error try again later"
 }

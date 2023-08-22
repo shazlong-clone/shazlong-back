@@ -8,7 +8,13 @@ const slotsSchema = mongoose.Schema(
     },
     to: {
       type: Date,
-      required: [true, 'Please provide your to']
+      required: [true, 'Please provide your to'],
+      validate: {
+        validator: function(to) {
+          return this.from < to;
+        },
+        message: 'from_must_be_less_than_to'
+      }
     },
     doctorId: {
       type: mongoose.Schema.Types.ObjectId,
