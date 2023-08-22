@@ -17,8 +17,8 @@ const doctorSchema = new mongoose.Schema(
       type: String,
       enum: GENDERS
     },
-    country: String,
-    languages: String,
+    country: Number,
+    languages: [Number],
     prefix: String,
     email: {
       type: String,
@@ -55,6 +55,8 @@ const doctorSchema = new mongoose.Schema(
         message: 'Passwords are not the same!'
       }
     },
+    specialization: [Number],
+    feez: [{ amount: Number, duration: Number }],
     passwordChangedAt: Date,
     passwordResetToken: String,
     passwordResetExpires: Date,

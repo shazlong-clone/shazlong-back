@@ -14,20 +14,21 @@ exports.signup = catchAsync(async (req, res, next) => {
   });
   await doctor.validate();
   const verticationCode = doctor.createVerificationCode();
-  const url = `${req.protocol}://${req.get(
-    'host'
-  )}/api/v1/doctors/verify-email-registration/${verticationCode}`;
-  const message = `Please Compleate Your Profile with This link: ${url}`;
-  await sendEmail({
-    email: req.body.email,
-    subject: 'Complete Your Profile Via link below',
-    message: message
-  });
+  // const url = `${req.protocol}://${req.get(
+  //   'host'
+  // )}/api/v1/doctors/verify-email-registration?${verticationCode}`;
+  // const message = `Please Compleate Your Profile with This link: ${url}`;
+  // await sendEmail({
+  //   email: req.body.email,
+  //   subject: 'Complete Your Profile Via link below',
+  //   message: message
+  // });
   await doctor.save();
 
   res.status(200).json({
     status: 'success',
-    message: res.__('verification_code_sent')
+    message: res.__('verification_code_sent'),
+    code: verticationCode
   });
 });
 
@@ -142,12 +143,14 @@ exports.verifyEmailRegistration = catchAsync(async (req, res, next) => {
     country: req.body.country,
     languages: req.body.languages,
     prefix: req.body.prefix,
-    cv: req.body.cv
+    cv: req.body.cv,
+    specialization: req.body.specialization,
+    feez: req.body.feez
   };
   for (const param in params) {
     if (!params[param]) return next(new AppError(`${param} is required`, 400));
   }
-  const verificationCode = req.query['verofovation-code'];
+  const verificationCode = req.query['verification-code'];
 
   const verificationHash = crypto
     .createHash('sha256')
@@ -163,8 +166,5 @@ exports.verifyEmailRegistration = catchAsync(async (req, res, next) => {
   }
   params.verificationHash = '';
   await doctor.updateOne(params);
-  res.status(200).json({
-    status: 'success',
-    message: res.__('profile_updated')
-  });
+  createSendToken(doctor, 200, res);
 });

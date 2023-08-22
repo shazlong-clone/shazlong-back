@@ -9,11 +9,11 @@ const router = express.Router();
 
 router.post('/signup', authDoctorController.signup);
 router.post('/login', authDoctorController.login);
-router.post(
+
+router.patch(
   '/verify-email-registration',
   authDoctorController.verifyEmailRegistration
 );
-router.patch('/verification', authDoctorController.verifyEmailRegistration);
 
 router.post('/forgotPassword', authDoctorController.forgotPassword);
 router.patch('/resetPassword/:token', authDoctorController.resetPassword);
