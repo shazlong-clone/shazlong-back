@@ -4,32 +4,6 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const { GENDERS, DOCTOR, USER } = require('../utils/constants');
 
-const slotsSchema = mongoose.Schema(
-  {
-    from: {
-      type: Date,
-      required: [true, 'Please provide your from']
-    },
-    to: {
-      type: Date,
-      required: [true, 'Please provide your to'],
-      validate: {
-        validator: function(to) {
-          return this.from < to;
-        },
-        message: 'from_must_be_less_than_to'
-      }
-    },
-    reserved: {
-      type: Boolean,
-      default: false
-    }
-  },
-  {
-    timestamps: true
-  }
-);
-
 const doctorSchema = new mongoose.Schema(
   {
     name: {
@@ -72,7 +46,7 @@ const doctorSchema = new mongoose.Schema(
     },
     passwordConfirm: {
       type: String,
-      required: [true, 'Please confirm your passwordConfirmsss'],
+      required: [true, 'Please confirm your password'],
       validate: {
         // This only works on CREATE and SAVE!!!
         validator: function(el) {
@@ -96,28 +70,7 @@ const doctorSchema = new mongoose.Schema(
       Type: Boolean,
       default: false
     },
-    slots: [
-      {
-        from: {
-          type: Date,
-          required: [true, 'Please provide your from']
-        },
-        to: {
-          type: Date,
-          required: [true, 'Please provide your to'],
-          validate: {
-            validator: function(to) {
-              return this.from < to;
-            },
-            message: 'from_must_be_less_than_to'
-          }
-        },
-        reserved: {
-          type: Boolean,
-          default: false
-        }
-      }
-    ]
+    slots: []
   },
   {
     toJSON: { virtuals: true },
