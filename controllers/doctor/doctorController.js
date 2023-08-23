@@ -9,9 +9,8 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
   const total = await Doctor.countDocuments();
 
   const deepFileds = [];
-  let advancedQuery = {};
+  let advancedQuery = {...req.query};
   deepFileds.push('duration', 'amount');
-  // importnat note if any of duration or amount is not exits ( = undefined)  then no filter happend and no error happend also 
   advancedQuery = {
     ...advancedQuery,
     feez:{ $elemMatch : {$and : [{duration: advancedQuery.duration}, {amount: advancedQuery.amount }]} }
@@ -21,18 +20,21 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
   const features = new APIFeatures(Doctor.find(), advancedQuery)
     .filter()
     .sort()
-    .limitFields()
-    .paginate();
-  const doctors = await features.query.populate({
+    .limitFields();
+
+  const populated =  features.query.populate({
     path:'slots',
     select:'-__v -createdAt -updatedAt',
     match:{reserved: false, from:{$gte : new Date()}},
     options:{sort:'from', limit:1}
   });
+  const doctors = await new APIFeatures(populated, {page:req.query.page,size:req.query.size}).paginate().query;
+  const count = await features.query.countDocuments()  
+
   // SEND RESPONSE
   res.status(200).json({
     status: 'success',
-    total,
+    count,
     data: {
       doctors
     }
