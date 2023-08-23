@@ -34,5 +34,6 @@ router.delete(
 );
 
 router.route('/getAllDoctors').get(doctorController.getAllDoctors);
+router.route('/:id').get(doctorController.getDoctor);
 
 module.exports = router;

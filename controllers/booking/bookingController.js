@@ -5,10 +5,10 @@ const Slot = require('../../models/slotModel');
 const Booking = require('../../models/bookingModel');
 
 exports.bookSlot = catchAsync(async (req, res, next) => {
-  const { id } = req.body;
-  if (!mongoose.isValidObjectId(id))
+  const { slotId } = req.body;
+  if (!mongoose.isValidObjectId(slotId))
     return next(new AppError(res.__('id_not_valid'), 400));
-  const slot = await Slot.findById(id);
+  const slot = await Slot.findById(slotId);
   if (!slot) return next(new AppError(res.__('no_slots'), 400));
   if (slot.reserved) return next(new AppError(res.__('reserved_slot'), 400));
   if (Date.now() > new Date(slot.from).getTime())
@@ -16,7 +16,7 @@ exports.bookSlot = catchAsync(async (req, res, next) => {
   slot.reserved = true;
   await slot.save();
   const book = await Booking.create({
-    slot: id,
+    slot: slotId,
     reservedBy: req.user.id
   });
 
@@ -27,11 +27,14 @@ exports.bookSlot = catchAsync(async (req, res, next) => {
 });
 
 exports.cancelBooking = catchAsync(async (req, res, next) => {
-  const { id } = req.body;
-  if (!mongoose.isValidObjectId(id))
+  const { bookingId } = req.body;
+  if (!mongoose.isValidObjectId(bookingId))
     return next(new AppError(res.__('id_not_valid'), 400));
-  const booking = await Booking.findById(id).populate('slot').exec();
+  const booking = await Booking.findById(bookingId).populate('slot').exec();
   if (!booking) return next(new AppError(res.__('no_booking_found'), 400));
+  if (!booking.slot){
+    return next(new AppError(res.__('no_slots'), 400));
+  }
   if (Date.now() > new Date(booking.slot.from).getTime())
     return next(new AppError(res.__('cant_cancel_past_solt'), 400));
 

@@ -65,11 +65,11 @@ const doctorSchema = new mongoose.Schema(
       default: true,
       select: false
     },
-    verificationHash: String,
     verified: {
-      Type: Boolean,
+      type: Boolean,
       default: false
-    }
+    },
+    verificationHash: String
   },
   {
     toJSON: { virtuals: true },
@@ -144,6 +144,12 @@ doctorSchema.methods.createPasswordResetToken = function() {
 
   return resetToken;
 };
+
+doctorSchema.virtual('slots', {
+  ref: 'Slot',
+  localField: '_id',
+  foreignField: 'doctorId'
+});
 
 const Doctor = mongoose.model('Doctor', doctorSchema);
 
