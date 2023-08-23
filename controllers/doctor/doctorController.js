@@ -2,39 +2,43 @@ const mongoose = require('mongoose');
 const Doctor = require('../../models/doctorModel');
 const catchAsync = require('../../utils/catchAsync');
 const AppError = require('../../utils/appError');
-const filterObj = require('../../utils/filterObject');
+const filterObject = require('../../utils/filterObject');
 const APIFeatures = require('../../utils/apiFeatures');
 
 exports.getAllDoctors = catchAsync(async (req, res, next) => {
-  const total = await Doctor.countDocuments();
-
-  const deepFileds = [];
+  // create the advanced query 
   let advancedQuery = {...req.query};
-  deepFileds.push('duration', 'amount');
   advancedQuery = {
     ...advancedQuery,
     feez:{ $elemMatch : {$and : [{duration: advancedQuery.duration}, {amount: advancedQuery.amount }]} }
   }
-  deepFileds.forEach(el => delete advancedQuery[el]);
+  //filter advanced query
+  advancedQuery =  filterObject (advancedQuery, 'duration', 'amount' )
 
+  // get feachtred doctors
   const features = new APIFeatures(Doctor.find(), advancedQuery)
     .filter()
     .sort()
     .limitFields();
 
+  // get populated doctors slots
   const populated =  features.query.populate({
     path:'slots',
     select:'-__v -createdAt -updatedAt',
     match:{reserved: false, from:{$gte : new Date()}},
     options:{sort:'from', limit:1}
   });
+
+  // get paginated doctors
   const doctors = await new APIFeatures(populated, {page:req.query.page,size:req.query.size}).paginate().query;
-  const count = await features.query.countDocuments()  
+  
+  // get total based on filter for front-end pagination 
+  const total = await features.query.countDocuments()  
 
   // SEND RESPONSE
   res.status(200).json({
     status: 'success',
-    count,
+    total,
     data: {
       doctors
     }
@@ -48,7 +52,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   }
 
   // 2) Filtered out unwanted fields names that are not allowed to be updated
-  const filteredBody = filterObj(
+  const filteredBody = filterObject(
     req.body,
     'role',
     'email',
