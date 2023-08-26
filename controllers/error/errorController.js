@@ -8,6 +8,12 @@ const handelObjectIdErrors = (err, res) => {
   const message = `${res.__('invalid')} ${err.path}: ${err.value}`;
   return new AppError(message, 400);
 };
+const handelMulterSizeError = (err, res) => {
+  const message = `${res.__('multer_error_max_size')} ${err.path}: ${
+    err.value
+  }`;
+  return new AppError(message, 400);
+};
 
 const handelValidationErrors = (err, res) => {
   let message = Object.values(err.errors).map(el => {
@@ -89,6 +95,8 @@ module.exports = (err, req, res, next) => {
     if (error.name === 'TokenExpiredError') error = handleJWTExpiredError(res);
     if (error.errors) error = handelValidationErrors(error, res);
     if (error.kind === 'ObjectId') error = handelObjectIdErrors(error, res);
+    if (error.name === 'MulterError' && error.code === 'LIMIT_FILE_SIZE')
+      error = handelMulterSizeError(error, res);
 
     sendErrorProd(error, res);
   }

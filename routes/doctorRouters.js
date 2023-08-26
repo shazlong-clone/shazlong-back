@@ -27,6 +27,9 @@ const upload = multer({
     } else {
       cb(new AppError('img_type_err', 400));
     }
+  },
+  limits: {
+    fileSize: 1 * 1024 * 1024
   }
 });
 

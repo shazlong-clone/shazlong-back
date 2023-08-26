@@ -35,5 +35,6 @@
   "fail": "fail",
   "error": "error",
   "no_photo": "no photo detected",
-  "img_type_err": "only allowed Types *.jpeg *.png *.jpg"
+  "img_type_err": "only allowed Types *.jpeg *.png *.jpg",
+  "multer_error_max_size": "too big photo max size allowed 1 Mega"
 }
