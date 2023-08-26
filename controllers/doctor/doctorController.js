@@ -3,6 +3,7 @@ const Doctor = require('../../models/doctorModel');
 const catchAsync = require('../../utils/catchAsync');
 const AppError = require('../../utils/appError');
 const filterObject = require('../../utils/filterObject');
+const getPaginate = require('../../utils/getPaginate');
 
 exports.getAllDoctors = catchAsync(async (req, res, next) => {
   const aggPipeline = [];
@@ -15,8 +16,14 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
     isOnline,
     duration,
     amount,
-    availability
+    availability,
+    page,
+    size,
+    ...rest
   } = req.query;
+  const { skip, limit } = getPaginate(page, size);
+
+  aggPipeline.push({ $match: rest });
   if (gender) {
     aggPipeline.push({ $match: { gender: Number(gender) } });
   }
@@ -113,12 +120,21 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
       }
     }
   );
-  if (!aggPipeline.length) {
-    doctors = await Doctor.find();
-  } else {
-    doctors = await Doctor.aggregate(aggPipeline);
-  }
+  aggPipeline.push(
+    {
+      $facet: {
+        data: [{ $skip: skip }, { $limit: limit }],
+        total: [{ $count: 'total' }]
+      }
+    },
+    {
+      $addFields: {
+        total: { $arrayElemAt: ['$total.total', 0] }
+      }
+    }
+  );
 
+  [doctors] = await Doctor.aggregate(aggPipeline);
   // SEND RESPONSE
   res.status(200).json({
     status: 'success',
