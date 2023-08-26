@@ -168,3 +168,5 @@ exports.verifyEmailRegistration = catchAsync(async (req, res, next) => {
   await doctor.updateOne(params);
   createSendToken(doctor, 200, res);
 });
+
+

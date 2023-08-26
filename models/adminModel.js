@@ -13,7 +13,6 @@ const adminSchema = new mongoose.Schema(
       type: String,
       unique: true,
       required: [true, 'Please provide your email'],
-
       validate: [validator.isEmail, 'Please provide a valid email']
     },
     password: {
@@ -23,7 +22,7 @@ const adminSchema = new mongoose.Schema(
       select: false
     },
     role: {
-      type: String,
+      type: Number,
       default: ADMIN
     },
     confirmPassword: {

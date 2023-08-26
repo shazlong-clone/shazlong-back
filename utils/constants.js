@@ -1,5 +1,5 @@
-exports.GENDERS = ['Male', 'Female'];
-
-exports.USER = 'user';
-exports.ADMIN = 'admin';
-exports.DOCTOR = 'doctor';
+exports.MALE = 1;
+exports.FEMALE = 2;
+exports.USER = 1;
+exports.DOCTOR = 2;
+exports.ADMIN = 3;

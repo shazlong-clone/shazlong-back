@@ -2,7 +2,7 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
-const { GENDERS, DOCTOR, USER } = require('../utils/constants');
+const { MALE, FEMALE, DOCTOR, USER } = require('../utils/constants');
 
 const doctorSchema = new mongoose.Schema(
   {
@@ -14,8 +14,9 @@ const doctorSchema = new mongoose.Schema(
     fullEnName: String,
     experienceYears: Number,
     gender: {
-      type: String,
-      enum: GENDERS
+      type: Number,
+      enum: [MALE, FEMALE],
+      description: '1 male 2 female'
     },
     country: Number,
     languages: [Number],
@@ -29,7 +30,7 @@ const doctorSchema = new mongoose.Schema(
     },
     photo: String,
     role: {
-      type: String,
+      type: Number,
       enum: [USER, DOCTOR],
       default: DOCTOR
     },
@@ -66,6 +67,10 @@ const doctorSchema = new mongoose.Schema(
       select: false
     },
     verified: {
+      type: Boolean,
+      default: false
+    },
+    isOnline: {
       type: Boolean,
       default: false
     },

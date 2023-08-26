@@ -2,7 +2,7 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
-const { GENDERS, USER, DOCTOR } = require('../utils/constants');
+const { MALE, FEMALE, USER, DOCTOR } = require('../utils/constants');
 
 const userSchema = new mongoose.Schema(
   {
@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema(
     },
     photo: String,
     role: {
-      type: String,
+      type: Number,
       enum: [USER, DOCTOR],
       default: USER
     },
@@ -53,7 +53,7 @@ const userSchema = new mongoose.Schema(
     gender: {
       type: String,
       required: [true, 'Please provide a gender'],
-      enum: GENDERS
+      enum: [MALE, FEMALE]
     },
     passwordChangedAt: Date,
     passwordResetToken: String,

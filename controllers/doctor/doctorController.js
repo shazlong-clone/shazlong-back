@@ -3,42 +3,125 @@ const Doctor = require('../../models/doctorModel');
 const catchAsync = require('../../utils/catchAsync');
 const AppError = require('../../utils/appError');
 const filterObject = require('../../utils/filterObject');
-const APIFeatures = require('../../utils/apiFeatures');
 
 exports.getAllDoctors = catchAsync(async (req, res, next) => {
-  // create the advanced query 
-  let advancedQuery = {...req.query};
-  advancedQuery = {
-    ...advancedQuery,
-    feez:{ $elemMatch : {$and : [{duration: advancedQuery.duration}, {amount: advancedQuery.amount }]} }
+  const aggPipeline = [];
+  let doctors = [];
+  const {
+    gender,
+    specialization,
+    country,
+    languages,
+    isOnline,
+    duration,
+    amount,
+    availability
+  } = req.query;
+  if (gender) {
+    aggPipeline.push({ $match: { gender: Number(gender) } });
   }
-  //filter advanced query
-  advancedQuery =  filterObject (advancedQuery, 'duration', 'amount' )
+  if (specialization) {
+    aggPipeline.push({ $match: { specialization: Number(specialization) } });
+  }
+  if (country) {
+    aggPipeline.push({ $match: { country: Number(country) } });
+  }
+  if (languages) {
+    aggPipeline.push({ $match: { languages: Number(languages) } });
+  }
+  if (isOnline) {
+    aggPipeline.push({ $match: { isOnline: Boolean(Number(isOnline)) } });
+  }
 
-  // get feachtred doctors
-  const features = new APIFeatures(Doctor.find(), advancedQuery)
-    .filter()
-    .sort()
-    .limitFields();
-
-  // get populated doctors slots
-  const populated =  features.query.populate({
-    path:'slots',
-    select:'-__v -createdAt -updatedAt',
-    match:{reserved: false, from:{$gte : new Date()}},
-    options:{sort:'from', limit:1}
+  if (duration) {
+    aggPipeline.push({
+      $match: { feez: { $elemMatch: { duration: Number(duration) } } }
+    });
+  }
+  if (amount) {
+    aggPipeline.push({
+      $match: { feez: { $elemMatch: { amount: { $lte: Number(amount) } } } }
+    });
+  }
+  aggPipeline.push({
+    $lookup: {
+      from: 'slots',
+      localField: '_id',
+      foreignField: 'doctorId',
+      as: 'slots'
+    }
   });
-
-  // get paginated doctors
-  const doctors = await new APIFeatures(populated, {page:req.query.page,size:req.query.size}).paginate().query;
-  
-  // get total based on filter for front-end pagination 
-  const total = await features.query.countDocuments()  
+  if (availability) {
+    const loacleTime = Date.now() + 60 * 60 * 1000;
+    aggPipeline.push({
+      $match: {
+        slots: {
+          $elemMatch: {
+            from: {
+              $gte: new Date(loacleTime),
+              $lte: new Date(loacleTime + availability * 24 * 60 * 60 * 1000)
+            }
+          }
+        }
+      }
+    });
+  }
+  aggPipeline.push(
+    {
+      $addFields: {
+        nearestSlot: {
+          $filter: {
+            input: '$slots',
+            as: 'slot',
+            cond: {
+              $and: [
+                { $gte: ['$$slot.from', new Date(Date.now())] },
+                { $ne: ['$$slot.reserved', true] }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      $addFields: {
+        minDate: { $min: '$slots.from' }
+      }
+    },
+    {
+      $addFields: {
+        nearestSlot: {
+          $arrayElemAt: [
+            {
+              $filter: {
+                input: '$nearestSlot',
+                as: 'slot',
+                cond: {
+                  $eq: ['$$slot.from', '$minDate']
+                }
+              }
+            },
+            0
+          ]
+        }
+      }
+    },
+    {
+      $project: {
+        minDate: 0,
+        slots: 0
+      }
+    }
+  );
+  if (!aggPipeline.length) {
+    doctors = await Doctor.find();
+  } else {
+    doctors = await Doctor.aggregate(aggPipeline);
+  }
 
   // SEND RESPONSE
   res.status(200).json({
     status: 'success',
-    total,
     data: {
       doctors
     }
