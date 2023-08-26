@@ -199,3 +199,18 @@ exports.getDoctor = catchAsync(async (req, res, next) => {
     data: doctor
   });
 });
+
+exports.updatePhoto = catchAsync(async (req, res, next) => {
+  if (!req.file) return next(new AppError(res.__('no_photo'), 400));
+  const doctor = await Doctor.findByIdAndUpdate(
+    req.user,
+    {
+      photo: req.file.filename
+    },
+    { new: true, runValidators: true }
+  );
+  res.status(200).json({
+    status: 'success',
+    data: doctor
+  });
+});

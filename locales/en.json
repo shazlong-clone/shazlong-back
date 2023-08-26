@@ -32,6 +32,8 @@
   "cant_cancel_past_solt": "Cant cancel past solt",
   "cant_reserve_past_solt": "Cant reserve past solt",
   "from_must_be_less_than_to": "From must be less than To",
-  "fail": "Fail",
-  "error": "error"
+  "fail": "fail",
+  "error": "error",
+  "no_photo": "no photo detected",
+  "uploading_err": "uploading error"
 }
