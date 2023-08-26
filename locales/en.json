@@ -35,5 +35,5 @@
   "fail": "fail",
   "error": "error",
   "no_photo": "no photo detected",
-  "uploading_err": "uploading error"
+  "img_type_err": "only allowed Types *.jpeg *.png *.jpg"
 }

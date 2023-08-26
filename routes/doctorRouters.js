@@ -25,7 +25,7 @@ const upload = multer({
     if (file.mimetype.startsWith('image/')) {
       cb(null, true);
     } else {
-      cb(new AppError('uploading_err', 400));
+      cb(new AppError('img_type_err', 400));
     }
   }
 });
