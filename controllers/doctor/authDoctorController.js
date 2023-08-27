@@ -135,17 +135,19 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 });
 
 exports.verifyEmailRegistration = catchAsync(async (req, res, next) => {
+  if (!req.file) return next(new AppError(res.__('no_pdf'), 400));
+
   const params = {
     fullArName: req.body.fullArName,
     fullEnName: req.body.fullEnName,
-    experienceYears: req.body.experienceYears,
-    gender: req.body.gender,
-    country: req.body.country,
-    languages: req.body.languages,
+    experienceYears: Number(req.body.experienceYears) || null,
+    gender: Number(req.body.gender) || null,
+    country: Number(req.body.country) || null,
+    languages: Number(req.body.languages) || null,
     prefix: req.body.prefix,
-    cv: req.body.cv,
-    specialization: req.body.specialization,
-    feez: req.body.feez
+    cv: req.file.path,
+    specialization: Number(req.body.specialization) || null,
+    feez: JSON.parse(req.body.feez)
   };
   for (const param in params) {
     if (!params[param]) return next(new AppError(`${param} is required`, 400));
@@ -165,6 +167,6 @@ exports.verifyEmailRegistration = catchAsync(async (req, res, next) => {
     return next(new AppError(res.__('doctor_not_exits'), 400));
   }
   params.verificationHash = '';
-  await doctor.updateOne(params);
+  await doctor.updateOne(params, { new: true, runValidators: true });
   createSendToken(doctor, 200, res);
 });

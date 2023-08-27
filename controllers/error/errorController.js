@@ -21,12 +21,12 @@ const handelValidationErrors = (err, res) => {
       return `${res.__('invalid')} ${el.path}: ${el.value} `;
     }
     if (el.name === 'ValidatorError') {
-      return el.message;
+      return res.__(el.message);
     }
     return res.__('validation_error');
   });
   if (message.length > 1) {
-    message = message.join(` ${res.__('and')} `);
+    message = message.join(`${res.__('and')}, `);
   }
   return new AppError(message, 400);
 };

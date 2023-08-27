@@ -31,10 +31,13 @@
   "reserved_slot": "هذه الفترة محجوزة من قبل",
   "cant_cancel_past_solt": "لايمكن الغاء فترة مضت",
   "cant_reserve_past_solt": "لايمكن حجز فترة مضت",
-  "from_must_be_less_than_to": "الفترة من والي غير صحيحة",
+  "from_must_be_less_than_to": "الفترة (من) اكبر من الفترة (الي)",
   "fail": "خطأ",
   "error": "حدث خطأ ما الرجاء المحاولة لاحقا",
   "no_photo": "لاتوجد صور مرفوعة",
   "img_type_err": "الصور المسموح بها *.jpeg *.png *.jpg",
-  "multer_error_max_size": "حجم الصورة كبير للغاية الحد الاقصي 1ميجا"
+  "multer_error_max_size": "حجم الصورة كبير للغاية الحد الاقصي 1 ميجا",
+  "pdf_type_err": "الصور المسموح بها *.pdf",
+  "no_file": "الرجاء ارفاق السرة الذاتية",
+  "is_required": "مطلوب"
 }

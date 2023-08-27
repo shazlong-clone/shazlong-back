@@ -192,7 +192,7 @@ exports.getDoctor = catchAsync(async (req, res, next) => {
   if (!id || !mongoose.isValidObjectId(id))
     return next(new AppError(`${id} ${res.__('id_not_valid')}`, 400));
   const doctor = await Doctor.findById(id)
-    .select('-cv -createdAt -updatedAt -email')
+    .select('-createdAt -updatedAt -email')
     .populate({ path: 'slots', select: '-__v' });
   res.status(200).json({
     status: 'success',
@@ -205,7 +205,7 @@ exports.updatePhoto = catchAsync(async (req, res, next) => {
   const doctor = await Doctor.findByIdAndUpdate(
     req.user,
     {
-      photo: req.file.filename
+      photo: req.file.path
     },
     { new: true, runValidators: true }
   );

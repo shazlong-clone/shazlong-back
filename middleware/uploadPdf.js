@@ -3,7 +3,7 @@ const AppError = require('../utils/appError');
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    cb(null, 'public/uploads/doctor/img');
+    cb(null, 'public/uploads/doctor/pdf');
   },
   filename: function(req, file, cb) {
     const uniqueSuffix = req.user.id;
@@ -15,10 +15,10 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage,
   fileFilter: function(req, file, cb) {
-    if (file.mimetype.startsWith('image/')) {
+    if (file.mimetype.startsWith('application/pdf')) {
       cb(null, true);
     } else {
-      cb(new AppError('img_type_err', 400));
+      cb(new AppError('pdf_type_err', 400));
     }
   },
   limits: {

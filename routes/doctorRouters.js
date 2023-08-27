@@ -1,4 +1,5 @@
 const express = require('express');
+const multer = require('multer');
 
 const doctorController = require('../controllers/doctor/doctorController');
 const authDoctorController = require('../controllers/doctor/authDoctorController');
@@ -7,14 +8,17 @@ const { DOCTOR } = require('../utils/constants');
 const { restrictTo } = require('../middleware/authorize');
 
 const uploadImg = require('../middleware/uploadImg');
+const uploadPdf = require('../middleware/uploadPdf');
 
 const router = express.Router();
 
+const upload = multer();
 router.post('/signup', authDoctorController.signup);
 router.post('/login', authDoctorController.login);
 
 router.patch(
   '/verify-email-registration',
+  uploadPdf.single('cv'),
   authDoctorController.verifyEmailRegistration
 );
 

@@ -28,7 +28,18 @@ const doctorSchema = new mongoose.Schema(
       lowercase: true,
       validate: [validator.isEmail, 'Please provide a valid email']
     },
-    photo: String,
+    photo: {
+      type: String,
+      get(photo) {
+        if (photo) {
+          const url = photo.replace(
+            'public',
+            `${process.env.APP_URL}:${process.env.PORT}`
+          );
+          return url;
+        }
+      }
+    },
     role: {
       type: Number,
       enum: [USER, DOCTOR],
@@ -43,7 +54,16 @@ const doctorSchema = new mongoose.Schema(
     birthDate: Date,
     cv: {
       type: String,
-      require: [true, 'Please provide your cv']
+      required: [true, 'Please provide your cv'],
+      get(cv) {
+        if (cv) {
+          const url = cv.replace(
+            'public',
+            `${process.env.APP_URL}:${process.env.PORT}`
+          );
+          return url;
+        }
+      }
     },
     passwordConfirm: {
       type: String,
@@ -77,8 +97,8 @@ const doctorSchema = new mongoose.Schema(
     verificationHash: String
   },
   {
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true },
+    toJSON: { virtuals: true, getters: true },
+    toObject: { virtuals: true, getters: true },
     timestamps: true
   }
 );

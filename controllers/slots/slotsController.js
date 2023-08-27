@@ -23,15 +23,13 @@ exports.updateSlot = catchAsync(async (req, res, next) => {
   if (!slot) return next(new AppError(res.__('no_slots'), 400));
   if (slot.reserved)
     return next(new AppError(res.__('reserved_slot_cant_updated'), 400));
-  const filtedSlot = { from: req.body.from, to: req.body.to };
-  const upatedSlot = await Slot.findByIdAndUpdate(id, filtedSlot, {
-    runValidators: true,
-    new: true
-  });
 
+  slot.from = req.body.from;
+  slot.to = req.body.to;
+  await slot.save();
   res.status(200).json({
     status: 'success',
-    data: upatedSlot
+    data: slot
   });
 });
 
