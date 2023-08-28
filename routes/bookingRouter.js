@@ -7,13 +7,13 @@ const { USER } = require('../utils/constants');
 const {
   bookSlot,
   cancelBooking,
-  getBookings
+  getAllBookings
 } = require('../controllers/booking/bookingController');
 
 router.route('/cancel').post(protect, restrictTo(USER), cancelBooking);
 router
   .route('/')
   .post(protect, restrictTo(USER), bookSlot)
-  .get(protect, getBookings);
+  .get(protect, getAllBookings);
 
 module.exports = router;

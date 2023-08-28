@@ -4,6 +4,7 @@ const authController = require('./../controllers/user/userAuthController');
 const { protect } = require('../middleware/authenticate');
 const { restrictTo } = require('../middleware/authorize');
 const { USER } = require('../utils/constants');
+const bookingRouter = require('./bookingRouter');
 
 const router = express.Router();
 
@@ -15,8 +16,10 @@ router.patch('/resetPassword/:token', authController.resetPassword);
 
 router.patch('/updateMyPassword', protect, authController.updatePassword);
 
-router.patch('/updateMe', protect, restrictTo(USER) , userController.updateMe);
-router.delete('/deleteMe', protect,  restrictTo(USER) ,userController.deleteMe);
+router.patch('/updateMe', protect, restrictTo(USER), userController.updateMe);
+router.delete('/deleteMe', protect, restrictTo(USER), userController.deleteMe);
+
+router.use('/bookings', bookingRouter);
 
 router.route('/').get(userController.getAllUsers);
 

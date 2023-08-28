@@ -19,7 +19,7 @@ const slotsSchema = mongoose.Schema(
     doctorId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Doctor',
-      required: [true, 'please Profied Doctor']
+      required: [true, 'please Provied Doctor']
     },
     reserved: {
       type: Boolean,

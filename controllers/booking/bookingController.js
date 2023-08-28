@@ -4,6 +4,7 @@ const AppError = require('../../utils/appError');
 const Slot = require('../../models/slotModel');
 const Booking = require('../../models/bookingModel');
 const APIFeatures = require('../../utils/apiFeatures');
+const { DOCTOR, USER } = require('../../utils/constants');
 
 exports.bookSlot = catchAsync(async (req, res, next) => {
   const { slotId } = req.body;
@@ -18,7 +19,8 @@ exports.bookSlot = catchAsync(async (req, res, next) => {
   await slot.save();
   const book = await Booking.create({
     slot: slotId,
-    reservedBy: req.user.id
+    reservedBy: req.user.id,
+    doctor: slot.doctorId
   });
 
   res.status(200).json({
@@ -52,16 +54,31 @@ exports.cancelBooking = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getBookings = catchAsync(async (req, res, next) => {
-  const featured = new APIFeatures(Booking.find(), req.query)
+exports.getAllBookings = catchAsync(async (req, res, next) => {
+  let query = { ...req.query };
+  if (req.user.role === DOCTOR) {
+    query = { ...req.query, doctor: req.user.id };
+  } else if (req.user.role === USER) {
+    query = { ...req.query, reservedBy: req.user.id };
+  }
+  const featured = new APIFeatures(Booking.find(), query)
     .filter()
     .limitFields()
     .sort()
     .paginate();
 
-  const filterdQuery = new APIFeatures(Booking.find()).filter();
-  const total = await Booking.countDocuments(filterdQuery.query);
-  const bookings = await featured.query;
+  const bookings = await featured.query
+    .populate({
+      path: 'slot'
+    })
+    .populate({
+      path: 'reservedBy'
+    })
+    .populate({
+      path: 'doctor'
+    });
+  const filtered = new APIFeatures(Booking.find(), query).filter();
+  const total = await Booking.countDocuments(filtered.query);
   res.status(200).json({
     status: 'success',
     total,
