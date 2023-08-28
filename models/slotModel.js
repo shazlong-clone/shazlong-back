@@ -16,7 +16,7 @@ const slotsSchema = mongoose.Schema(
         message: 'from_must_be_less_than_to'
       }
     },
-    doctorId: {
+    doctor: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Doctor',
       required: [true, 'please Provied Doctor']

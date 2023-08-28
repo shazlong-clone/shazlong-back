@@ -173,7 +173,7 @@ doctorSchema.methods.createPasswordResetToken = function() {
 doctorSchema.virtual('slots', {
   ref: 'Slot',
   localField: '_id',
-  foreignField: 'doctorId'
+  foreignField: 'doctor'
 });
 
 const Doctor = mongoose.model('Doctor', doctorSchema);

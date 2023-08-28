@@ -54,7 +54,7 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
     $lookup: {
       from: 'slots',
       localField: '_id',
-      foreignField: 'doctorId',
+      foreignField: 'doctor',
       as: 'slots'
     }
   });

@@ -6,7 +6,7 @@ const APIFeatures = require('../../utils/apiFeatures');
 
 exports.createSlot = catchAsync(async (req, res, next) => {
   const slots = req.body.slots.map(el => {
-    return { ...el, doctorId: req.user.id };
+    return { ...el, doctor: req.user.id };
   });
   const slot = await Slot.insertMany(slots);
   res.status(200).json({
@@ -35,7 +35,7 @@ exports.updateSlot = catchAsync(async (req, res, next) => {
 
 exports.getDoctorSlots = catchAsync(async (req, res, next) => {
   const features = new APIFeatures(
-    Slot.find({ doctorId: req.user.id }),
+    Slot.find({ doctor: req.user.id }),
     req.query
   )
     .filter()

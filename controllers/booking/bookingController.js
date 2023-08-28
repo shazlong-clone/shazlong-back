@@ -20,7 +20,7 @@ exports.bookSlot = catchAsync(async (req, res, next) => {
   const book = await Booking.create({
     slot: slotId,
     reservedBy: req.user.id,
-    doctor: slot.doctorId
+    doctor: slot.doctor
   });
 
   res.status(200).json({
