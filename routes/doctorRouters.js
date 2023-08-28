@@ -6,7 +6,7 @@ const { protect } = require('../middleware/authenticate');
 const { DOCTOR } = require('../utils/constants');
 const { restrictTo } = require('../middleware/authorize');
 const bookingRouter = require('./bookingRouter');
-
+const reviewRouter = require('./reviewRouter');
 const uploadImg = require('../middleware/uploadImg');
 const uploadPdf = require('../middleware/uploadPdf');
 
@@ -48,6 +48,7 @@ router.post(
 );
 
 router.route('/getAllDoctors').get(doctorController.getAllDoctors);
+router.use('/:doctorId/reviews', reviewRouter);
 router.route('/:id').get(doctorController.getDoctor);
 
 router.use('/bookings', bookingRouter);

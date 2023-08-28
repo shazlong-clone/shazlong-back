@@ -3,7 +3,11 @@ const AppError = require('../../utils/appError');
 const catchAsync = require('../../utils/catchAsync');
 
 exports.getAllReviewes = catchAsync(async (req, res, next) => {
-  const reviews = await Review.find();
+  let params = { ...req.query };
+  if (req.params.doctorId) {
+    params = { ...params, doctor: req.params.doctorId };
+  }
+  const reviews = await Review.find(params);
   res.status(200).json({
     status: 'success',
     data: reviews
