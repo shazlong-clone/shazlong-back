@@ -21,6 +21,15 @@ const doctorSchema = new mongoose.Schema(
     country: Number,
     languages: [Number],
     prefix: String,
+    nReviews: {
+      type: Number,
+      default: 0
+    },
+    avgReviews: {
+      type: Number,
+      min: [0.0, 'min avrage reviews is 0.0'],
+      max: [5.0, 'max avrage reviews is 5.0']
+    },
     email: {
       type: String,
       required: [true, 'Please provide your email'],
