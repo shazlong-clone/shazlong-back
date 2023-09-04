@@ -26,7 +26,7 @@ exports.signup = catchAsync(async (req, res, next) => {
   await doctor.save();
 
   res.status(200).json({
-    status: 'success',
+    status: true,
     message: res.__('verification_code_sent'),
     code: verticationCode
   });
@@ -76,7 +76,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     });
 
     res.status(200).json({
-      status: 'success',
+      status: true,
       message: res.__('token_sent')
     });
   } catch (err) {

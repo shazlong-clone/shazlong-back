@@ -7,6 +7,7 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const path = require('path');
 const { I18n } = require('i18n');
+const cors = require('cors');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/error/errorController');
@@ -29,6 +30,24 @@ const i18n = new I18n({
   updateFiles: false
 });
 app.use(i18n.init);
+
+// CORS
+
+const whitelist = [process.env.FRONT_URL, undefined]; //undefined is postment origin
+const corsOptions = {
+  origin: function(origin, callback) {
+    if (
+      whitelist.indexOf(origin) !== -1 ||
+      process.env.NODE_ENV === 'production'
+    ) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+};
+
+app.use(cors(corsOptions));
 
 // GLOBAL MIDDLEWARES
 // Set security HTTP headers

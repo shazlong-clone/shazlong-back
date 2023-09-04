@@ -24,7 +24,7 @@ exports.bookSlot = catchAsync(async (req, res, next) => {
   });
 
   res.status(200).json({
-    status: 'success',
+    status: true,
     data: book
   });
 });
@@ -49,7 +49,7 @@ exports.cancelBooking = catchAsync(async (req, res, next) => {
   const updatedBooking = await booking.save();
 
   res.status(200).json({
-    status: 'success',
+    status: true,
     data: updatedBooking
   });
 });
@@ -80,7 +80,7 @@ exports.getAllBookings = catchAsync(async (req, res, next) => {
   const filtered = new APIFeatures(Booking.find(), query).filter();
   const total = await Booking.countDocuments(filtered.query);
   res.status(200).json({
-    status: 'success',
+    status: true,
     total,
     data: bookings
   });

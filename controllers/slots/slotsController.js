@@ -10,7 +10,7 @@ exports.createSlot = catchAsync(async (req, res, next) => {
   });
   const slot = await Slot.insertMany(slots);
   res.status(200).json({
-    status: 'success',
+    status: true,
     data: slot
   });
 });
@@ -28,7 +28,7 @@ exports.updateSlot = catchAsync(async (req, res, next) => {
   slot.to = req.body.to;
   await slot.save();
   res.status(200).json({
-    status: 'success',
+    status: true,
     data: slot
   });
 });
@@ -45,7 +45,7 @@ exports.getDoctorSlots = catchAsync(async (req, res, next) => {
   const slots = await features.query;
   if (!slots) return next(new AppError(res.__('no_slots'), 400));
   res.status(200).json({
-    status: 'success',
+    status: true,
     data: slots
   });
 });

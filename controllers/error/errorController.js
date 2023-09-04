@@ -50,7 +50,7 @@ const handleJWTExpiredError = () => new AppError('expoired_token', 401);
 
 const sendErrorDev = (err, res) => {
   res.status(err.statusCode).json({
-    status: err.status,
+    status: false,
     error: err,
     message: err.message,
     stack: err.stack
@@ -61,7 +61,7 @@ const sendErrorProd = (err, res) => {
   // Operational, trusted error: send message to client
   if (err.isOperational) {
     res.status(err.statusCode).json({
-      status: res.__(err.status),
+      status: false,
       message: res.__(err.message)
     });
 
@@ -72,7 +72,7 @@ const sendErrorProd = (err, res) => {
 
     // 2) Send generic message
     res.status(500).json({
-      status: res.__('error'),
+      status: false,
       message: res.__('server_error')
       // message: err
     });

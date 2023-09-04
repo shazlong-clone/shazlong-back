@@ -9,7 +9,7 @@ exports.getAllReviewes = catchAsync(async (req, res, next) => {
   }
   const reviews = await Review.find(params);
   res.status(200).json({
-    status: 'success',
+    status: true,
     data: reviews
   });
 });
@@ -30,7 +30,7 @@ exports.createReview = catchAsync(async (req, res, next) => {
   const reviews = await Review.create(params);
 
   res.status(200).json({
-    status: 'success',
+    status: true,
     data: reviews
   });
 });

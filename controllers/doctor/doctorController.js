@@ -137,7 +137,7 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
   [doctors] = await Doctor.aggregate(aggPipeline);
   // SEND RESPONSE
   res.status(200).json({
-    status: 'success',
+    status: true,
     data: {
       doctors
     }
@@ -171,7 +171,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   );
 
   res.status(200).json({
-    status: 'success',
+    status: true,
     data: {
       user: updatedUser
     }
@@ -182,7 +182,7 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
   await Doctor.findByIdAndUpdate(req.user.id, { active: false });
 
   res.status(204).json({
-    status: 'success',
+    status: true,
     data: null
   });
 });
@@ -195,7 +195,7 @@ exports.getDoctor = catchAsync(async (req, res, next) => {
     .select('-createdAt -updatedAt -email')
     .populate({ path: 'slots', select: '-__v' });
   res.status(200).json({
-    status: 'success',
+    status: true,
     data: doctor
   });
 });
@@ -210,7 +210,7 @@ exports.updatePhoto = catchAsync(async (req, res, next) => {
     { new: true, runValidators: true }
   );
   res.status(200).json({
-    status: 'success',
+    status: true,
     data: doctor
   });
 });

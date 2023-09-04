@@ -6,7 +6,7 @@ const { createSendToken } = require('../../utils/token');
 exports.createAdmin = catchAsync(async (req, res, next) => {
   const admin = await Admin.create(req.body);
   res.status(200).json({
-    status: 'success',
+    status: true,
     data: admin
   });
 });
