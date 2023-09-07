@@ -39,5 +39,7 @@
   "multer_error_max_size": "Too big photo max size allowed 1 Mega",
   "pdf_type_err": "Only allowed Types *.pdf",
   "no_file": "Please add your CV",
-  "is_required": "is required"
+  "is_required": "is required",
+  "You_Already_Have_Payment": "You Already Have Payment",
+  "You_Dont_Have_Payment": "You Dont Have Payment"
 }

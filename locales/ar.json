@@ -39,5 +39,7 @@
   "multer_error_max_size": "حجم الصورة كبير للغاية الحد الاقصي 1 ميجا",
   "pdf_type_err": "الصور المسموح بها *.pdf",
   "no_file": "الرجاء ارفاق السرة الذاتية",
-  "is_required": "مطلوب"
+  "is_required": "مطلوب",
+  "You_Already_Have_Payment": "لديك بالفعل وسيلة دفع",
+  "You_Dont_Have_Payment": "لايوجد لديك وسائل دفع"
 }
