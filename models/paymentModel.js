@@ -8,14 +8,14 @@ const paymentScheam = new mongoose.Schema({
   payment: {
     card: {
       cardNumber: String,
-      cvc: Number,
-      expireDate: String
+      expireDate: String,
+      cvc: String
     },
     fawry: {
       email: String,
       phone: String
     },
-    vodaphoneCash: {
+    vodafoneCash: {
       phone: String
     }
   }
