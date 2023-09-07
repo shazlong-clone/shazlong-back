@@ -26,7 +26,6 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   const filteredBody = filterObj(
     req.body,
     'role',
-    'email',
     'password',
     'passwordConfirm'
   );
@@ -51,5 +50,33 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
   res.status(204).json({
     status: true,
     data: null
+  });
+});
+
+exports.getMe = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+
+  res.status(200).json({
+    status: true,
+    data: {
+      user
+    }
+  });
+});
+
+exports.updatePhoto = catchAsync(async (req, res, next) => {
+  if (!req.file) return next(new AppError(res.__('no_photo'), 400));
+  const user = await User.findByIdAndUpdate(
+    req.user._id,
+    {
+      photo: req.file.path
+    },
+    { new: true, runValidators: true }
+  );
+  res.status(200).json({
+    status: true,
+    data: {
+      user
+    }
   });
 });

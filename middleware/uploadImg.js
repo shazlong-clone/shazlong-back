@@ -1,9 +1,12 @@
 const multer = require('multer');
 const AppError = require('../utils/appError');
+const { DOCTORSTORAGE, USERSTORAGE, USER } = require('../utils/constants');
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    cb(null, 'public/uploads/doctor/img');
+    console.log(req.user);
+    const dest = req.user.role === USER ? USERSTORAGE : DOCTORSTORAGE;
+    cb(null, dest);
   },
   filename: function(req, file, cb) {
     const uniqueSuffix = req.user.id;

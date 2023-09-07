@@ -203,7 +203,7 @@ exports.getDoctor = catchAsync(async (req, res, next) => {
 exports.updatePhoto = catchAsync(async (req, res, next) => {
   if (!req.file) return next(new AppError(res.__('no_photo'), 400));
   const doctor = await Doctor.findByIdAndUpdate(
-    req.user,
+    req.user._id,
     {
       photo: req.file.path
     },

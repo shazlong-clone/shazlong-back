@@ -26,7 +26,18 @@ const userSchema = new mongoose.Schema(
       type: Number,
       required: [true, 'Please provide your country']
     },
-    photo: String,
+    photo: {
+      type: String,
+      get(photo) {
+        if (photo) {
+          const url = photo.replace(
+            'public',
+            `${process.env.APP_URL}:${process.env.PORT}`
+          );
+          return url;
+        }
+      }
+    },
     role: {
       type: Number,
       enum: [USER, DOCTOR],
@@ -55,6 +66,10 @@ const userSchema = new mongoose.Schema(
       required: [true, 'Please provide a gender'],
       enum: [MALE, FEMALE]
     },
+    countryCode: {
+      type: String,
+      required: [true, 'Please provide a country Code']
+    },
     passwordChangedAt: Date,
     passwordResetToken: String,
     passwordResetExpires: Date,
@@ -65,7 +80,9 @@ const userSchema = new mongoose.Schema(
     }
   },
   {
-    timestamps: true
+    timestamps: true,
+    toObject: { virtuals: true, getters: true },
+    toJSON: { virtuals: true, getters: true }
   }
 );
 
