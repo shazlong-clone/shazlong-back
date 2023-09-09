@@ -9,6 +9,7 @@ const bookingRouter = require('./bookingRouter');
 const reviewRouter = require('./reviewRouter');
 const uploadImg = require('../middleware/uploadImg');
 const uploadPdf = require('../middleware/uploadPdf');
+const { getUserByCode } = require('../middleware/getUserByCode');
 
 const router = express.Router();
 
@@ -19,6 +20,12 @@ router.patch(
   '/verify-email-registration',
   uploadPdf.single('cv'),
   authDoctorController.verifyEmailRegistration
+);
+router.patch(
+  '/uploadCv',
+  getUserByCode,
+  uploadPdf.single('cv'),
+  doctorController.uploadCv
 );
 
 router.post('/forgotPassword', authDoctorController.forgotPassword);

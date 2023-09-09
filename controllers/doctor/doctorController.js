@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const mongoose = require('mongoose');
 const Doctor = require('../../models/doctorModel');
 const catchAsync = require('../../utils/catchAsync');
@@ -206,6 +207,20 @@ exports.updatePhoto = catchAsync(async (req, res, next) => {
     req.user._id,
     {
       photo: req.file.path
+    },
+    { new: true, runValidators: true }
+  );
+  res.status(200).json({
+    status: true,
+    data: doctor
+  });
+});
+exports.uploadCv = catchAsync(async (req, res, next) => {
+  if (!req.file) return next(new AppError(res.__('no_photo'), 400));
+  const doctor = await Doctor.findByIdAndUpdate(
+    req.user._id,
+    {
+      cv: req.file.path
     },
     { new: true, runValidators: true }
   );

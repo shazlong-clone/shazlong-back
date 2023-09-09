@@ -4,6 +4,7 @@ const catchAsync = require('../../utils/catchAsync');
 const AppError = require('../../utils/appError');
 const sendEmail = require('../../utils/email');
 const { createSendToken } = require('../../utils/token');
+const hashIt = require('../../utils/hashIt');
 
 exports.signup = catchAsync(async (req, res, next) => {
   const doctor = new Doctor({
@@ -90,10 +91,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
 exports.resetPassword = catchAsync(async (req, res, next) => {
   // 1) Get user based on the token
-  const hashedToken = crypto
-    .createHash('sha256')
-    .update(req.params.token)
-    .digest('hex');
+  const hashedToken = hashIt(req.params.token);
 
   const doctor = await Doctor.findOne({
     passwordResetToken: hashedToken,

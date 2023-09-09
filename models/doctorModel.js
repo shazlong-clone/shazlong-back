@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const { MALE, FEMALE, DOCTOR, USER } = require('../utils/constants');
+const hashIt = require('../utils/hashIt');
 
 const doctorSchema = new mongoose.Schema(
   {
@@ -63,7 +64,6 @@ const doctorSchema = new mongoose.Schema(
     birthDate: Date,
     cv: {
       type: String,
-      required: [true, 'Please provide your cv'],
       get(cv) {
         if (cv) {
           const url = cv.replace(
@@ -170,10 +170,7 @@ doctorSchema.methods.createVerificationCode = function() {
 doctorSchema.methods.createPasswordResetToken = function() {
   const resetToken = crypto.randomBytes(32).toString('hex');
 
-  this.passwordResetToken = crypto
-    .createHash('sha256')
-    .update(resetToken)
-    .digest('hex');
+  this.passwordResetToken = hashIt(resetToken);
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 
   return resetToken;

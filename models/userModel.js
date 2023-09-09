@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const { MALE, FEMALE, USER, DOCTOR } = require('../utils/constants');
+const hashIt = require('../utils/hashIt');
 
 const userSchema = new mongoose.Schema(
   {
@@ -135,10 +136,7 @@ userSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
 userSchema.methods.createPasswordResetToken = function() {
   const resetToken = crypto.randomBytes(32).toString('hex');
 
-  this.passwordResetToken = crypto
-    .createHash('sha256')
-    .update(resetToken)
-    .digest('hex');
+  this.passwordResetToken = hashIt(resetToken);
 
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 
