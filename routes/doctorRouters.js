@@ -3,7 +3,7 @@ const express = require('express');
 const doctorController = require('../controllers/doctor/doctorController');
 const authDoctorController = require('../controllers/doctor/authDoctorController');
 const { protect } = require('../middleware/authenticate');
-const { DOCTOR } = require('../utils/constants');
+const { DOCTOR, ADMIN } = require('../utils/constants');
 const { restrictTo } = require('../middleware/authorize');
 const bookingRouter = require('./bookingRouter');
 const reviewRouter = require('./reviewRouter');
@@ -18,10 +18,10 @@ router.post('/login', authDoctorController.login);
 
 router.patch(
   '/verify-email-registration',
-  uploadPdf.single('cv'),
+  getUserByCode,
   authDoctorController.verifyEmailRegistration
 );
-router.patch(
+router.post(
   '/uploadCv',
   getUserByCode,
   uploadPdf.single('cv'),
@@ -44,6 +44,13 @@ router.delete(
   protect,
   restrictTo(DOCTOR),
   doctorController.deleteMe
+);
+
+router.delete(
+  '/deleteByID',
+  protect,
+  restrictTo(ADMIN),
+  doctorController.deleteDoctors
 );
 
 router.post(

@@ -133,38 +133,22 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 });
 
 exports.verifyEmailRegistration = catchAsync(async (req, res, next) => {
-  if (!req.file) return next(new AppError(res.__('no_pdf'), 400));
-
   const params = {
     fullArName: req.body.fullArName,
     fullEnName: req.body.fullEnName,
     experienceYears: Number(req.body.experienceYears) || null,
     gender: Number(req.body.gender) || null,
     country: Number(req.body.country) || null,
-    languages: Number(req.body.languages) || null,
-    prefix: req.body.prefix,
-    cv: req.file.path,
-    specialization: Number(req.body.specialization) || null,
-    feez: JSON.parse(req.body.feez)
+    languages: req.body.languages || null,
+    prefix: req.body.prefix
   };
   for (const param in params) {
     if (!params[param]) return next(new AppError(`${param} is required`, 400));
   }
-  const verificationCode = req.query['verification-code'];
 
-  const verificationHash = crypto
-    .createHash('sha256')
-    .update(verificationCode)
-    .digest('hex');
-
-  if (!verificationCode) {
-    return next(new AppError(res.__('verification Code equired'), 400));
-  }
-  const doctor = await Doctor.findOne({ verificationHash });
-  if (!doctor) {
-    return next(new AppError(res.__('doctor_not_exits'), 400));
-  }
-  params.verificationHash = '';
-  await doctor.updateOne(params, { new: true, runValidators: true });
+  const doctor = await Doctor.findByIdAndUpdate(req.user._id, params, {
+    new: true,
+    runValidators: true
+  });
   createSendToken(doctor, 200, res);
 });

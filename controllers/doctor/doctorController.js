@@ -229,3 +229,17 @@ exports.uploadCv = catchAsync(async (req, res, next) => {
     data: doctor
   });
 });
+
+exports.deleteDoctors = catchAsync(async (req, res, next) => {
+  const { ids = [] } = req.query;
+  if (!ids.length) {
+    return next(new AppError('Ids_Required'));
+  }
+  const doctors = await Doctor.deleteMany({ _id: { $in: ids.split(',') } });
+  res.status(200).json({
+    status: true,
+    data: {
+      countDelted: doctors.deletedCount
+    }
+  });
+});

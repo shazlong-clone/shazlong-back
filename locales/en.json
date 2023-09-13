@@ -41,5 +41,8 @@
   "no_file": "Please add your CV",
   "is_required": "is required",
   "You_Already_Have_Payment": "You Already Have Payment",
-  "You_Dont_Have_Payment": "You Dont Have Payment"
+  "You_Dont_Have_Payment": "You Dont Have Payment",
+  "no_verfication_code": "no  verification code",
+  "Ids_Required": "Ids Required",
+  "no_user_with_this_code": "No user with this code"
 }
