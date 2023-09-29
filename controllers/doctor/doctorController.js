@@ -243,3 +243,13 @@ exports.deleteDoctors = catchAsync(async (req, res, next) => {
     }
   });
 });
+
+exports.getMe = catchAsync(async (req, res, next) => {
+  const doctor = await Doctor.findById(req.user._id);
+  res.status(200).json({
+    status: true,
+    data: {
+      doctor
+    }
+  });
+});

@@ -45,6 +45,7 @@ router.delete(
   restrictTo(DOCTOR),
   doctorController.deleteMe
 );
+router.get('/getMe', protect, restrictTo(DOCTOR), doctorController.getMe);
 
 router.delete(
   '/deleteByID',
