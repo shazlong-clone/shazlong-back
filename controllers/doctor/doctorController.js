@@ -5,6 +5,7 @@ const catchAsync = require('../../utils/catchAsync');
 const AppError = require('../../utils/appError');
 const filterObject = require('../../utils/filterObject');
 const getPaginate = require('../../utils/getPaginate');
+const resizeBuffer = require('../../utils/resizeBuffer');
 
 exports.getAllDoctors = catchAsync(async (req, res, next) => {
   const aggPipeline = [];
@@ -203,10 +204,15 @@ exports.getDoctor = catchAsync(async (req, res, next) => {
 
 exports.updatePhoto = catchAsync(async (req, res, next) => {
   if (!req.file) return next(new AppError(res.__('no_photo'), 400));
+  // Resize the image using sharp
+  const resizedBuffer = await resizeBuffer(req.file.buffer, 80, 80);
+
+  const base64Photo = resizedBuffer.toString('base64');
+
   const doctor = await Doctor.findByIdAndUpdate(
     req.user._id,
     {
-      photo: req.file.path
+      photo: base64Photo
     },
     { new: true, runValidators: true }
   );
@@ -217,10 +223,15 @@ exports.updatePhoto = catchAsync(async (req, res, next) => {
 });
 exports.uploadCv = catchAsync(async (req, res, next) => {
   if (!req.file) return next(new AppError(res.__('no_photo'), 400));
+
+  // Resize the image using sharp
+  const resizedBuffer = await resizeBuffer(req.file.buffer, 80, 80);
+  const base64Photo = resizedBuffer.toString('base64');
+
   const doctor = await Doctor.findByIdAndUpdate(
     req.user._id,
     {
-      cv: req.file.path
+      cv: base64Photo
     },
     { new: true, runValidators: true }
   );

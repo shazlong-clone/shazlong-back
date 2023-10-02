@@ -8,7 +8,6 @@ const { restrictTo } = require('../middleware/authorize');
 const bookingRouter = require('./bookingRouter');
 const reviewRouter = require('./reviewRouter');
 const uploadImg = require('../middleware/uploadImg');
-const uploadPdf = require('../middleware/uploadPdf');
 const { getUserByCode } = require('../middleware/getUserByCode');
 
 const router = express.Router();
@@ -24,7 +23,7 @@ router.patch(
 router.post(
   '/uploadCv',
   getUserByCode,
-  uploadPdf.single('cv'),
+  uploadImg.single('cv'),
   doctorController.uploadCv
 );
 

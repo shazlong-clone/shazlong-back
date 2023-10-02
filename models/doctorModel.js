@@ -42,10 +42,7 @@ const doctorSchema = new mongoose.Schema(
       type: String,
       get(photo) {
         if (photo) {
-          const url = photo.replace(
-            'public',
-            `${process.env.APP_URL}:${process.env.PORT}`
-          );
+          const url = `data:image/jpeg;base64,${photo}`;
           return url;
         }
       }
@@ -64,12 +61,9 @@ const doctorSchema = new mongoose.Schema(
     birthDate: Date,
     cv: {
       type: String,
-      get(cv) {
-        if (cv) {
-          const url = cv.replace(
-            'public',
-            `${process.env.APP_URL}:${process.env.PORT}`
-          );
+      get(photo) {
+        if (photo) {
+          const url = `data:image/jpeg;base64,${photo}`;
           return url;
         }
       }
