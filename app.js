@@ -34,15 +34,16 @@ app.use(i18n.init);
 
 // CORS
 
-const whitelist = [process.env.FRONT_URL, undefined]; //undefined is postment origin
+const whitelist = [process.env.FRONT_URL];
 const corsOptions = {
   origin: function(origin, callback) {
     if (
       whitelist.indexOf(origin) !== -1 ||
-      process.env.NODE_ENV === 'production'
+      process.env.NODE_ENV === 'development'
     ) {
       callback(null, true);
     } else {
+      console.log('Cors Error')
       callback(new Error('Not allowed by CORS'));
     }
   }

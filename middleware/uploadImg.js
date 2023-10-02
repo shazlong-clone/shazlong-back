@@ -4,7 +4,6 @@ const { DOCTORSTORAGE, USERSTORAGE, USER } = require('../utils/constants');
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    console.log(req.user);
     const dest = req.user.role === USER ? USERSTORAGE : DOCTORSTORAGE;
     cb(null, dest);
   },

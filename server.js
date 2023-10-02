@@ -22,7 +22,6 @@ DB = DB.replace(
   process.env.DATABASE_PASSWORD
 ).replace('<dbname>', process.env.DATABASE_NAME);
 
-console.log(DB);
 mongoose
   .connect(DB, {
     useNewUrlParser: true,
