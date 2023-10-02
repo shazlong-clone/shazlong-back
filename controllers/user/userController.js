@@ -3,6 +3,8 @@ const User = require('../../models/userModel');
 const catchAsync = require('../../utils/catchAsync');
 const AppError = require('../../utils/appError');
 const filterObj = require('../../utils/filterObject');
+const resieBuffer = require('../../utils/resizeBuffer');
+const resizeBuffer = require('../../utils/resizeBuffer');
 
 exports.getAllUsers = catchAsync(async (req, res, next) => {
   const users = await User.find();
@@ -68,9 +70,7 @@ exports.getMe = catchAsync(async (req, res, next) => {
 exports.updatePhoto = catchAsync(async (req, res, next) => {
   if (!req.file) return next(new AppError(res.__('no_photo'), 400));
   // Resize the image using sharp
-  const resizedBuffer = await sharp(req.file.buffer)
-    .resize({ width: 80, height: 80 }) // Adjust the width and height as needed
-    .toBuffer();
+  const resizedBuffer = await resizeBuffer(req.file.buffer, 80, 80);
 
   const base64Photo = resizedBuffer.toString('base64');
 
