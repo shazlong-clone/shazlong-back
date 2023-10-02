@@ -11,12 +11,18 @@ process.on('uncaughtException', err => {
 dotenv.config({ path: './config.env' });
 const app = require('./app');
 
-let DB; 
-if(process.env.NODE_ENV==='production'){
-  DB = process.env.DATABASE_REMOTE.replace('<password>', process.env.DATABASE_PASSWORD)
-}else {
-   DB = process.env.DATABASE_LOCAL;
+let DB;
+if (process.env.NODE_ENV === 'production') {
+  DB = process.env.DATABASE_REMOTE;
+} else {
+  DB = process.env.DATABASE_LOCALE;
 }
+DB = DB.replace(
+  '<password>',
+  process.env.DATABASE_PASSWORD
+).replace('<dbname>', process.env.DATABASE_NAME);
+
+console.log(DB);
 mongoose
   .connect(DB, {
     useNewUrlParser: true,
