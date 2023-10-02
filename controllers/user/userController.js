@@ -1,3 +1,4 @@
+const sharp = require('sharp');
 const User = require('../../models/userModel');
 const catchAsync = require('../../utils/catchAsync');
 const AppError = require('../../utils/appError');
@@ -66,10 +67,17 @@ exports.getMe = catchAsync(async (req, res, next) => {
 
 exports.updatePhoto = catchAsync(async (req, res, next) => {
   if (!req.file) return next(new AppError(res.__('no_photo'), 400));
+  // Resize the image using sharp
+  const resizedBuffer = await sharp(req.file.buffer)
+    .resize({ width: 80, height: 80 }) // Adjust the width and height as needed
+    .toBuffer();
+
+  const base64Photo = resizedBuffer.toString('base64');
+
   const user = await User.findByIdAndUpdate(
     req.user._id,
     {
-      photo: req.file.path
+      photo: base64Photo
     },
     { new: true, runValidators: true }
   );

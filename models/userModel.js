@@ -31,10 +31,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       get(photo) {
         if (photo) {
-          const url = photo.replace(
-            'public',
-            `${process.env.APP_URL}:${process.env.PORT}`
-          );
+          const url = `data:image/jpeg;base64,${ photo}`
           return url;
         }
       }
