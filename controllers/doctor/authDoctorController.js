@@ -140,7 +140,8 @@ exports.verifyEmailRegistration = catchAsync(async (req, res, next) => {
     gender: Number(req.body.gender) || null,
     country: Number(req.body.country) || null,
     languages: req.body.languages || null,
-    prefix: req.body.prefix
+    prefix: req.body.prefix,
+    countryCode: req.body.countryCode
   };
   for (const param in params) {
     if (!params[param]) return next(new AppError(`${param} is required`, 400));

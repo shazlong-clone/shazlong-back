@@ -38,6 +38,11 @@ const doctorSchema = new mongoose.Schema(
       lowercase: true,
       validate: [validator.isEmail, 'Please provide a valid email']
     },
+    countryCode: {
+      type: String
+    },
+    address: Number,
+    phone: String,
     photo: {
       type: String,
       get(photo) {
