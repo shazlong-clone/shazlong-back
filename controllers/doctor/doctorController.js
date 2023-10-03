@@ -225,7 +225,7 @@ exports.uploadCv = catchAsync(async (req, res, next) => {
   if (!req.file) return next(new AppError(res.__('no_photo'), 400));
 
   // Resize the image using sharp
-  const resizedBuffer = await resizeBuffer(req.file.buffer, 80, 80);
+  const resizedBuffer = await resizeBuffer(req.file.buffer, 200, 200);
   const base64Photo = resizedBuffer.toString('base64');
 
   const doctor = await Doctor.findByIdAndUpdate(
