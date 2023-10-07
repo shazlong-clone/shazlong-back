@@ -1,9 +1,7 @@
-const sharp = require('sharp');
 const User = require('../../models/userModel');
 const catchAsync = require('../../utils/catchAsync');
 const AppError = require('../../utils/appError');
 const filterObj = require('../../utils/filterObject');
-const resieBuffer = require('../../utils/resizeBuffer');
 const resizeBuffer = require('../../utils/resizeBuffer');
 
 exports.getAllUsers = catchAsync(async (req, res, next) => {

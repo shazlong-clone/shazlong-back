@@ -66,9 +66,9 @@ const doctorSchema = new mongoose.Schema(
     birthDate: Date,
     cv: {
       type: String,
-      get(photo) {
-        if (photo) {
-          const url = `data:image/jpeg;base64,${photo}`;
+      get(cv) {
+        if (cv) {
+          const url = `data:image/jpeg;base64,${cv}`;
           return url;
         }
       }
