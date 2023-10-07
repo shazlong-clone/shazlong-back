@@ -73,6 +73,12 @@ const doctorSchema = new mongoose.Schema(
         }
       }
     },
+    certifications: [
+      { name: String, arabic_name: String, place: String, time: Date }
+    ],
+    educations: [
+      { name: String, arabic_name: String, place: String, time: Date }
+    ],
     passwordConfirm: {
       type: String,
       required: [true, 'Please confirm your password'],
