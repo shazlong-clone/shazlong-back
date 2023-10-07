@@ -64,6 +64,13 @@ router.post(
 router.route('/getAllDoctors').get(doctorController.getAllDoctors);
 router.use('/:doctorId/reviews', reviewRouter);
 router.route('/:id').get(doctorController.getDoctor);
+router
+  .route('/addOrUpdateDoctorExperience')
+  .post(
+    protect,
+    uploadImg.single('company_logo'),
+    doctorController.addOrUpdateDoctorExperience
+  );
 
 router.use('/bookings', bookingRouter);
 module.exports = router;

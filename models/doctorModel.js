@@ -91,6 +91,16 @@ const doctorSchema = new mongoose.Schema(
         time: [Date]
       }
     ],
+    experiences: [
+      {
+        title: String,
+        ar_title: String,
+        description: String,
+        ar_description: String,
+        company_logo: String,
+        time: [Date]
+      }
+    ],
     passwordConfirm: {
       type: String,
       required: [true, 'Please confirm your password'],

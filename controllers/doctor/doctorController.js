@@ -1,4 +1,3 @@
-const crypto = require('crypto');
 const mongoose = require('mongoose');
 const Doctor = require('../../models/doctorModel');
 const catchAsync = require('../../utils/catchAsync');
@@ -257,6 +256,45 @@ exports.deleteDoctors = catchAsync(async (req, res, next) => {
 
 exports.getMe = catchAsync(async (req, res, next) => {
   const doctor = await Doctor.findById(req.user._id);
+  res.status(200).json({
+    status: true,
+    data: {
+      doctor
+    }
+  });
+});
+
+exports.addOrUpdateDoctorExperience = catchAsync(async (req, res, next) => {
+  if (req.file) {
+    const resizedBuffer = await resizeBuffer(req.file.buffer, 40, 40);
+    const base64Photo = resizedBuffer.toString('base64');
+    req.body.company_logo = base64Photo;
+  }
+  let doctor;
+  const params = {
+    ...req.body,
+    time: req.body.time.split(',').map(t => new Date(t))
+  };
+  if (req.body._id) {
+    doctor = await Doctor.updateOne(
+      { _id: req.user._id, 'experiences._id': req.body._id },
+      {
+        $set: { 'experiences.$': params }
+      }
+    );
+  } else {
+    doctor = await Doctor.findByIdAndUpdate(
+      req.user._id,
+      { $push: { experiences: params } },
+      {
+        runValidators: true,
+        new: true
+      }
+    );
+  }
+
+  // Resize the image using sharp
+
   res.status(200).json({
     status: true,
     data: {
