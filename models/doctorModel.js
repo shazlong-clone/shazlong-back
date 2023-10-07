@@ -74,10 +74,22 @@ const doctorSchema = new mongoose.Schema(
       }
     },
     certifications: [
-      { name: String, arabic_name: String, place: String, time: Date }
+      {
+        title: String,
+        ar_title: String,
+        place: String,
+        ar_place: String,
+        time: [Date]
+      }
     ],
     educations: [
-      { name: String, arabic_name: String, place: String, time: Date }
+      {
+        title: String,
+        ar_title: String,
+        ar_place: String,
+        place: String,
+        time: [Date]
+      }
     ],
     passwordConfirm: {
       type: String,
