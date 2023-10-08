@@ -302,3 +302,26 @@ exports.addOrUpdateDoctorExperience = catchAsync(async (req, res, next) => {
     }
   });
 });
+
+exports.deleteExperienceById = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+  const doctor = await Doctor.updateOne(
+    { _id: req.user.id },
+    {
+      $pull: { experiences: { _id: id } }
+    },
+    {
+      runValidators: true,
+      new: true
+    }
+  );
+
+  // Resize the image using sharp
+
+  res.status(200).json({
+    status: true,
+    data: {
+      doctor
+    }
+  });
+});

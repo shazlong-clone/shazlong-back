@@ -72,5 +72,9 @@ router
     doctorController.addOrUpdateDoctorExperience
   );
 
+router
+  .route('/deleteExperienceById/:id')
+  .delete(protect, doctorController.deleteExperienceById);
+
 router.use('/bookings', bookingRouter);
 module.exports = router;
