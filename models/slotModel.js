@@ -24,6 +24,10 @@ const slotsSchema = mongoose.Schema(
     reserved: {
       type: Boolean,
       default: false
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false
     }
   },
   {

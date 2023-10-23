@@ -49,3 +49,20 @@ exports.getDoctorSlots = catchAsync(async (req, res, next) => {
     data: slots
   });
 });
+
+exports.deleteSlot = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+  if (!mongoose.isValidObjectId(id))
+    return next(new AppError(res.__('id_not_valid'), 400));
+  const slot = await Slot.findById(id);
+  if (!slot) return next(new AppError(res.__('no_slots'), 400));
+  if (slot.reserved)
+    return next(new AppError(res.__('reserved_slot_cant_updated'), 400));
+
+  slot.isDeleted = true;
+  await slot.save();
+  res.status(200).json({
+    status: true,
+    data: slot
+  });
+});
