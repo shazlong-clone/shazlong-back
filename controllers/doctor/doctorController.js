@@ -117,7 +117,19 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
     {
       $project: {
         minDate: 0,
-        slots: 0
+        slots: 0,
+        educations: 0,
+        certifications: 0,
+        experiences: 0,
+        password: 0,
+        __v: 0,
+        active: 0,
+        verified: 0,
+        verificationHash: 0,
+        experienceYears: 0,
+        countryCode: 0,
+        email: 0,
+        role: 0
       }
     }
   );
