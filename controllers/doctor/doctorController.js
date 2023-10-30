@@ -3,7 +3,7 @@ const Doctor = require('../../models/doctorModel');
 const catchAsync = require('../../utils/catchAsync');
 const AppError = require('../../utils/appError');
 const filterObject = require('../../utils/filterObject');
-const getPaginate = require('../../utils/getPaginate');
+const { getPaginate, getPagingData } = require('../../utils/getPaginate');
 const resizeBuffer = require('../../utils/resizeBuffer');
 
 exports.getAllDoctors = catchAsync(async (req, res, next) => {
@@ -93,7 +93,7 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
     },
     {
       $addFields: {
-        minDate: { $min: '$slots.from' }
+        minDate: { $min: '$nearestSlot.from' }
       }
     },
     {
@@ -116,7 +116,7 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
     },
     {
       $project: {
-        minDate: 0,
+        minDate:0,
         slots: 0,
         educations: 0,
         certifications: 0,
@@ -129,7 +129,8 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
         experienceYears: 0,
         countryCode: 0,
         email: 0,
-        role: 0
+        role: 0,
+        cv:0
       }
     }
   );
@@ -148,12 +149,11 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
   );
 
   [doctors] = await Doctor.aggregate(aggPipeline);
+  const response = getPagingData(doctors, page, limit);
   // SEND RESPONSE
   res.status(200).json({
     status: true,
-    data: {
-      doctors
-    }
+    data: response
   });
 });
 

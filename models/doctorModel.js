@@ -29,7 +29,8 @@ const doctorSchema = new mongoose.Schema(
     avgReviews: {
       type: Number,
       min: [0.0, 'min avrage reviews is 0.0'],
-      max: [5.0, 'max avrage reviews is 5.0']
+      max: [5.0, 'max avrage reviews is 5.0'],
+      default: 3.5
     },
     email: {
       type: String,
