@@ -14,13 +14,16 @@ const doctorSchema = new mongoose.Schema(
     fullArName: String,
     fullEnName: String,
     experienceYears: Number,
+    // 1 for male 2 for female
     gender: {
       type: Number,
-      enum: [MALE, FEMALE],
-      description: '1 male 2 female'
+      enum: [MALE, FEMALE]
     },
+    // country is any number betwen 1 and 242
     country: Number,
+    // languages is array from 257 or 258 or 259 or 260 or 261 or 262 or 263 or 264 or 265 or 266 or 267 or 268 or
     languages: [Number],
+    // prefix is one of 'Dr', 'PsyD', 'Prof', 'MBPsS', 'Mr', 'Mrs', 'Ms'
     prefix: String,
     nReviews: {
       type: Number,
@@ -44,6 +47,7 @@ const doctorSchema = new mongoose.Schema(
     },
     address: Number,
     phone: String,
+    // photo should be in base64 image you can add and doctor image randomly
     photo: {
       type: String,
       get(photo) {
@@ -53,6 +57,7 @@ const doctorSchema = new mongoose.Schema(
         }
       }
     },
+    // role is 1 for user and 2 for doctor
     role: {
       type: Number,
       enum: [USER, DOCTOR],
@@ -113,6 +118,7 @@ const doctorSchema = new mongoose.Schema(
         message: 'Passwords are not the same!'
       }
     },
+    //specialization is array from  1 or 2 or 3 or 4 or 8 or 9 or 10 or 11 or 12 or 13 or 14
     specialization: [Number],
     feez: [{ amount: Number, duration: Number }],
     passwordChangedAt: Date,

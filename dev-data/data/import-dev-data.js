@@ -1,14 +1,14 @@
 const fs = require('fs');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const Tour = require('./../../models/tourModel');
+const Doctor = require('./../../models/doctorModel');
 
 dotenv.config({ path: './config.env' });
 
-const DB = process.env.DATABASE.replace(
-  '<PASSWORD>',
+const DB = process.env.DATABASE_LOCALE.replace(
+  '<password>',
   process.env.DATABASE_PASSWORD
-);
+).replace('<dbname>', process.env.DATABASE_NAME);
 
 mongoose
   .connect(DB, {
@@ -19,14 +19,14 @@ mongoose
   .then(() => console.log('DB connection successful!'));
 
 // READ JSON FILE
-const tours = JSON.parse(
-  fs.readFileSync(`${__dirname}/tours-simple.json`, 'utf-8')
+const doctor = JSON.parse(
+  fs.readFileSync(`${__dirname}/doctors.json`, 'utf-8')
 );
 
 // IMPORT DATA INTO DB
 const importData = async () => {
   try {
-    await Tour.create(tours);
+    await Doctor.create(doctor);
     console.log('Data successfully loaded!');
   } catch (err) {
     console.log(err);
@@ -37,7 +37,7 @@ const importData = async () => {
 // DELETE ALL DATA FROM DB
 const deleteData = async () => {
   try {
-    await Tour.deleteMany();
+    await Doctor.deleteMany();
     console.log('Data successfully deleted!');
   } catch (err) {
     console.log(err);
