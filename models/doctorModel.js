@@ -42,9 +42,6 @@ const doctorSchema = new mongoose.Schema(
       lowercase: true,
       validate: [validator.isEmail, 'Please provide a valid email']
     },
-    countryCode: {
-      type: String
-    },
     address: Number,
     phone: String,
     // photo should be in base64 image you can add and doctor image randomly

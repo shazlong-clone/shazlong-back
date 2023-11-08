@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       get(photo) {
         if (photo) {
-          const url = `data:image/jpeg;base64,${ photo}`
+          const url = `data:image/jpeg;base64,${photo}`;
           return url;
         }
       }
@@ -63,10 +63,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Please provide a gender'],
       enum: [MALE, FEMALE]
-    },
-    countryCode: {
-      type: String,
-      required: [true, 'Please provide a country Code']
     },
     passwordChangedAt: Date,
     passwordResetToken: String,
