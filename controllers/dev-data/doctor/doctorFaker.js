@@ -30,7 +30,6 @@ for (let i = 0; i < 1; i++) {
     email: faker.internet.email().toLowerCase(),
     address: faker.location.city(),
     // countryCode: faker.phone.phoneNumberCode(), will be removed
-    ar_addres: fakerAR.location.city(), //will be added
     phone: faker.phone.number(),
     photo: faker.image.avatarLegacy(),
     cv: 'https://content.wepik.com/statics/10879408/preview-page0.jpg',
