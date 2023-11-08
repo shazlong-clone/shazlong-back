@@ -16,6 +16,7 @@ const randomDoctorData = [];
 
 for (let i = 0; i < 1; i++) {
   const doctorData = {
+    id: faker.datatype.uuid(),
     name: faker.person.firstName(),
     fullArName: faker.person.fullName(),
     fullEnName: fakerAR.person.fullName(),
@@ -33,43 +34,49 @@ for (let i = 0; i < 1; i++) {
     phone: faker.phone.number(),
     photo: faker.image.avatarLegacy(),
     cv: 'https://content.wepik.com/statics/10879408/preview-page0.jpg',
-    certifications:Array(faker.number.int({min:1, max:4})).fill('').map(cer =>{
-      return       {
-        title: faker.lorem.words(3),
-        ar_title: faker.lorem.words(3),
-        place: faker.location.city(),
-        ar_place: fakerAR.location.city(),
-        time: [
-          faker.date.past({ years: 20, refDate: new Date() }),
-          faker.date.past({ years: 2, refDate: new Date() })
-        ]
-      }
-    }),
-    educations: Array(faker.number.int({min:1, max:3})).fill('').map(edu =>{
-      return {
-        title: faker.lorem.words(3),
-        ar_title: faker.lorem.words(3),
-        place: faker.location.city(),
-        ar_place: fakerAR.location.city(),
-        time: [
-          faker.date.past({ years: 20, refDate: new Date() }),
-          faker.date.past({ years: 2, refDate: new Date() })
-        ]
-      }
-    }),
-    experiences: Array(faker.number.int({min:1, max:6})).fill('').map(ex =>{
-      return {
-        title: faker.lorem.words(3),
-        ar_title: fakerAR.lorem.words(3),
-        description: faker.lorem.paragraph(),
-        ar_description: fakerAR.lorem.paragraph(),
-        company_logo: faker.image.urlLoremFlickr({ category: 'business' }),
-        time: [
-          faker.date.past({ years: 20, refDate: new Date() }),
-          faker.date.past({ years: 2, refDate: new Date() })
-        ]
-      }
-    }) ,
+    certifications: Array(faker.number.int({ min: 1, max: 4 }))
+      .fill('')
+      .map(cer => {
+        return {
+          title: faker.lorem.words(3),
+          ar_title: faker.lorem.words(3),
+          place: faker.location.city(),
+          ar_place: fakerAR.location.city(),
+          time: [
+            faker.date.past({ years: 20, refDate: new Date() }),
+            faker.date.past({ years: 2, refDate: new Date() })
+          ]
+        };
+      }),
+    educations: Array(faker.number.int({ min: 1, max: 3 }))
+      .fill('')
+      .map(edu => {
+        return {
+          title: faker.lorem.words(3),
+          ar_title: faker.lorem.words(3),
+          place: faker.location.city(),
+          ar_place: fakerAR.location.city(),
+          time: [
+            faker.date.past({ years: 20, refDate: new Date() }),
+            faker.date.past({ years: 2, refDate: new Date() })
+          ]
+        };
+      }),
+    experiences: Array(faker.number.int({ min: 1, max: 6 }))
+      .fill('')
+      .map(ex => {
+        return {
+          title: faker.lorem.words(3),
+          ar_title: fakerAR.lorem.words(3),
+          description: faker.lorem.paragraph(),
+          ar_description: fakerAR.lorem.paragraph(),
+          company_logo: faker.image.urlLoremFlickr({ category: 'business' }),
+          time: [
+            faker.date.past({ years: 20, refDate: new Date() }),
+            faker.date.past({ years: 2, refDate: new Date() })
+          ]
+        };
+      }),
     passwordConfirm: faker.internet.password(),
     specialization: [faker.number.int({ min: 1, max: 14 })],
     feez: [
