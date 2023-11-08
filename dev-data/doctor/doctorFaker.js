@@ -11,24 +11,30 @@ const count = JSON.parse(fs.readFileSync('./public/data/countries.json')).map(
 const preFix = JSON.parse(fs.readFileSync('./public/data/prefix.json')).map(
   el => el.id
 );
+const spec = JSON.parse(fs.readFileSync('./public/data/specialty.json')).map(
+  el => el.id
+);
+const hostpitals = JSON.parse(fs.readFileSync('./public/data/hospitals.json'));
 
 const randomDoctorData = [];
 
-for (let i = 0; i < 1; i++) {
+for (let i = 0; i < 50; i++) {
   const doctorData = {
-    id: faker.datatype.uuid(),
+    id: faker.string.uuid(),
     name: faker.person.firstName(),
     fullArName: faker.person.fullName(),
     fullEnName: fakerAR.person.fullName(),
     experienceYears: faker.number.int({ min: 1, max: 40 }),
     gender: faker.number.int({ min: 1, max: 2 }),
-    country: count[faker.number.int({ min: 0, max: count.length })],
-    languages: lang[faker.number.int({ min: 0, max: lang.length })],
-    pre_fix: lang[faker.number.int({ min: 0, max: preFix.length })],
-    nReviews: faker.number.int(100),
+    country: count[faker.number.int({ min: 0, max: count.length - 1 })],
+    languages: lang[faker.number.int({ min: 0, max: lang.length - 1 })],
+    prefix: preFix[faker.number.int({ min: 0, max: preFix.length - 1 })],
+    sessions: faker.number.int({ min: 3, max: 40 }),
+    nReviews: faker.number.int({ min: 1, max: 5 }),
     avgReviews: faker.number.int({ min: 0, max: 5, precision: 0.1 }),
     email: faker.internet.email().toLowerCase(),
     address: faker.location.city(),
+    ar_address: fakerAR.location.city(),
     // countryCode: faker.phone.phoneNumberCode(), will be removed
     phone: faker.phone.number(),
     photo: faker.image.avatarLegacy(),
@@ -69,15 +75,23 @@ for (let i = 0; i < 1; i++) {
           ar_title: fakerAR.lorem.words(3),
           description: faker.lorem.paragraph(),
           ar_description: fakerAR.lorem.paragraph(),
-          company_logo: faker.image.urlLoremFlickr({ category: 'business' }),
+          company_logo:
+            hostpitals[
+              faker.number.int({ min: 0, max: hostpitals.length - 1 })
+            ],
           time: [
             faker.date.past({ years: 20, refDate: new Date() }),
             faker.date.past({ years: 2, refDate: new Date() })
           ]
         };
       }),
-    passwordConfirm: faker.internet.password(),
-    specialization: [faker.number.int({ min: 1, max: 14 })],
+    password: 'doctor1234__',
+    passwordConfirm: 'doctor1234__',
+    specialization: Array(faker.number.int({ min: 2, max: 8 }))
+      .fill('')
+      .map(el => {
+        return spec[faker.number.int({ min: 0, max: spec.length - 1 })];
+      }),
     feez: [
       { amount: faker.number.int(500), duration: 30 },
       { amount: faker.number.int(500), duration: 60 }

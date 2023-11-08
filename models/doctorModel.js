@@ -24,7 +24,8 @@ const doctorSchema = new mongoose.Schema(
     // languages is array from 257 or 258 or 259 or 260 or 261 or 262 or 263 or 264 or 265 or 266 or 267 or 268 or
     languages: [Number],
     // prefix is one of 'Dr', 'PsyD', 'Prof', 'MBPsS', 'Mr', 'Mrs', 'Ms'
-    prefix: String,
+    prefix: Number,
+    sessions: Number,
     nReviews: {
       type: Number,
       default: 0
@@ -42,7 +43,8 @@ const doctorSchema = new mongoose.Schema(
       lowercase: true,
       validate: [validator.isEmail, 'Please provide a valid email']
     },
-    address: Number,
+    address: String,
+    ar_address: String,
     phone: String,
     // photo should be in base64 image you can add and doctor image randomly
     photo: {
