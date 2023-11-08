@@ -33,8 +33,8 @@ for (let i = 0; i < 1; i++) {
     phone: faker.phone.number(),
     photo: faker.image.avatarLegacy(),
     cv: 'https://content.wepik.com/statics/10879408/preview-page0.jpg',
-    certifications: [
-      {
+    certifications:Array(faker.number.int({min:1, max:4})).fill('').map(cer =>{
+      return       {
         title: faker.lorem.words(3),
         ar_title: faker.lorem.words(3),
         place: faker.location.city(),
@@ -44,9 +44,9 @@ for (let i = 0; i < 1; i++) {
           faker.date.past({ years: 2, refDate: new Date() })
         ]
       }
-    ],
-    educations: [
-      {
+    }),
+    educations: Array(faker.number.int({min:1, max:3})).fill('').map(edu =>{
+      return {
         title: faker.lorem.words(3),
         ar_title: faker.lorem.words(3),
         place: faker.location.city(),
@@ -56,9 +56,9 @@ for (let i = 0; i < 1; i++) {
           faker.date.past({ years: 2, refDate: new Date() })
         ]
       }
-    ],
-    experiences: [
-      {
+    }),
+    experiences: Array(faker.number.int({min:1, max:6})).fill('').map(ex =>{
+      return {
         title: faker.lorem.words(3),
         ar_title: fakerAR.lorem.words(3),
         description: faker.lorem.paragraph(),
@@ -69,7 +69,7 @@ for (let i = 0; i < 1; i++) {
           faker.date.past({ years: 2, refDate: new Date() })
         ]
       }
-    ],
+    }) ,
     passwordConfirm: faker.internet.password(),
     specialization: [faker.number.int({ min: 1, max: 14 })],
     feez: [
