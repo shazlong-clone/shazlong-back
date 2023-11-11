@@ -7,6 +7,11 @@ const hashIt = require('../utils/hashIt');
 
 const doctorSchema = new mongoose.Schema(
   {
+    _id: {
+      type: mongoose.Schema.Types.ObjectId,
+      default: mongoose.Types.ObjectId, // Use the ObjectId constructor as the default value
+      unique: true
+    },
     name: {
       type: String,
       required: [true, 'Please tell us your name!']

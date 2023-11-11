@@ -1,7 +1,7 @@
 const fs = require('fs');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const Doctor = require('../../models/doctorModel');
+const Slot = require('../../models/slotModel');
 
 dotenv.config({ path: './config.env' });
 
@@ -20,14 +20,12 @@ mongoose
   .then(() => console.log('DB connection successful!'));
 
 // READ JSON FILE
-const doctor = JSON.parse(
-  fs.readFileSync(`${__dirname}/doctors.json`, 'utf-8')
-);
+const slots = JSON.parse(fs.readFileSync(`${__dirname}/slots.json`, 'utf-8'));
 
 // IMPORT DATA INTO DB
 const importData = async () => {
   try {
-    await Doctor.create(doctor);
+    await Slot.create(slots);
     console.log('Data successfully loaded!');
   } catch (err) {
     console.log(err);
@@ -38,7 +36,7 @@ const importData = async () => {
 // DELETE ALL DATA FROM DB
 const deleteData = async () => {
   try {
-    await Doctor.deleteMany();
+    await Slot.deleteMany();
     console.log('Data successfully deleted!');
   } catch (err) {
     console.log(err);

@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 
 const slotsSchema = mongoose.Schema(
   {
+    _id: {
+      type: mongoose.Schema.Types.ObjectId,
+      default: mongoose.Types.ObjectId,
+      unique: true
+    },
     from: {
       type: Date,
       required: [true, 'Please provide your from']

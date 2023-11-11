@@ -1,6 +1,7 @@
 const fs = require('fs');
 
 const { fakerAR, faker } = require('@faker-js/faker');
+const mongoose = require('mongoose');
 
 const lang = JSON.parse(fs.readFileSync('./public/data/lang.json')).map(
   el => el.id
@@ -20,7 +21,7 @@ const randomDoctorData = [];
 
 for (let i = 0; i < 50; i++) {
   const doctorData = {
-    id: faker.string.uuid(),
+    _id: new mongoose.mongo.ObjectId(),
     name: faker.person.firstName(),
     fullArName: faker.person.fullName(),
     fullEnName: fakerAR.person.fullName(),
