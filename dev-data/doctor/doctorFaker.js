@@ -23,8 +23,8 @@ for (let i = 0; i < 50; i++) {
   const doctorData = {
     _id: new mongoose.mongo.ObjectId(),
     name: faker.person.firstName(),
-    fullArName: faker.person.fullName(),
-    fullEnName: fakerAR.person.fullName(),
+    fullArName: fakerAR.person.fullName(),
+    fullEnName: faker.person.fullName(),
     experienceYears: faker.number.int({ min: 1, max: 40 }),
     gender: faker.number.int({ min: 1, max: 2 }),
     country: count[faker.number.int({ min: 0, max: count.length - 1 })],

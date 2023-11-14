@@ -16,12 +16,15 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
     languages,
     isOnline,
     duration,
-    amount,
+    minAmount,
+    maxAmount,
     availability,
+    rate,
     page,
     size,
     ...rest
   } = req.query;
+
   const { skip, limit } = getPaginate(page, size);
 
   aggPipeline.push({ $match: rest });
@@ -29,16 +32,33 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
     aggPipeline.push({ $match: { gender: Number(gender) } });
   }
   if (specialization) {
-    aggPipeline.push({ $match: { specialization: Number(specialization) } });
+    aggPipeline.push({
+      $match: {
+        specialization: {
+          $elemMatch: { $in: specialization.split(',').map(Number) }
+        }
+      }
+    });
   }
   if (country) {
-    aggPipeline.push({ $match: { country: Number(country) } });
+    aggPipeline.push({
+      $match: {
+        country: { $in: country.split(',').map(Number) }
+      }
+    });
   }
   if (languages) {
-    aggPipeline.push({ $match: { languages: Number(languages) } });
+    aggPipeline.push({
+      $match: {
+        languages: { $elemMatch: { $in: languages.split(',').map(Number) } }
+      }
+    });
   }
   if (isOnline) {
     aggPipeline.push({ $match: { isOnline: Boolean(Number(isOnline)) } });
+  }
+  if (rate) {
+    aggPipeline.push({ $match: { avgReviews: { $gte: Number(rate) } } });
   }
 
   if (duration) {
@@ -46,9 +66,18 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
       $match: { feez: { $elemMatch: { duration: Number(duration) } } }
     });
   }
-  if (amount) {
+  if (minAmount !== undefined && maxAmount !== undefined) {
     aggPipeline.push({
-      $match: { feez: { $elemMatch: { amount: { $lte: Number(amount) } } } }
+      $match: {
+        feez: {
+          $elemMatch: {
+            amount: {
+              $gte: Number(minAmount),
+              $lte: Number(maxAmount)
+            }
+          }
+        }
+      }
     });
   }
   aggPipeline.push({
