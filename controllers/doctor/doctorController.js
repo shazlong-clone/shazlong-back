@@ -9,48 +9,53 @@ const resizeBuffer = require('../../utils/resizeBuffer');
 exports.getAllDoctors = catchAsync(async (req, res, next) => {
   const aggPipeline = [];
   let doctors = [];
+  const params = { ...req.body };
+  // availability 0=NOW,1=TODAY,2 TODAY
+
+  if (params.availability === 0) {
+    params.isOnline = true;
+    delete params.availability;
+  }
   const {
     gender,
-    specialization,
-    country,
-    languages,
+    specialization = [],
+    country = [],
+    languages = [],
     isOnline,
     duration,
-    minAmount,
-    maxAmount,
+    amount = [],
     availability,
     rate,
     page,
     size,
     ...rest
-  } = req.query;
+  } = params;
 
   const { skip, limit } = getPaginate(page, size);
-
   aggPipeline.push({ $match: rest });
   if (gender) {
     aggPipeline.push({ $match: { gender: Number(gender) } });
   }
-  if (specialization) {
+  if (specialization.length) {
     aggPipeline.push({
       $match: {
         specialization: {
-          $elemMatch: { $in: specialization.split(',').map(Number) }
+          $elemMatch: { $in: specialization }
         }
       }
     });
   }
-  if (country) {
+  if (country.length) {
     aggPipeline.push({
       $match: {
-        country: { $in: country.split(',').map(Number) }
+        country: { $in: country }
       }
     });
   }
-  if (languages) {
+  if (languages.length) {
     aggPipeline.push({
       $match: {
-        languages: { $elemMatch: { $in: languages.split(',').map(Number) } }
+        languages: { $elemMatch: { $in: languages } }
       }
     });
   }
@@ -66,14 +71,14 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
       $match: { feez: { $elemMatch: { duration: Number(duration) } } }
     });
   }
-  if (minAmount !== undefined && maxAmount !== undefined) {
+  if (amount.length) {
     aggPipeline.push({
       $match: {
         feez: {
           $elemMatch: {
             amount: {
-              $gte: Number(minAmount),
-              $lte: Number(maxAmount)
+              $gte: Number(amount[0]),
+              $lte: Number(amount[1])
             }
           }
         }

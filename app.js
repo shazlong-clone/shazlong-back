@@ -43,7 +43,7 @@ const corsOptions = {
     ) {
       callback(null, true);
     } else {
-      console.log('Cors Error')
+      console.log('Cors Error');
       callback(new Error('Not allowed by CORS'));
     }
   }
@@ -58,12 +58,12 @@ app.use(helmet());
 app.use(morgan('dev'));
 
 // Limit requests from same API
-const limiter = rateLimit({
-  max: 1000,
-  windowMs: 60 * 60 * 1000,
-  message: 'Too many requests from this IP, please try again in an hour!'
-});
-app.use('/api', limiter);
+// const limiter = rateLimit({
+//   max: 1000,
+//   windowMs: 60 * 60 * 1000,
+//   message: 'Too many requests from this IP, please try again in an hour!'
+// });
+// app.use('/api', limiter);
 
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));

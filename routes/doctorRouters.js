@@ -61,7 +61,7 @@ router.post(
   doctorController.updatePhoto
 );
 
-router.route('/getAllDoctors').get(doctorController.getAllDoctors);
+router.route('/getAllDoctors').post(doctorController.getAllDoctors);
 router.use('/:doctorId/reviews', reviewRouter);
 router.route('/:id').get(doctorController.getDoctor);
 router
