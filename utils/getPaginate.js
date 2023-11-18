@@ -1,6 +1,6 @@
 exports.getPaginate = (pageNum, size) => {
   const page = pageNum * 1 || 1;
-  const limit = size * 1 || 100;
+  const limit = size * 1 || 30;
   const skip = (page - 1) * limit;
   return { limit, skip };
 };

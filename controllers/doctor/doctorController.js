@@ -6,17 +6,19 @@ const filterObject = require('../../utils/filterObject');
 const { getPaginate, getPagingData } = require('../../utils/getPaginate');
 const resizeBuffer = require('../../utils/resizeBuffer');
 
+const DESC = 'DESC';
+
 exports.getAllDoctors = catchAsync(async (req, res, next) => {
   const aggPipeline = [];
   let doctors = [];
   const params = { ...req.body };
   // availability 0=NOW,1=TODAY,2 TODAY
-
   if (params.availability === 0) {
     params.isOnline = true;
     delete params.availability;
   }
   const {
+    name = '',
     gender,
     specialization = [],
     country = [],
@@ -28,11 +30,21 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
     rate,
     page,
     size,
-    ...rest
+    sortBy,
+    sort
   } = params;
 
   const { skip, limit } = getPaginate(page, size);
-  aggPipeline.push({ $match: rest });
+  if (name) {
+    aggPipeline.push({
+      $match: {
+        $or: [
+          { fullEnName: { $regex: name.trim() } },
+          { fullArName: { $regex: name.trim() } }
+        ]
+      }
+    });
+  }
   if (gender) {
     aggPipeline.push({ $match: { gender: Number(gender) } });
   }
@@ -132,6 +144,11 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
     },
     {
       $addFields: {
+        minFeez: { $min: '$feez.amount' }
+      }
+    },
+    {
+      $addFields: {
         nearestSlot: {
           $arrayElemAt: [
             {
@@ -167,6 +184,18 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
       }
     }
   );
+  if (sortBy) {
+    let sortion = {};
+    if (sortBy === 'feez') {
+      sortion = { minFeez: sort === DESC ? -1 : 1 };
+    }
+    if (sortBy === 'stars') {
+      sortion = { avgReviews: sort === DESC ? -1 : 1 };
+    }
+    aggPipeline.push({
+      $sort: sortion
+    });
+  }
   aggPipeline.push(
     {
       $facet: {
