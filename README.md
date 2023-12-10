@@ -21,7 +21,7 @@ npm i
 ```sh
 npm run dev
 ```
-## to impor data to db 
+## to import data to db 
 
 ```sh
 gulp
