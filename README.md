@@ -21,8 +21,15 @@ npm i
 ```sh
 npm run dev
 ```
-## to import data to db 
+
+## to import data to db locale db
 
 ```sh
 gulp
+```
+
+## to import data to db remote db
+
+```sh
+NODE_ENV=production gulp
 ```

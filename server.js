@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const DB = require('./dev-data/db');
+
 require('colors');
 
 process.on('uncaughtException', err => {
@@ -10,17 +12,6 @@ process.on('uncaughtException', err => {
 
 dotenv.config({ path: './config.env' });
 const app = require('./app');
-
-let DB;
-if (process.env.NODE_ENV === 'production') {
-  DB = process.env.DATABASE_REMOTE;
-} else {
-  DB = process.env.DATABASE_LOCALE;
-}
-DB = DB.replace('<password>', process.env.DATABASE_PASSWORD).replace(
-  '<dbname>',
-  process.env.DATABASE_NAME
-);
 
 mongoose
   .connect(DB, {

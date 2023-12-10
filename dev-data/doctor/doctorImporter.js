@@ -1,14 +1,7 @@
 const fs = require('fs');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
 const Doctor = require('../../models/doctorModel');
-
-dotenv.config({ path: './config.env' });
-
-const DB = process.env.DATABASE_LOCALE.replace(
-  '<password>',
-  process.env.DATABASE_PASSWORD
-).replace('<dbname>', process.env.DATABASE_NAME);
+const DB = require('../db');
 
 mongoose
   .connect(DB, {
