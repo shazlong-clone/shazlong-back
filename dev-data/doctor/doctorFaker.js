@@ -1,3 +1,4 @@
+// genrate order 1
 const fs = require('fs');
 
 const { fakerAR, faker } = require('@faker-js/faker');
