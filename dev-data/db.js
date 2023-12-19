@@ -6,9 +6,9 @@ let DB;
 
 if (process.env.NODE_ENV === 'production') {
   DB = process.env.DATABASE_REMOTE;
-  console.log('REMOTE DB');
+  console.log('DATA BASE TYPE => REMOTE DB');
 } else {
-  console.log('LOCALE DB');
+  console.log('DATA BASE TYPE => LOCALE DB');
   DB = process.env.DATABASE_LOCALE;
 }
 
