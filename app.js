@@ -49,7 +49,7 @@ const corsOptions = {
   }
 };
 
-app.use(cors());
+app.use(cors({ origin: '*' }));
 
 // GLOBAL MIDDLEWARES
 // Set security HTTP headers
