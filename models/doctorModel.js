@@ -53,13 +53,13 @@ const doctorSchema = new mongoose.Schema(
     phone: String,
     // photo should be in base64 image you can add and doctor image randomly
     photo: {
-      type: String,
-      get(photo) {
-        if (photo) {
-          const url = `data:image/jpeg;base64,${photo}`;
-          return url;
-        }
-      }
+      type: String
+      // get(photo) {
+      //   if (photo && photo.includs('http:')) {
+      //     const url = `data:image/jpeg;base64,${photo}`;
+      //     return url;
+      //   }
+      // }
     },
     // role is 1 for user and 2 for doctor
     role: {
@@ -75,13 +75,13 @@ const doctorSchema = new mongoose.Schema(
     },
     birthDate: Date,
     cv: {
-      type: String,
-      get(cv) {
-        if (cv) {
-          const url = `data:image/jpeg;base64,${cv}`;
-          return url;
-        }
-      }
+      type: String
+      // get(cv) {
+      //   if (cv) {
+      //     const url = `data:image/jpeg;base64,${cv}`;
+      //     return url;
+      //   }
+      // }
     },
     certifications: [
       {

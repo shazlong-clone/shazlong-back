@@ -84,7 +84,7 @@ module.exports = (err, req, res, next) => {
   err.status = err.status || 'error';
   if (process.env.NODE_ENV === 'development') {
     sendErrorDev(err, res);
-  } else if (process.env.NODE_ENV === 'production') {
+  } else {
     let error = { ...err, message: err.message || '' };
     if (error.reason && error.reason.code === 'ERR_ASSERTION')
       error = handleCastErrorDB(error, res);

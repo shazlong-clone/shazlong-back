@@ -5,6 +5,7 @@ const AppError = require('../../utils/appError');
 const filterObject = require('../../utils/filterObject');
 const { getPaginate, getPagingData } = require('../../utils/getPaginate');
 const resizeBuffer = require('../../utils/resizeBuffer');
+const { BASE64_STARTER } = require('../../utils/constants');
 
 const DESC = 'DESC';
 
@@ -280,7 +281,7 @@ exports.updatePhoto = catchAsync(async (req, res, next) => {
   // Resize the image using sharp
   const resizedBuffer = await resizeBuffer(req.file.buffer, 80, 80);
 
-  const base64Photo = resizedBuffer.toString('base64');
+  const base64Photo = `${BASE64_STARTER}${resizedBuffer.toString('base64')}`;
 
   const doctor = await Doctor.findByIdAndUpdate(
     req.user._id,
@@ -299,7 +300,7 @@ exports.uploadCv = catchAsync(async (req, res, next) => {
 
   // Resize the image using sharp
   const resizedBuffer = await resizeBuffer(req.file.buffer, 200, 200);
-  const base64Photo = resizedBuffer.toString('base64');
+  const base64Photo = `${BASE64_STARTER}${resizedBuffer.toString('base64')}`;
 
   const doctor = await Doctor.findByIdAndUpdate(
     req.user._id,
@@ -341,7 +342,7 @@ exports.getMe = catchAsync(async (req, res, next) => {
 exports.addOrUpdateDoctorExperience = catchAsync(async (req, res, next) => {
   if (req.file) {
     const resizedBuffer = await resizeBuffer(req.file.buffer, 40, 40);
-    const base64Photo = resizedBuffer.toString('base64');
+    const base64Photo = `${BASE64_STARTER}${resizedBuffer.toString('base64')}`;
     req.body.company_logo = base64Photo;
   }
   let doctor;
@@ -396,6 +397,19 @@ exports.deleteExperienceById = catchAsync(async (req, res, next) => {
     status: true,
     data: {
       doctor
+    }
+  });
+});
+
+exports.getOnlineDoctors = catchAsync(async (req, res, next) => {
+  const onlineDoctrs = await Doctor.find({ isOnline: true }).select({
+    isOnline: 1,
+    photo: 1
+  });
+  res.status(200).json({
+    status: true,
+    data: {
+      results: onlineDoctrs
     }
   });
 });

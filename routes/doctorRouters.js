@@ -28,6 +28,7 @@ router.post(
 );
 
 router.post('/forgotPassword', authDoctorController.forgotPassword);
+
 router.patch('/resetPassword/:token', authDoctorController.resetPassword);
 
 router.patch('/updateMyPassword', protect, authDoctorController.updatePassword);
@@ -62,8 +63,9 @@ router.post(
 );
 
 router.route('/getAllDoctors').post(doctorController.getAllDoctors);
+
 router.use('/:doctorId/reviews', reviewRouter);
-router.route('/:id').get(doctorController.getDoctor);
+
 router
   .route('/addOrUpdateDoctorExperience')
   .post(
@@ -77,4 +79,9 @@ router
   .delete(protect, doctorController.deleteExperienceById);
 
 router.use('/bookings', bookingRouter);
+
+router.route('/getOnlineDoctors').get(doctorController.getOnlineDoctors);
+
+// should be at the end
+router.route('/:id').get(doctorController.getDoctor);
 module.exports = router;

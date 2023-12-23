@@ -28,13 +28,13 @@ const userSchema = new mongoose.Schema(
       required: [true, 'Please provide your country']
     },
     photo: {
-      type: String,
-      get(photo) {
-        if (photo) {
-          const url = `data:image/jpeg;base64,${photo}`;
-          return url;
-        }
-      }
+      type: String
+      // get(photo) {
+      //   if (photo) {
+      //     const url = `data:image/jpeg;base64,${photo}`;
+      //     return url;
+      //   }
+      // }
     },
     role: {
       type: Number,
