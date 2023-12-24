@@ -1,6 +1,5 @@
 const express = require('express');
 const morgan = require('morgan');
-const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
@@ -18,7 +17,8 @@ const {
   slotRouter,
   bookingRouter,
   reviewRouter,
-  paymentRouter
+  paymentRouter,
+  blogRouter
 } = require('./routes');
 
 const app = express();
@@ -106,6 +106,7 @@ app.use('/api/v1/slots', slotRouter);
 app.use('/api/v1/booking', bookingRouter);
 app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/payment', paymentRouter);
+app.use('/api/v1/blogs', blogRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

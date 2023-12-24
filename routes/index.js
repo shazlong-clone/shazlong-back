@@ -5,3 +5,4 @@ exports.slotRouter = require('./slotRouter');
 exports.bookingRouter = require('./bookingRouter');
 exports.reviewRouter = require('./reviewRouter');
 exports.paymentRouter = require('./paymentRouter');
+exports.blogRouter = require('./blogRouter');
