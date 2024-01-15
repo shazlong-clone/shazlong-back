@@ -1,6 +1,8 @@
 // genrate order 1
 const fs = require('fs');
 
+const MALE = 1;
+const FEMALE = 2;
 const { fakerAR, faker } = require('@faker-js/faker');
 const mongoose = require('mongoose');
 
@@ -21,16 +23,18 @@ const hostpitals = JSON.parse(fs.readFileSync('./public/data/hospitals.json'));
 const randomDoctorData = [];
 
 for (let i = 0; i < 50; i++) {
+  const gender = faker.number.int({ min: MALE, max: FEMALE });
+  const genderText = gender === MALE ? 'male' : 'female';
   const doctorData = {
     _id: new mongoose.mongo.ObjectId(),
     name: faker.person.firstName(),
     fullArName: fakerAR.person.fullName(),
     fullEnName: faker.person.fullName(),
     experienceYears: faker.number.int({ min: 1, max: 40 }),
-    gender: faker.number.int({ min: 1, max: 2 }),
+    gender: gender,
     country: count[faker.number.int({ min: 0, max: count.length - 1 })],
     languages: lang[faker.number.int({ min: 0, max: lang.length - 1 })],
-    prefix: preFix[faker.number.int({ min: 0, max: preFix.length - 1 })],
+    prefix: preFix[faker.number.int({ min: 1, max: preFix.length - 1 })],
     sessions: faker.number.int({ min: 3, max: 40 }),
     nReviews: faker.number.int({ min: 1, max: 5 }),
     avgReviews: faker.number.int({ min: 0, max: 5, precision: 0.1 }),
@@ -39,7 +43,9 @@ for (let i = 0; i < 50; i++) {
     ar_address: fakerAR.location.city(),
     // countryCode: faker.phone.phoneNumberCode(), will be removed
     phone: faker.phone.number(),
-    photo: faker.image.avatarLegacy(),
+    photo: `https://xsgames.co/randomusers/assets/avatars/${genderText}/${faker.number.int(
+      { min: 1, max: 77 }
+    )}.jpg`,
     cv: 'https://content.wepik.com/statics/10879408/preview-page0.jpg',
     certifications: Array(faker.number.int({ min: 1, max: 4 }))
       .fill('')

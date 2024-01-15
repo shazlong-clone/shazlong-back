@@ -76,7 +76,7 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
     aggPipeline.push({ $match: { isOnline: Boolean(Number(isOnline)) } });
   }
   if (rate) {
-    aggPipeline.push({ $match: { avgReviews: { $gte: Number(rate) } } });
+    aggPipeline.push({ $match: { avgReviews: { $eq: Number(rate) } } });
   }
 
   if (duration) {
