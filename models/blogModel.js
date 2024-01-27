@@ -22,6 +22,11 @@ const blogSchema = new mongoose.Schema(
     durationOfReading: {
       type: String,
       required: true
+    },
+    isFake: {
+      type: Boolean,
+      default: false,
+      select: -1
     }
   },
   {

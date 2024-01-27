@@ -33,6 +33,11 @@ const slotsSchema = mongoose.Schema(
     isDeleted: {
       type: Boolean,
       default: false
+    },
+    isFake: {
+      type: Boolean,
+      default: false,
+      select: -1
     }
   },
   {

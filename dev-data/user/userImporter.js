@@ -1,8 +1,7 @@
 const fs = require('fs');
 const mongoose = require('mongoose');
-const Slot = require('../../models/slotModel');
-
 const DB = require('../db');
+const User = require('../../models/userModel');
 
 mongoose
   .connect(DB, {
@@ -14,23 +13,22 @@ mongoose
   .then(() => console.log('DB connection successful!'));
 
 // READ JSON FILE
-const slots = JSON.parse(fs.readFileSync(`${__dirname}/slots.json`, 'utf-8'));
+const users = JSON.parse(fs.readFileSync(`${__dirname}/users.json`, 'utf-8'));
 
 // IMPORT DATA INTO DB
 const importData = async () => {
   try {
-    await Slot.create(slots);
+    await User.create(users);
     console.log('Data successfully loaded!');
   } catch (err) {
     console.log(err);
   }
   process.exit();
 };
-
 // DELETE ALL DATA FROM DB
 const deleteData = async () => {
   try {
-    await Slot.deleteMany();
+    await User.deleteMany();
     console.log('Data successfully deleted!');
   } catch (err) {
     console.log(err);
@@ -39,7 +37,7 @@ const deleteData = async () => {
 };
 
 if (process.argv[2] === '--import') {
-  importData(Slot, slots);
+  importData(User, users);
 } else if (process.argv[2] === '--delete') {
-  deleteData(Slot);
+  deleteData(User);
 }

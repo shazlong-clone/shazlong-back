@@ -1,10 +1,13 @@
 // genrate order 1
 const fs = require('fs');
 
-const MALE = 1;
-const FEMALE = 2;
 const { fakerAR, faker } = require('@faker-js/faker');
 const mongoose = require('mongoose');
+const {
+  MALE,
+  FEMALE,
+  PROFILE_PICTURE_BASE_URL
+} = require('../../utils/constants');
 
 const lang = JSON.parse(fs.readFileSync('./public/data/lang.json')).map(
   el => el.id
@@ -43,9 +46,10 @@ for (let i = 0; i < 50; i++) {
     ar_address: fakerAR.location.city(),
     // countryCode: faker.phone.phoneNumberCode(), will be removed
     phone: faker.phone.number(),
-    photo: `https://xsgames.co/randomusers/assets/avatars/${genderText}/${faker.number.int(
-      { min: 1, max: 77 }
-    )}.jpg`,
+    photo: `${PROFILE_PICTURE_BASE_URL}/${genderText}/${faker.number.int({
+      min: 1,
+      max: 77
+    })}.jpg`,
     cv: 'https://content.wepik.com/statics/10879408/preview-page0.jpg',
     certifications: Array(faker.number.int({ min: 1, max: 4 }))
       .fill('')
@@ -101,7 +105,7 @@ for (let i = 0; i < 50; i++) {
         return spec[faker.number.int({ min: 0, max: spec.length - 1 })];
       })
       .reduce((prev, curr) => {
-        const index = prev.findIndex(curr.id);
+        const index = prev.indexOf(curr.id);
         if (index === -1) {
           return [...prev, curr];
         }

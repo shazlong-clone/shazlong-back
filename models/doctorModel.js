@@ -141,7 +141,12 @@ const doctorSchema = new mongoose.Schema(
       type: Boolean,
       default: false
     },
-    verificationHash: String
+    verificationHash: String,
+    isFake: {
+      type: Boolean,
+      default: false,
+      select: -1
+    }
   },
   {
     toJSON: { virtuals: true, getters: true },

@@ -35,7 +35,12 @@ const adminSchema = new mongoose.Schema(
         message: 'Passwords are not the same!'
       }
     },
-    passwordChangedAt: Date
+    passwordChangedAt: Date,
+    isFake: {
+      type: Boolean,
+      default: false,
+      select: -1
+    }
   },
   {
     timestamps: true

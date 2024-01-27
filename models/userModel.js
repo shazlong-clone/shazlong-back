@@ -71,6 +71,11 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
       select: false
+    },
+    isFake: {
+      type: Boolean,
+      default: false,
+      select: -1
     }
   },
   {
