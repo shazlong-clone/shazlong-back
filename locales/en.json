@@ -44,5 +44,6 @@
   "You_Dont_Have_Payment": "You Dont Have Payment",
   "no_verfication_code": "no  verification code",
   "Ids_Required": "Ids Required",
-  "no_user_with_this_code": "No user with this code"
+  "no_user_with_this_code": "No user with this code",
+  "no_doctor_found": "no doctor found"
 }

@@ -44,5 +44,6 @@
   "You_Dont_Have_Payment": "لايوجد لديك وسائل دفع",
   "no_verfication_code": "لايوجد كود",
   "Ids_Required": "الرقم التعريفي مطلوب",
-  "no_user_with_this_code": "لايوجد دكتور لهذا الكود"
+  "no_user_with_this_code": "لايوجد دكتور لهذا الكود",
+  "no_doctor_found": "لايوجد دكتور"
 }

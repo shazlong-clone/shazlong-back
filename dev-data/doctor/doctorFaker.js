@@ -99,7 +99,14 @@ for (let i = 0; i < 50; i++) {
       .fill('')
       .map(el => {
         return spec[faker.number.int({ min: 0, max: spec.length - 1 })];
-      }),
+      })
+      .reduce((prev, curr) => {
+        const index = prev.findIndex(curr.id);
+        if (index === -1) {
+          return [...prev, curr];
+        }
+        return prev;
+      }, []),
     feez: [
       { amount: faker.number.int(500), duration: 30 },
       { amount: faker.number.int(500), duration: 60 }
