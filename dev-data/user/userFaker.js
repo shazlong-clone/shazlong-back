@@ -27,7 +27,8 @@ for (let i = 0; i < 10; i++) {
     })}.jpg`,
     role: USER,
     birthDate: faker.date.past({ years: 10 }),
-    gender: gender
+    gender: gender,
+    isFake: true
   };
   users.push(user);
 }

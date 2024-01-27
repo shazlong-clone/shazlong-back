@@ -31,7 +31,8 @@ for (let i = 0; i < doctorsIds.length; i++) {
       to: to,
       doctor: doctorsIds[i],
       reserved: faker.datatype.boolean(),
-      isDeleted: false
+      isDeleted: false,
+      isFake: true
     };
 
     randomslotsData.push(doctorData);

@@ -120,7 +120,8 @@ for (let i = 0; i < 50; i++) {
     // passwordResetExpires: null,
     active: true,
     verified: true,
-    isOnline: faker.datatype.boolean()
+    isOnline: faker.datatype.boolean(),
+    idFake: true
     // verificationHash: faker.uuid()
   };
 

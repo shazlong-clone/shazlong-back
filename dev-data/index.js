@@ -11,7 +11,9 @@ exports.importData = async (Model, data) => {
 // DELETE ALL DATA FROM DB
 exports.deleteData = async Model => {
   try {
-    await Model.deleteMany();
+    await Model.deleteMany({
+      isFaker: true
+    });
     console.log('Data successfully deleted!');
   } catch (err) {
     console.log(err);
