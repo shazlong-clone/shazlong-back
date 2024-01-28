@@ -225,6 +225,11 @@ doctorSchema.virtual('slots', {
   foreignField: 'doctor'
 });
 
+doctorSchema.virtual('reviews', {
+  ref: 'Review',
+  localField: '_id',
+  foreignField: 'doctor'
+});
 const Doctor = mongoose.model('Doctor', doctorSchema);
 
 module.exports = Doctor;

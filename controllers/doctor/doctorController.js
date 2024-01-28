@@ -268,6 +268,14 @@ exports.getDoctor = catchAsync(async (req, res, next) => {
   if (!id || !mongoose.isValidObjectId(id))
     return next(new AppError(`${id} ${res.__('id_not_valid')}`, 400));
   const doctor = await Doctor.findById(id)
+    .populate({
+      path: 'reviews',
+      select: 'user message createdAt rate',
+      populate: {
+        path: 'user',
+        select: 'name'
+      }
+    })
     .select('-updatedAt -email')
     .populate({ path: 'slots', select: '-__v' });
 

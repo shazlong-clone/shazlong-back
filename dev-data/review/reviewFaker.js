@@ -1,8 +1,9 @@
 const fs = require('fs');
-const { faker } = require('@faker-js/faker');
+const { faker, fakerAR } = require('@faker-js/faker');
+const mongoose = require('mongoose');
 
-const doctors = JSON.parse(fs.readFileSync('../doctor/doctors.json'));
-const users = JSON.parse(fs.readFileSync('../user/users.json'));
+const doctors = JSON.parse(fs.readFileSync('./dev-data/doctor/doctors.json'));
+const users = JSON.parse(fs.readFileSync('./dev-data/user/users.json'));
 
 const reviews = [];
 doctors.forEach(doctor => {
@@ -12,7 +13,11 @@ doctors.forEach(doctor => {
       users[faker.number.int({ min: 0, max: users.length - 1 })]._id;
     const doctorId = doctor._id;
     const randReview = {
-      message: faker.lorem.sentences({ min: 1, max: 3 }),
+      _id: new mongoose.mongo.ObjectId(),
+      message:
+        i % 2 === 0
+          ? fakerAR.lorem.sentences({ min: 1, max: 3 })
+          : faker.lorem.sentences({ min: 1, max: 3 }),
       rate: faker.number.float({ min: 1, max: 5 }),
       user: userId,
       doctor: doctorId,
@@ -22,3 +27,5 @@ doctors.forEach(doctor => {
     reviews.push(randReview);
   }
 });
+
+fs.writeFileSync(`${__dirname}/reviews.json`, JSON.stringify(reviews));

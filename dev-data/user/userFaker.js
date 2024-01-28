@@ -1,5 +1,6 @@
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
+const mongoose = require('mongoose');
 const {
   MALE,
   FEMALE,
@@ -14,6 +15,7 @@ for (let i = 0; i < 10; i++) {
 
   const genderText = gender === MALE ? 'male' : 'female';
   const user = {
+    _id: mongoose.mongo.ObjectId(),
     name: faker.person.firstName(),
     email: faker.internet.email(),
     phone: faker.phone.number(),

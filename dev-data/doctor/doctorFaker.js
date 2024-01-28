@@ -121,7 +121,7 @@ for (let i = 0; i < 50; i++) {
     active: true,
     verified: true,
     isOnline: faker.datatype.boolean(),
-    idFake: true
+    isFake: true
     // verificationHash: faker.uuid()
   };
 

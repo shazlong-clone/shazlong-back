@@ -12,7 +12,7 @@ exports.importData = async (Model, data) => {
 exports.deleteData = async Model => {
   try {
     await Model.deleteMany({
-      isFaker: true
+      isFake: true
     });
     console.log('Data successfully deleted!');
   } catch (err) {

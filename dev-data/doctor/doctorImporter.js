@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const Doctor = require('../../models/doctorModel');
 const DB = require('../db');
 const { importData, deleteData } = require('..');
+require('colors');
 
 mongoose
   .connect(DB, {
@@ -20,6 +21,8 @@ const doctors = JSON.parse(
 
 if (process.argv[2] === '--import') {
   importData(Doctor, doctors);
+  console.log('DOCTORS IMPORTED SUCCESSFULY'.blue.bold);
 } else if (process.argv[2] === '--delete') {
   deleteData(Doctor);
+  console.log('DOCTORS DELETED SUCCESSFULY'.red.bold);
 }

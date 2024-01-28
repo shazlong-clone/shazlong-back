@@ -1,7 +1,7 @@
 const fs = require('fs');
 const mongoose = require('mongoose');
 const DB = require('../db');
-const User = require('../../models/userModel');
+const Review = require('../../models/reviewsModel');
 const { importData, deleteData } = require('..');
 require('colors');
 
@@ -15,12 +15,14 @@ mongoose
   .then(() => console.log('DB connection successful!'));
 
 // READ JSON FILE
-const users = JSON.parse(fs.readFileSync(`${__dirname}/users.json`, 'utf-8'));
+const reviews = JSON.parse(
+  fs.readFileSync(`${__dirname}/reviews.json`, 'utf-8')
+);
 
 if (process.argv[2] === '--import') {
-  importData(User, users);
-  console.log('USERS IMPORTED SUCCESSFULY'.blue.bold);
+  importData(Review, reviews);
+  console.log('REVIEWS IMPORTED SUCCESSFULY'.blue.bold);
 } else if (process.argv[2] === '--delete') {
-  deleteData(User);
-  console.log('USERS DELETED SUCCESSFULY'.red.bold);
+  deleteData(Review);
+  console.log('REVIEWS DELETED SUCCESSFULY'.red.bold);
 }

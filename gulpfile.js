@@ -32,9 +32,23 @@ gulp.task(
     'node ./dev-data/user/userImporter.js --import'
   ])
 );
+// Define task 1 to run a Node.js file
+gulp.task(
+  'add_reviews_to_db',
+  shell.task([
+    'node ./dev-data/review/reviewFaker.js',
+    'node ./dev-data/review/reviewImporter.js --delete',
+    'node ./dev-data/review/reviewImporter.js --import'
+  ])
+);
 
 // Create a default task that runs task1, task2, and task3 in order
 gulp.task(
   'default',
-  gulp.series('add_doctors_to_db', 'add_slots_to_db', 'add_users_to_db')
+  gulp.series(
+    'add_doctors_to_db',
+    'add_slots_to_db',
+    'add_users_to_db',
+    'add_reviews_to_db'
+  )
 );
