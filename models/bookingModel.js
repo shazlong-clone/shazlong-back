@@ -22,7 +22,7 @@ const bookingSchema = mongoose.Schema(
     isFake: {
       type: Boolean,
       default: false,
-      select: -1
+      select: false
     }
   },
   {

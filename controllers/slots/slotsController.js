@@ -49,6 +49,23 @@ exports.getDoctorSlots = catchAsync(async (req, res, next) => {
     data: slots
   });
 });
+exports.getSlotsByIds = catchAsync(async (req, res, next) => {
+  const { slotsIds } = req.query;
+  const slotsIdsArr = slotsIds
+    .split(',')
+  const slots = await Slot.find({
+    _id: slotsIdsArr
+  }).populate({
+    path:'doctor',
+    select:'fullArName fullEnName prefix photo feez',
+  });
+
+  if (!slots) return next(new AppError(res.__('no_slots'), 400));
+  res.status(200).json({
+    status: true,
+    data: slots
+  });
+});
 
 exports.deleteSlot = catchAsync(async (req, res, next) => {
   const { id } = req.params;
