@@ -14,7 +14,7 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
   let doctors = [];
   const params = { ...req.body };
   // availability 0=NOW,1=TODAY,2 TODAY
-  if (params.availability === 0) {
+  if (params.availability === 0 || params.availability === '0' ) {
     params.isOnline = true;
     delete params.availability;
   }
