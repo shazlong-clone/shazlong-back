@@ -13,7 +13,7 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
   const aggPipeline = [];
   let doctors = [];
   const params = { ...req.body };
-  // availability 0=NOW,1=TODAY,2 TODAY
+  // availability 0=NOW,1=TODAY,7 THIS WEEK
   if (params.availability === 0 || params.availability === '0') {
     params.isOnline = true;
     delete params.availability;
@@ -76,7 +76,7 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
     aggPipeline.push({ $match: { isOnline: Boolean(Number(isOnline)) } });
   }
   if (rate) {
-    aggPipeline.push({ $match: { avgReviews: { $eq: Number(rate) } } });
+    aggPipeline.push({ $match: { avgReviews: { $gte: Number(rate) } } });
   }
 
   if (duration) {
@@ -106,7 +106,7 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
       as: 'slots'
     }
   });
-  if (availability) {
+  if (availability && availability !== 'all') {
     const loacleTime = Date.now() + 60 * 60 * 1000;
     aggPipeline.push({
       $match: {

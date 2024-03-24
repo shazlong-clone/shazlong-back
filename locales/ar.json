@@ -4,7 +4,7 @@
   "password_required": "الرجاء تعبئة الرقم السري",
   "password_or_email_wrong": "البريد الالكتروني او الرقم السري خطأ",
   "not_logedin": "الرجاء تسجل الدخول اولا",
-  "user_nolong_exits": "المستخدم التابع لهذا التوكين لم يعد مسجل",
+  "user_nolong_exits": "الحساب المستخدم غير مسجل الرجاء تسجيل الدخول مرة اخرى",
   "password_changed": "لوقد قمت مؤخرا بتغير كلمة السر",
   "authorization_error": "كمستخدم ليس مسموح بعمل هذا الامر",
   "email_removed": "لايوجد مستخدم بهذا البريد الالكتروني",
@@ -45,5 +45,7 @@
   "no_verfication_code": "لايوجد كود",
   "Ids_Required": "الرقم التعريفي مطلوب",
   "no_user_with_this_code": "لايوجد دكتور لهذا الكود",
-  "no_doctor_found": "لايوجد دكتور"
+  "no_doctor_found": "لايوجد دكتور",
+  "some_slots_not_found": "لايوجد فترات",
+  "some_slots_reserved": "هذه الفترات محجوزة من قبل"
 }

@@ -5,27 +5,32 @@ const Slot = require('../../models/slotModel');
 const Booking = require('../../models/bookingModel');
 const APIFeatures = require('../../utils/apiFeatures');
 const { DOCTOR, USER } = require('../../utils/constants');
+const filterObj = require('../../utils/filterObject');
 
 exports.bookSlot = catchAsync(async (req, res, next) => {
-  const { slotId } = req.body;
-  if (!mongoose.isValidObjectId(slotId))
-    return next(new AppError(res.__('id_not_valid'), 400));
-  const slot = await Slot.findById(slotId);
-  if (!slot) return next(new AppError(res.__('no_slots'), 400));
-  if (slot.reserved) return next(new AppError(res.__('reserved_slot'), 400));
-  if (Date.now() > new Date(slot.from).getTime())
-    return next(new AppError(res.__('cant_reserve_past_solt'), 400));
-  slot.reserved = true;
-  await slot.save();
-  const book = await Booking.create({
-    slot: slotId,
-    reservedBy: req.user.id,
-    doctor: slot.doctor
+  const { slotIds = [] } = req.body;
+  const slots = await Slot.find({ _id: { $in: slotIds } });
+  if (slots.length === 0) {
+    return next(new AppError(res.__('some_slots_not_found'), 400));
+  }
+  const reservedSlots = slots.filter(slot => slot.reserved === true);
+  if (reservedSlots.length > 0) {
+    return next(new AppError(res.__('some_slots_reserved'), 400));
+  }
+  slots.forEach(async slot => {
+    slot.reserved = true;
+    await slot.save();
   });
+  const booking = await Booking.insertMany(
+    slotIds.map(slotId => ({
+      slot: slotId,
+      reservedBy: req.user.id
+    }))
+  );
 
   res.status(200).json({
     status: true,
-    data: book
+    data: booking
   });
 });
 
@@ -57,7 +62,9 @@ exports.cancelBooking = catchAsync(async (req, res, next) => {
 exports.getAllBookings = catchAsync(async (req, res, next) => {
   let query = { ...req.query };
   if (req.user.role === DOCTOR) {
-    query = { ...req.query, doctor: req.user.id };
+    const slotsIds = await Slot.find({ doctor: req.user._id }, '_id');
+    query = { ...query, slot: { $in: slotsIds.map(el => el._id) } };
+    query = filterObj(query, 'doctor');
   } else if (req.user.role === USER) {
     query = { ...req.query, reservedBy: req.user.id };
   }
@@ -67,16 +74,13 @@ exports.getAllBookings = catchAsync(async (req, res, next) => {
     .sort()
     .paginate();
 
-  const bookings = await featured.query
-    .populate({
-      path: 'slot'
-    })
-    .populate({
-      path: 'reservedBy'
-    })
-    .populate({
-      path: 'doctor'
-    });
+  const bookings = await featured.query.populate({
+    path: 'slot',
+    populate: {
+      path: 'doctor',
+      select: 'fullArName fullEnName prefix photo gender prefix'
+    }
+  });
   const filtered = new APIFeatures(Booking.find(), query).filter();
   const total = await Booking.countDocuments(filtered.query);
   res.status(200).json({

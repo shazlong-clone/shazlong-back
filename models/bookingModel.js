@@ -15,10 +15,6 @@ const bookingSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
     },
-    doctor: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Doctor'
-    },
     isFake: {
       type: Boolean,
       default: false,
