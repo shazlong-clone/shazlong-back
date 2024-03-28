@@ -279,7 +279,8 @@ exports.getDoctor = catchAsync(async (req, res, next) => {
     .populate({
       path: 'slots',
       select: '-__v',
-      match: { from: { $gte: Date.now() } }
+      match: { from: { $gte: Date.now() } },
+      options: { sort: { from: 1 } }
     });
 
   if (!doctor) {
