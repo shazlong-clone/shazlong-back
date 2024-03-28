@@ -8,3 +8,4 @@ exports.USERSTORAGE = 'public/uploads/user/img';
 exports.BASE64_STARTER = 'data:image/jpeg;base64,';
 exports.PROFILE_PICTURE_BASE_URL =
   'https://xsgames.co/randomusers/assets/avatars';
+exports.SLOTSDURATIONS = [30, 60];

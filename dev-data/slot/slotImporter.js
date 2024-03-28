@@ -20,7 +20,7 @@ const slots = JSON.parse(fs.readFileSync(`${__dirname}/slots.json`, 'utf-8'));
 
 if (process.argv[2] === '--import') {
   importData(Slot, slots);
-  console.log('USERS IMPORTED SUCCESSFULY'.blue.bold);
+  console.log('USERS IMPORTED SUCCESSFULY'.green.bold);
 } else if (process.argv[2] === '--delete') {
   deleteData(Slot);
   console.log('USERS DELETED SUCCESSFULY'.red.bold);

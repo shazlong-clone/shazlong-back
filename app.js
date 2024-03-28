@@ -7,6 +7,9 @@ const hpp = require('hpp');
 const path = require('path');
 const { I18n } = require('i18n');
 const cors = require('cors');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const cron = require('node-cron');
+const updateDoctorSlots = require('./utils/updateDoctorSlots');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/error/errorController');
@@ -48,6 +51,11 @@ const corsOptions = {
     }
   }
 };
+
+// Define the task to be executed every day
+cron.schedule('42 * * * *', () => {
+  updateDoctorSlots();
+});
 
 app.use(cors({ origin: '*' }));
 

@@ -272,11 +272,15 @@ exports.getDoctor = catchAsync(async (req, res, next) => {
       path: 'reviews',
       select: 'user message createdAt rate',
       populate: {
-        path: 'user',
+        path: 'user'
       }
     })
     .select('-updatedAt -email')
-    .populate({ path: 'slots', select: '-__v' });
+    .populate({
+      path: 'slots',
+      select: '-__v',
+      match: { from: { $gte: Date.now() } }
+    });
 
   if (!doctor) {
     return next(new AppError(`${res.__('no_doctor_found')}`, 400));

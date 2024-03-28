@@ -6,22 +6,22 @@ const { faker } = require('@faker-js/faker');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const moment = require('moment');
 const mongoose = require('mongoose');
+const { SLOTSDURATIONS } = require('../../utils/constants');
 
 const doctorsIds = JSON.parse(
   fs.readFileSync('./dev-data/doctor/doctors.json')
 ).map(el => el._id);
 
 const randomslotsData = [];
-const slotdurations = [30, 60];
 for (let i = 0; i < doctorsIds.length; i++) {
   for (let j = 0; j < faker.number.int({ min: 30, max: 50 }); j++) {
     const from = faker.date.between({
-      from: moment().subtract(7, 'days'),
+      from: moment(),
       to: moment().add(7, 'days')
     });
 
     const to = moment(from).add(
-      slotdurations[faker.number.int({ min: 0, max: 1 })],
+      SLOTSDURATIONS[faker.number.int({ min: 0, max: 1 })],
       'minutes'
     );
 
