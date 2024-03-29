@@ -4,7 +4,7 @@ const AppError = require('../../utils/appError');
 const Slot = require('../../models/slotModel');
 const Booking = require('../../models/bookingModel');
 const APIFeatures = require('../../utils/apiFeatures');
-const { DOCTOR, USER } = require('../../utils/constants');
+const { DOCTOR, USER, CANCELED } = require('../../utils/constants');
 const filterObj = require('../../utils/filterObject');
 
 exports.bookSlot = catchAsync(async (req, res, next) => {
@@ -49,7 +49,7 @@ exports.cancelBooking = catchAsync(async (req, res, next) => {
     return next(new AppError(res.__('cant_cancel_past_solt'), 400));
 
   booking.slot.reserved = false;
-  booking.status = 0;
+  booking.status = CANCELED;
   await booking.slot.save();
   const updatedBooking = await booking.save();
 

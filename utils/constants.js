@@ -9,3 +9,9 @@ exports.BASE64_STARTER = 'data:image/jpeg;base64,';
 exports.PROFILE_PICTURE_BASE_URL =
   'https://xsgames.co/randomusers/assets/avatars';
 exports.SLOTSDURATIONS = [30, 60];
+
+
+exports.CANCELED = 0;
+exports.RESERVED = 1;
+exports.PATIENT_ATTEND = 2;
+exports.PATIENT_NOT_ATTEND = 3;
