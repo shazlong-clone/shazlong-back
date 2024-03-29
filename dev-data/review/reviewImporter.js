@@ -21,8 +21,8 @@ const reviews = JSON.parse(
 
 if (process.argv[2] === '--import') {
   importData(Review, reviews);
-  console.log('REVIEWS IMPORTED SUCCESSFULY'.blue.bold);
+  console.log('REVIEWS IMPORTED SUCCESSFULY'.green.bold);
 } else if (process.argv[2] === '--delete') {
   deleteData(Review);
-  console.log('REVIEWS DELETED SUCCESSFULY'.red.bold);
+  console.log('REVIEWS DELETED SUCCESSFULY'.green.bold);
 }

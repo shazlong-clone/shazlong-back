@@ -15,16 +15,17 @@ const doctorsIds = JSON.parse(
 const randomslotsData = [];
 for (let i = 0; i < doctorsIds.length; i++) {
   for (let j = 0; j < faker.number.int({ min: 30, max: 50 }); j++) {
-    const from = faker.date.between({
+    let from = faker.date.between({
       from: moment(),
       to: moment().add(7, 'days')
     });
+    from = moment(from).format('YYYY-MM-DD HH:mm:ss');
+
 
     const to = moment(from).add(
       SLOTSDURATIONS[faker.number.int({ min: 0, max: 1 })],
       'minutes'
-    );
-
+    ).format('YYYY-MM-DD HH:mm:ss');
     const doctorData = {
       _id: new mongoose.mongo.ObjectId(),
       from: from,

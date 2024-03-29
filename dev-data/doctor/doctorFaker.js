@@ -105,7 +105,7 @@ for (let i = 0; i < 50; i++) {
         return spec[faker.number.int({ min: 0, max: spec.length - 1 })];
       })
       .reduce((prev, curr) => {
-        const index = prev.indexOf(curr.id);
+        const index = prev.findIndex(el => el.id === curr.id);
         if (index === -1) {
           return [...prev, curr];
         }

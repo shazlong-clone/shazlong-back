@@ -19,8 +19,8 @@ const users = JSON.parse(fs.readFileSync(`${__dirname}/users.json`, 'utf-8'));
 
 if (process.argv[2] === '--import') {
   importData(User, users);
-  console.log('USERS IMPORTED SUCCESSFULY'.blue.bold);
+  console.log('USERS IMPORTED SUCCESSFULY'.green.bold);
 } else if (process.argv[2] === '--delete') {
   deleteData(User);
-  console.log('USERS DELETED SUCCESSFULY'.red.bold);
+  console.log('USERS DELETED SUCCESSFULY'.green.bold);
 }

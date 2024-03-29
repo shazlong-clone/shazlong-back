@@ -53,7 +53,7 @@ const corsOptions = {
 };
 
 // Define the task to be executed every day
-cron.schedule('42 * * * *', () => {
+cron.schedule('0 0 * * *', () => {
   updateDoctorSlots();
 });
 

@@ -12,7 +12,10 @@ mongoose
     useFindAndModify: false,
     useUnifiedTopology: true
   })
-  .then(() => console.log('DB connection successful!'));
+  .then(() => console.log('DB connection successful!')).catch(err => {
+    console.log('DB connection failed!'.bold.red);
+    console.log(err);
+  });
 
 // READ JSON FILE
 const doctors = JSON.parse(
@@ -21,8 +24,8 @@ const doctors = JSON.parse(
 
 if (process.argv[2] === '--import') {
   importData(Doctor, doctors);
-  console.log('DOCTORS IMPORTED SUCCESSFULY'.blue.bold);
+  console.log('DOCTORS IMPORTED SUCCESSFULY'.green.bold);
 } else if (process.argv[2] === '--delete') {
   deleteData(Doctor);
-  console.log('DOCTORS DELETED SUCCESSFULY'.red.bold);
+  console.log('DOCTORS DELETED SUCCESSFULY'.green.bold);
 }
