@@ -73,14 +73,29 @@ exports.getAllBookings = catchAsync(async (req, res, next) => {
     .limitFields()
     .sort()
     .paginate();
+  let bookings = [];
+  if (req.user.role === DOCTOR) {
+    bookings = await featured.query
+      .populate({
+        path: 'slot',
+        select: 'from to',
+      })
+      .populate({
+        path: 'reservedBy',
+        select: 'name photo'
+      });
+  } else {
+    bookings = await featured.query
+      .populate({
+        path: 'slot',
+        select: 'from to doctor',
+        populate: {
+          path: 'doctor',
+          select: 'fullArName fullEnName prefix photo gender prefix'
+        }
+      })
+  }
 
-  const bookings = await featured.query.populate({
-    path: 'slot',
-    populate: {
-      path: 'doctor',
-      select: 'fullArName fullEnName prefix photo gender prefix'
-    }
-  });
   const filtered = new APIFeatures(Booking.find(), query).filter();
   const total = await Booking.countDocuments(filtered.query);
   res.status(200).json({

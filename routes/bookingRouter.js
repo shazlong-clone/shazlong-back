@@ -13,7 +13,7 @@ const {
 router.route('/cancel').post(protect, restrictTo(USER), cancelBooking);
 router
   .route('/')
-  .post(protect, restrictTo(USER), bookSlot)
+  .post(protect, bookSlot)
   .get(protect, getAllBookings);
 
 module.exports = router;
