@@ -56,7 +56,7 @@ for (let i = 0; i < 50; i++) {
       .map(cer => {
         return {
           title: faker.lorem.words(6),
-          ar_title: faker.lorem.words(6),
+          ar_title: fakerAR.lorem.words(6),
           place: faker.location.city(),
           ar_place: fakerAR.location.city(),
           time: [
@@ -70,7 +70,7 @@ for (let i = 0; i < 50; i++) {
       .map(edu => {
         return {
           title: faker.lorem.words(7),
-          ar_title: faker.lorem.words(7),
+          ar_title: fakerAR.lorem.words(7),
           place: faker.location.city(),
           ar_place: fakerAR.location.city(),
           time: [
