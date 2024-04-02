@@ -78,22 +78,21 @@ exports.getAllBookings = catchAsync(async (req, res, next) => {
     bookings = await featured.query
       .populate({
         path: 'slot',
-        select: 'from to',
+        select: 'from to'
       })
       .populate({
         path: 'reservedBy',
         select: 'name photo'
       });
   } else {
-    bookings = await featured.query
-      .populate({
-        path: 'slot',
-        select: 'from to doctor',
-        populate: {
-          path: 'doctor',
-          select: 'fullArName fullEnName prefix photo gender prefix'
-        }
-      })
+    bookings = await featured.query.populate({
+      path: 'slot',
+      select: 'from to doctor',
+      populate: {
+        path: 'doctor',
+        select: 'fullArName fullEnName prefix photo gender prefix'
+      }
+    });
   }
 
   const filtered = new APIFeatures(Booking.find(), query).filter();
@@ -102,5 +101,23 @@ exports.getAllBookings = catchAsync(async (req, res, next) => {
     status: true,
     total,
     data: bookings
+  });
+});
+
+exports.updateBookings = catchAsync(async (req, res, next) => {
+  const { bookingIds = [], status = null } = req.body;
+  if (!bookingIds.length) {
+    return next(new AppError(res.__('booking_ids_required'), 400));
+  }
+  if (status === null || status === undefined) {
+    return next(new AppError(res.__('status_required'), 400));
+  }
+  const updatedBookings = await Booking.updateMany(
+    { _id: { $in: bookingIds } },
+    { status }
+  );
+  res.status(200).json({
+    status: true,
+    data: updatedBookings
   });
 });

@@ -47,5 +47,7 @@
   "no_user_with_this_code": "No user with this code",
   "no_doctor_found": "no doctor found",
   "some_slots_not_found": "some slots not found",
-  "some_slots_reserved": "some slots reserved"
+  "some_slots_reserved": "some slots reserved",
+  "booking_ids_required": "booking ids required",
+  "status_required": "status required"
 }
