@@ -1,8 +1,11 @@
 class APIFeatures {
   constructor(query, queryString) {
     this.query = query;
-    this.total = null;
     this.queryString = queryString;
+    this.excutedQyery = {};
+    this.page = 1;
+    this.size = 100;
+    this.skip = 0;
   }
 
   filter() {
@@ -15,7 +18,7 @@ class APIFeatures {
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
     // parsing will remove undefined fileds
     this.query = this.query.find(JSON.parse(queryStr));
-
+    this.excutedQyery = JSON.parse(queryStr);
     return this;
   }
 
@@ -42,10 +45,10 @@ class APIFeatures {
   }
 
   paginate() {
-    const page = this.queryString.page * 1 || 1;
-    const size = this.queryString.size * 1 || 100;
-    const skip = (page - 1) * size;
-    this.query = this.query.skip(skip).limit(size);
+    this.page = this.queryString.page * 1 || 1;
+    this.size = this.queryString.size * 1 || 100;
+    this.skip = (this.page - 1) * this.size;
+    this.query = this.query.skip(this.skip).limit(this.size);
     return this;
   }
 }

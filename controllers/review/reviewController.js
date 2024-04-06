@@ -1,16 +1,22 @@
 const Review = require('../../models/reviewsModel');
+const APIFeatures = require('../../utils/apiFeatures');
 const AppError = require('../../utils/appError');
 const catchAsync = require('../../utils/catchAsync');
+const getPagination = require('../../utils/getPagination');
 
 exports.getAllReviewes = catchAsync(async (req, res, next) => {
   let params = { ...req.query };
   if (req.params.doctorId) {
     params = { ...params, doctor: req.params.doctorId };
   }
-  const reviews = await Review.find(params);
+  const featured = new APIFeatures(Review.find(), params).filter().paginate();
+  const reviews = await featured.query;
+  const total = await Review.countDocuments(featured.excutedQyery);
+  const data = getPagination(reviews, total, featured.page, featured.size);
+  
   res.status(200).json({
     status: true,
-    data: reviews
+    data
   });
 });
 

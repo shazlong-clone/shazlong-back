@@ -6,6 +6,7 @@ const Booking = require('../../models/bookingModel');
 const APIFeatures = require('../../utils/apiFeatures');
 const { DOCTOR, USER, CANCELED } = require('../../utils/constants');
 const filterObj = require('../../utils/filterObject');
+const getPagination = require('../../utils/getPagination');
 
 exports.bookSlot = catchAsync(async (req, res, next) => {
   const { slotIds = [] } = req.body;
@@ -68,6 +69,7 @@ exports.getAllBookings = catchAsync(async (req, res, next) => {
   } else if (req.user.role === USER) {
     query = { ...req.query, reservedBy: req.user.id };
   }
+
   const featured = new APIFeatures(Booking.find(), query)
     .filter()
     .limitFields()
@@ -95,12 +97,14 @@ exports.getAllBookings = catchAsync(async (req, res, next) => {
     });
   }
 
-  const filtered = new APIFeatures(Booking.find(), query).filter();
-  const total = await Booking.countDocuments(filtered.query);
+  console.log(featured.excutedQyery)
+
+  const total = await Booking.countDocuments(featured.excutedQyery);
+  const data = getPagination(bookings, total, featured.page, featured.size);
+
   res.status(200).json({
     status: true,
-    total,
-    data: bookings
+    data
   });
 });
 

@@ -15,10 +15,8 @@ const app = require('./app');
 
 mongoose
   .connect(DB, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false
+    useNewUrlParser: true, 
+    useUnifiedTopology: true 
   })
   .then(() => console.log('DB connection successful!'.yellow.bold));
 

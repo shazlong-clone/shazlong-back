@@ -3,11 +3,26 @@ const Doctor = require('../../models/doctorModel');
 const catchAsync = require('../../utils/catchAsync');
 const AppError = require('../../utils/appError');
 const filterObject = require('../../utils/filterObject');
-const { getPaginate, getPagingData } = require('../../utils/getPaginate');
 const resizeBuffer = require('../../utils/resizeBuffer');
 const { BASE64_STARTER } = require('../../utils/constants');
 
 const DESC = 'DESC';
+
+const getPaginate = (pageNum, size) => {
+  const page = pageNum * 1 || 1;
+  const limit = size * 1 || 30;
+  const skip = (page - 1) * limit;
+  return { limit, skip };
+};
+
+const getPagingData = (data, page, limit) => {
+  const { total: totalItems, data: result } = data;
+  page = page || 0;
+  // eslint-disable-next-line radix
+  const currentPage = parseInt(page === 0 ? 1 : page);
+  const totalPages = Math.ceil(totalItems / limit);
+  return { totalItems, totalPages, currentPage, result };
+};
 
 exports.getAllDoctors = catchAsync(async (req, res, next) => {
   const aggPipeline = [];
