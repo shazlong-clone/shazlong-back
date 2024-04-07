@@ -1,6 +1,5 @@
 function findIndex(str1, str2) {
     let index = str1.indexOf(str2);
-    console.log(index);
 }
  
 const str1 = "Welcome to GeeksforGeeks";

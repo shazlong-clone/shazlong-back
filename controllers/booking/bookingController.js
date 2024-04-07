@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const moment = require('moment');
 const catchAsync = require('../../utils/catchAsync');
 const AppError = require('../../utils/appError');
 const Slot = require('../../models/slotModel');
@@ -63,18 +64,30 @@ exports.cancelBooking = catchAsync(async (req, res, next) => {
 exports.getAllBookings = catchAsync(async (req, res, next) => {
   let query = { ...req.query };
   if (req.user.role === DOCTOR) {
-    const slotsIds = await Slot.find({ doctor: req.user._id }, '_id');
-    query = { ...query, slot: { $in: slotsIds.map(el => el._id) } };
-    query = filterObj(query, 'doctor');
+    let date = {};
+    if (req.query.date) {
+      date = {
+        from: req.query.date
+      };
+    }
+    const slots = await new APIFeatures(Slot.find(), {
+      doctor: req.user._id,
+      ...date,
+      fields: '_id'
+    }).filter().query;
+    const slotsIDs = slots.map(el => el._id);
+
+    query = { ...query, slot: { $in: slotsIDs } };
+    query = filterObj(query, 'doctor', 'date');
   } else if (req.user.role === USER) {
     query = { ...req.query, reservedBy: req.user.id };
   }
-
   const featured = new APIFeatures(Booking.find(), query)
     .filter()
     .limitFields()
     .sort()
     .paginate();
+
   let bookings = [];
   if (req.user.role === DOCTOR) {
     bookings = await featured.query
@@ -96,8 +109,6 @@ exports.getAllBookings = catchAsync(async (req, res, next) => {
       }
     });
   }
-
-  console.log(featured.excutedQyery)
 
   const total = await Booking.countDocuments(featured.excutedQyery);
   const data = getPagination(bookings, total, featured.page, featured.size);
