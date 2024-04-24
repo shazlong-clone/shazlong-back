@@ -1,0 +1,11 @@
+{
+  "user_id": 1,
+  "test_id": 2,
+  "result":25,
+  "answers": [
+    {
+      "question_id": 1,
+      "answer_id": 2
+    }
+  ]
+}
