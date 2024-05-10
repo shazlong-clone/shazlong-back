@@ -42,6 +42,13 @@ gulp.task(
   ])
 );
 
+gulp.task(
+  'add_tests_to_db',
+  shell.task([
+    'node ./dev-data/test/testImporter.js --delete',
+    'node ./dev-data/test/testImporter.js --import'
+  ])
+);
 // Create a default task that runs task1, task2, and task3 in order
 gulp.task(
   'default',
@@ -49,6 +56,7 @@ gulp.task(
     'add_doctors_to_db',
     'add_slots_to_db',
     'add_users_to_db',
-    'add_reviews_to_db'
+    'add_reviews_to_db',
+    'add_tests_to_db'
   )
 );

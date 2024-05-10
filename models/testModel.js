@@ -4,14 +4,9 @@ const { Schema } = mongoose;
 
 // Define Answer Schema
 const AnswerSchema = new Schema({
-  _id: {
-    type: mongoose.Schema.Types.ObjectId,
-    default: mongoose.Types.ObjectId,
-    unique: true
-  },
   answer: String,
   ar_answer: String,
-  value: String
+  weight: Number
 });
 
 // Define Question Schema
@@ -22,8 +17,7 @@ const QuestionSchema = new Schema({
     unique: true
   },
   question: String,
-  ar_question: String,
-  answers: [AnswerSchema]
+  ar_question: String
 });
 
 // Define Result Schema
@@ -41,10 +35,22 @@ const TestSchema = new Schema({
     default: mongoose.Types.ObjectId,
     unique: true
   },
+  isFake: {
+    type: Boolean,
+    default:true,
+  },
+  duration:{
+    type:String,
+    default:'15 min'
+  },
   name: String,
   ar_name: String,
+  description: String,
+  ar_description:String,
   questions: [QuestionSchema],
+  answers: [AnswerSchema],
   results: [ResultSchema]
+
 });
 
 // Create and export the Test model

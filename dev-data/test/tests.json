@@ -1,0 +1,462 @@
+[
+ {
+  "_id": "663e938c9b8cc071f6ab70e1",
+  "name": "CAGE Alcohol Questionnaire (CAGE)",
+  "ar_name": "استبيان CAGE للكحول (CAGE)",
+  "link": "https://psychology-tools.com/test/cage-alcohol-questionnaire",
+  "description": "IntroductionThe CAGE Alcohol Questionnaire is a brief psychological assessment instrument that plays designed to detect problematic alcohol consumption in its early stages. Developed to be simple and direct, it consists of just four questions that probe into the behaviors and feelings associated with drinking habits. The primary objective of this tool is to screen for alcohol dependence and abuse, making it a first step in recognizing when alcohol use may be crossing into concerning territory. It is structured to be easily administered, whether through self-assessment or by healthcare providers, facilitating a straightforward approach to identifying issues related to alcohol.The origins of the CAGE questionnaire trace back to its development for use in both clinical and research settings. Its design is focused on efficiency, enabling a rapid assessment without compromising on the depth of insight into an individual's relationship with alcohol. This efficiency is particularly beneficial in busy clinical environments where time is limited, as well as in situations where a quick preliminary assessment is necessary. The questionnaire’s ability to be self-administered adds to its versatility, allowing individuals to conduct a personal review of their drinking patterns in private. This feature supports its use not only in professional settings but also as a self-help tool for those who have concerns about their alcohol consumption.In practice, the CAGE questionnaire is applied across a range of contexts, from primary care settings to mental health clinics, serving as an entry point for further exploration of alcohol use issues. Its utility lies in its capacity to prompt a deeper investigation into a person's drinking behavior, potentially leading to early intervention and support. While it is not a diagnostic tool in itself, the CAGE questionnaire's results can guide healthcare professionals in deciding whether additional, more comprehensive assessments are warranted. In this way, it contributes to a larger framework of strategies aimed at addressing alcohol-related problems, underscoring the importance of early detection and the benefits of proactive intervention.InstructionsPlease answer yes or no to the following questions.",
+  "ar_description": "مقدمة يعد استبيان CAGE حول الكحول بمثابة أداة تقييم نفسي موجزة تم تصميمها لاكتشاف مشكلة استهلاك الكحول في مراحلها المبكرة. تم تطويره ليكون بسيطًا ومباشرًا، ويتكون من أربعة أسئلة فقط تبحث في السلوكيات والمشاعر المرتبطة بعادات الشرب. الهدف الأساسي من هذه الأداة هو الكشف عن الاعتماد على الكحول وإساءة استخدامه، مما يجعلها خطوة أولى في التعرف على متى قد يعبر تعاطي الكحول إلى منطقة مثيرة للقلق. وقد تم تصميمه بحيث يسهل إدارته، سواء من خلال التقييم الذاتي أو من خلال مقدمي الرعاية الصحية، مما يسهل اتباع نهج مباشر لتحديد المشكلات المتعلقة بالكحول.تعود أصول استبيان CAGE إلى تطويره لاستخدامه في كل من الإعدادات السريرية والبحثية. ويركز تصميمه على الكفاءة، مما يتيح إجراء تقييم سريع دون المساس بعمق التبصر في علاقة الفرد بالكحول. تعتبر هذه الكفاءة مفيدة بشكل خاص في البيئات السريرية المزدحمة حيث يكون الوقت محدودًا، وكذلك في الحالات التي يكون فيها التقييم الأولي السريع ضروريًا. تضيف قدرة الاستبيان على الإدارة الذاتية إلى تنوعه، مما يسمح للأفراد بإجراء مراجعة شخصية لأنماط الشرب الخاصة بهم على انفراد. تدعم هذه الميزة استخدامها ليس فقط في الإعدادات المهنية ولكن أيضًا كأداة للمساعدة الذاتية لأولئك الذين لديهم مخاوف بشأن استهلاكهم للكحول.من الناحية العملية، يتم تطبيق استبيان CAGE عبر مجموعة من السياقات، بدءًا من إعدادات الرعاية الأولية وحتى عيادات الصحة العقلية، ليكون بمثابة نقطة دخول لمزيد من الاستكشاف لقضايا تعاطي الكحول. تكمن فائدته في قدرته على إجراء تحقيق أعمق في سلوك الشرب لدى الشخص، مما قد يؤدي إلى التدخل المبكر والدعم. على الرغم من أنها ليست أداة تشخيصية في حد ذاتها، إلا أن نتائج استبيان CAGE يمكن أن توجه متخصصي الرعاية الصحية في تحديد ما إذا كان هناك ما يبرر إجراء تقييمات إضافية وأكثر شمولاً. وبهذه الطريقة، فإنه يساهم في إطار أكبر من الاستراتيجيات التي تهدف إلى معالجة المشاكل المرتبطة بالكحول، مع التأكيد على أهمية الكشف المبكر وفوائد التدخل الاستباقي.تعليمات يرجى الإجابة بنعم أو لا على الأسئلة التالية.",
+  "questions": [
+   {
+    "_id": "663e938c9b8cc071f6ab70e2",
+    "question": "Have you ever felt you needed to Cut down on your drinking?",
+    "ar_question": "هل شعرت يومًا أنك بحاجة إلى التوقف عن شرب الخمر؟"
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab70e3",
+    "question": "Have people Annoyed you by criticizing your drinking?",
+    "ar_question": "أزعجك"
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab70e4",
+    "question": "Have you ever felt Guilty about drinking?",
+    "ar_question": "هل شعرت يومًا بالذنب تجاه شرب الخمر؟"
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab70e5",
+    "question": "Have you ever felt you needed a drink first thing in the morning (Eye-opener) to steady your nerves or to get rid of a hangover?",
+    "ar_question": "هل شعرت يومًا أنك بحاجة إلى مشروب أول شيء في الصباح ( E ye-opener) لتثبيت أعصابك أو للتخلص من مخلفات الكحول؟"
+   }
+  ],
+  "answers": [
+   {
+    "name": "Yes",
+    "ar_name": "نعم",
+    "weight": 1
+   },
+   {
+    "name": "No",
+    "ar_name": "لا",
+    "weight": 2
+   }
+  ],
+  "results": [
+   {
+    "form": 0,
+    "to": 5,
+    "case": "case",
+    "ar_case": "translation to arabic"
+   }
+  ]
+ },
+ {
+  "_id": "663e938c9b8cc071f6ab70e6",
+  "name": "Bergen Shopping Addiction Scale (BSAS)",
+  "ar_name": "مقياس بيرغن لإدمان التسوق (BSAS)",
+  "link": "https://psychology-tools.com/test/bergen-shopping-addiction-scale",
+  "description": "IntroductionThe Bergen Shopping Addiction Scale (BSAS) is an assessment tool developed to evaluate the behaviors associated with compulsive buying and the possibility of shopping addiction. It comprises a set of statements to which respondents are asked to gauge their agreement or disagreement, aiming to illuminate the patterns and frequencies of shopping behavior that may suggest an addiction. By quantifying these behaviors, the BSAS provides a structured approach to understanding how shopping habits might deviate from the norm and potentially impact an individual's life.Designed for both self-assessment and professional use, the BSAS offers insight into the psychological drivers behind shopping habits. This scale is particularly useful for therapists, counselors, and researchers interested in the dynamics of consumer behavior and addiction. For individuals, it can serve as a reflective tool to examine their own shopping behaviors, offering a starting point for recognizing when such activities may become problematic. For professionals, it offers a methodical way to identify those who may benefit from further psychological support or interventions tailored to compulsive shopping behaviors.In applying the BSAS, the goal is not only to identify excessive shopping tendencies but also to understand the broader implications of such behavior on personal, financial, and social well-being. It encourages a deeper exploration into the motivations behind compulsive buying, such as emotional regulation or identity seeking, and how these motivations contribute to the development of addictive patterns. The scale's structured format allows for consistent application and comparison across different populations, making it a valuable instrument in the broader field of psychological assessment and intervention for shopping addiction.InstructionsFor each item, tick the response alternative (ranging from “completely disagree” to “completely agree”) that best describes you. The statements relate to your thoughts, feelings and actions in the last 12 months.",
+  "ar_description": "مقدمة مقياس بيرغن لإدمان التسوق (BSAS) هو أداة تقييم تم تطويرها لتقييم السلوكيات المرتبطة بالشراء القهري وإمكانية إدمان التسوق. وهو يتألف من مجموعة من العبارات التي يُطلب من المشاركين قياس موافقتهم أو عدم موافقتهم عليها، بهدف إلقاء الضوء على أنماط وتكرار سلوك التسوق الذي قد يوحي بالإدمان. ومن خلال قياس هذه السلوكيات، يوفر نظام BSAS نهجًا منظمًا لفهم كيفية انحراف عادات التسوق عن القاعدة وربما التأثير على حياة الفرد.تم تصميم BSAS للتقييم الذاتي والاستخدام المهني، ويقدم نظرة ثاقبة للدوافع النفسية وراء عادات التسوق. هذا المقياس مفيد بشكل خاص للمعالجين والمستشارين والباحثين المهتمين بديناميكيات سلوك المستهلك والإدمان. بالنسبة للأفراد، يمكن أن تكون بمثابة أداة عاكسة لفحص سلوكيات التسوق الخاصة بهم، مما يوفر نقطة انطلاق للتعرف على الأوقات التي قد تصبح فيها هذه الأنشطة مشكلة. بالنسبة للمحترفين، فهو يوفر طريقة منهجية لتحديد أولئك الذين قد يستفيدون من المزيد من الدعم النفسي أو التدخلات المصممة خصيصًا لسلوكيات التسوق القهرية.في تطبيق BSAS، فإن الهدف ليس فقط تحديد ميول التسوق المفرطة ولكن أيضًا فهم الآثار الأوسع لمثل هذا السلوك على الرفاهية الشخصية والمالية والاجتماعية. إنه يشجع على استكشاف أعمق للدوافع الكامنة وراء الشراء القهري، مثل التنظيم العاطفي أو البحث عن الهوية، وكيف تساهم هذه الدوافع في تطوير أنماط الإدمان. يسمح الشكل المنظم للمقياس بالتطبيق المتسق والمقارنة بين مجموعات سكانية مختلفة، مما يجعله أداة قيمة في المجال الأوسع للتقييم النفسي والتدخل لإدمان التسوق.تعليمات لكل بند، ضع علامة في خيار الإجابة البديلة (التي تتراوح من \"لا أوافق تمامًا\" إلى \"أوافق تمامًا\") الذي يصفك على أفضل وجه. تتعلق البيانات بأفكارك ومشاعرك وأفعالك خلال الأشهر الـ 12 الماضية.",
+  "questions": [
+   {
+    "_id": "663e938c9b8cc071f6ab70e7",
+    "question": "Shopping/buying is the most important thing in my life.",
+    "ar_question": "التسوق/الشراء هو أهم شيء في حياتي."
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab70e8",
+    "question": "I think about shopping/buying things all the time.",
+    "ar_question": "أفكر في التسوق/شراء الأشياء طوال الوقت."
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab70e9",
+    "question": "I spend a lot of time thinking of or planning shopping/buying.",
+    "ar_question": "أقضي الكثير من الوقت في التفكير أو التخطيط للتسوق/الشراء."
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab70ea",
+    "question": "Thoughts about shopping/buying keep popping in my head.",
+    "ar_question": "الأفكار حول التسوق/الشراء تستمر في الظهور في رأسي."
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab70eb",
+    "question": "I shop in order to feel better.",
+    "ar_question": "أتسوق لكي أشعر بالتحسن."
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab70ec",
+    "question": "I shop/buy things in order to change my mood.",
+    "ar_question": "أتسوق/أشتري أشياء من أجل تغيير مزاجي."
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab70ed",
+    "question": "I shop/buy things in order to forget about personal problems.",
+    "ar_question": "أتسوق/أشتري الأشياء لكي أنسى مشاكلي الشخصية."
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab70ee",
+    "question": "I shop/buy things in order to reduce feelings of guilt, anxiety, helplessness, loneliness, and/or depression.",
+    "ar_question": "أقوم بالتسوق/شراء الأشياء من أجل تقليل مشاعر الذنب، والقلق، والعجز، و/أو الوحدة، و/أو الاكتئاب."
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab70ef",
+    "question": "I shop/buy so much that it negatively affects my daily obligations (e.g., school and work).",
+    "ar_question": "أتسوق/أشتري كثيرًا مما يؤثر سلبًا على التزاماتي اليومية (مثل المدرسة والعمل)."
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab70f0",
+    "question": "I give less priority to hobbies, leisure activities, job/studies, or exercise because of shopping/buying.",
+    "ar_question": "أعطي أولوية أقل للهوايات أو الأنشطة الترفيهية أو العمل/الدراسة أو ممارسة الرياضة بسبب التسوق/الشراء."
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab70f1",
+    "question": "I have ignored love partner, family, and friends because of shopping/buying.",
+    "ar_question": "لقد تجاهلت شريك الحب والأسرة والأصدقاء بسبب التسوق/الشراء."
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab70f2",
+    "question": "I often end up in arguments with other because of shopping/buying.",
+    "ar_question": "غالبًا ما ينتهي بي الأمر في جدال مع الآخرين بسبب التسوق/الشراء."
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab70f3",
+    "question": "I feel an increasing inclination to shop/buy things.",
+    "ar_question": "أشعر بميل متزايد للتسوق/شراء الأشياء."
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab70f4",
+    "question": "I shop/buy much more than I had intended/planned.",
+    "ar_question": "أتسوق/أشتري أكثر بكثير مما كنت أنوي/خططت له."
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab70f5",
+    "question": "I feel I have to shop/buy more and more to obtain the same satisfaction as before.",
+    "ar_question": "أشعر أنه يتعين علي التسوق/الشراء أكثر وأكثر للحصول على نفس الرضا الذي كنت أشعر به من قبل."
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab70f6",
+    "question": "I spend more and more time shopping/buying.",
+    "ar_question": "أقضي المزيد من الوقت في التسوق/الشراء."
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab70f7",
+    "question": "I have tried to cut down on shopping/buying without success.",
+    "ar_question": "لقد حاولت التقليل من التسوق/الشراء دون جدوى."
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab70f8",
+    "question": "I have been told by others to reduce shopping/buying without listening to them.",
+    "ar_question": "لقد طلب مني الآخرون تقليل التسوق/الشراء دون الاستماع إليهم."
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab70f9",
+    "question": "I have decided to shop/buy less, but have not been able to do so.",
+    "ar_question": "لقد قررت التسوق/الشراء بشكل أقل، ولكنني لم أتمكن من القيام بذلك."
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab70fa",
+    "question": "I have managed to limit shopping/buying for periods, and the experienced relapse.",
+    "ar_question": "تمكنت من الحد من التسوق/الشراء لفترات، وتعرضت للانتكاسة."
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab70fb",
+    "question": "I become stressed if obstructed from shopping/buying things.",
+    "ar_question": "أشعر بالتوتر إذا منعتني من التسوق/شراء الأشياء."
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab70fc",
+    "question": "I become sour and grumpy if I for some reasons cannot shop/buy things when I feel like it.",
+    "ar_question": "أشعر بالغضب والغضب إذا لم أتمكن من التسوق/شراء الأشياء عندما أرغب في ذلك لبعض الأسباب."
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab70fd",
+    "question": "I feel bad if I for some reason are prevented from shopping/buying things.",
+    "ar_question": "أشعر بالسوء إذا مُنعت لسبب ما من التسوق/شراء الأشياء."
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab70fe",
+    "question": "I there has been a while since I last shopped I feel a strong urge to shop/buy things.",
+    "ar_question": "لقد مرت فترة من الوقت منذ آخر مرة قمت فيها بالتسوق وأشعر برغبة قوية في التسوق/شراء الأشياء."
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab70ff",
+    "question": "I shop/buy so much that it has caused economic problems.",
+    "ar_question": "أتسوق/أشتري كثيرًا مما يسبب مشاكل اقتصادية."
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab7100",
+    "question": "I shop/buy so much that it has impaired my well-being.",
+    "ar_question": "أتسوق/أشتري كثيرًا مما يؤثر على صحتي."
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab7101",
+    "question": "I have worried so much about my shopping that it sometimes has made me sleepless.",
+    "ar_question": "لقد كنت قلقة للغاية بشأن التسوق لدرجة أنني في بعض الأحيان كنت أعاني من الأرق."
+   },
+   {
+    "_id": "663e938c9b8cc071f6ab7102",
+    "question": "I have been bothered with poor conscience because of shopping/buying.",
+    "ar_question": "لقد انزعجت من ضعف الضمير بسبب التسوق / الشراء."
+   }
+  ],
+  "answers": [
+   {
+    "name": "Completely Disagree",
+    "ar_name": "اختلف تماما",
+    "weight": 1
+   },
+   {
+    "name": "Disagree",
+    "ar_name": "تعارض",
+    "weight": 2
+   },
+   {
+    "name": "Neither Disagree Nor Agree",
+    "ar_name": "لا نختلف ولا نتفق",
+    "weight": 3
+   },
+   {
+    "name": "Agree",
+    "ar_name": "يوافق",
+    "weight": 4
+   },
+   {
+    "name": "Completely Agree",
+    "ar_name": "أتفق تماما",
+    "weight": 5
+   }
+  ],
+  "results": [
+   {
+    "form": 0,
+    "to": 5,
+    "case": "case",
+    "ar_case": "translation to arabic"
+   }
+  ]
+ },
+ {
+  "_id": "663e938d9b8cc071f6ab7103",
+  "name": "Childhood Autism Spectrum Test (CAST)",
+  "ar_name": "اختبار طيف التوحد في مرحلة الطفولة (CAST)",
+  "link": "https://psychology-tools.com/test/cast",
+  "description": "IntroductionThe Childhood Autism Spectrum Test (CAST), formerly known as the Childhood\n        Asperger Syndrome Test, is a tool designed for the early detection of Autism Spectrum Disorder (ASD) in children\n        aged 4 to 11 years. It is structured as a parent-completed questionnaire, focusing on behaviors and abilities\n        that are indicative of ASD. By capturing a wide range of social, communicative, and imaginative behaviors, the\n        CAST aims to identify children who may benefit from a more detailed evaluation for ASD. This screening tool is\n        particularly notable for its role in facilitating early identification of ASD, thereby enabling timely\n        intervention and support.\n      Developed by a team of experts in the field of autism research, the CAST consists of a series of questions that\n        parents or primary caregivers answer based on their observations of the child's behavior and interactions. The\n        questionnaire is designed to be both comprehensive and accessible, allowing for its use in various settings,\n        including primary care, educational environments, and within the family home. The emphasis on parent-reported\n        observations leverages the detailed knowledge that caregivers often have about their child's behavior in a range\n        of social contexts and situations.\n      One of the key strengths of the CAST is its focus on early childhood, a critical period for the development of\n        social and communicative skills. Early detection of ASD can significantly influence the course of a child's\n        development, offering opportunities for interventions that can improve social, communicative, and academic\n        outcomes. By providing a structured framework for assessing behaviors associated with ASD, the CAST plays an\n        essential role in the early diagnostic process, guiding families and professionals toward further evaluation\n        when necessary.\n      The application of the CAST in screening for ASD reflects an understanding of the importance of early,\n        accessible, and accurate identification of autism spectrum conditions. Its development and use underscore the\n        commitment within the field of autism research to create tools that can bridge the gap between expert diagnostic\n        services and the initial concerns of parents or educators. Through its widespread use, the CAST contributes to a\n        broader awareness and understanding of ASD, promoting a more inclusive and supportive approach to supporting\n        children with diverse developmental profiles.\n      The Childhood Autism Spectrum Test's design as a parent-completed questionnaire makes it an accessible and\n        practical tool for the early screening of ASD. By enabling early identification and intervention, the CAST\n        contributes to positive outcomes for children with ASD, supporting their development and integration within\n        educational settings and the broader community.\n      InstructionsPlease read each question carefully and select the most accurate\n        response.",
+  "ar_description": "مقدمة اختبار طيف التوحد في مرحلة الطفولة (CAST)، المعروف سابقًا باسم اختبار متلازمة أسبرجر في مرحلة الطفولة، هو أداة مصممة للكشف المبكر عن اضطراب طيف التوحد (ASD) لدى الأطفال الذين تتراوح أعمارهم بين 4 إلى 11 عامًا. تم تصميمه على شكل استبيان مملوء من قبل الوالدين، مع التركيز على السلوكيات والقدرات التي تشير إلى اضطراب طيف التوحد. من خلال التقاط مجموعة واسعة من السلوكيات الاجتماعية والتواصلية والخيالية، يهدف CAST إلى تحديد الأطفال الذين قد يستفيدون من تقييم أكثر تفصيلاً لاضطراب طيف التوحد. تتميز أداة الفحص هذه بشكل خاص بدورها في تسهيل التعرف المبكر على اضطراب طيف التوحد، وبالتالي تمكين التدخل والدعم في الوقت المناسب.تم تطوير CAST بواسطة فريق من الخبراء في مجال أبحاث التوحد، ويتكون من سلسلة من الأسئلة التي يجيب عليها الآباء أو مقدمو الرعاية الأساسيون بناءً على ملاحظاتهم لسلوك الطفل وتفاعلاته. تم تصميم الاستبيان ليكون شاملاً ويمكن الوصول إليه، مما يسمح باستخدامه في مختلف البيئات، بما في ذلك الرعاية الأولية والبيئات التعليمية وداخل منزل الأسرة. إن التركيز على الملاحظات التي أبلغ عنها الآباء يعزز المعرفة التفصيلية التي يمتلكها مقدمو الرعاية غالبًا حول سلوك أطفالهم في مجموعة من السياقات والمواقف الاجتماعية.إحدى نقاط القوة الرئيسية لـ CAST هي تركيزها على مرحلة الطفولة المبكرة، وهي فترة حرجة لتنمية المهارات الاجتماعية والتواصلية. يمكن أن يؤثر الاكتشاف المبكر لاضطراب طيف التوحد بشكل كبير على مسار نمو الطفل، مما يوفر فرصًا للتدخلات التي يمكن أن تحسن النتائج الاجتماعية والتواصلية والأكاديمية. من خلال توفير إطار منظم لتقييم السلوكيات المرتبطة باضطراب طيف التوحد، يلعب CAST دورًا أساسيًا في عملية التشخيص المبكر، وتوجيه العائلات والمهنيين نحو مزيد من التقييم عند الضرورة.يعكس تطبيق CAST في فحص اضطراب طيف التوحد فهمًا لأهمية التحديد المبكر والميسور والدقيق لحالات طيف التوحد. يؤكد تطويره واستخدامه على الالتزام في مجال أبحاث التوحد بإنشاء أدوات يمكنها سد الفجوة بين خدمات التشخيص المتخصصة والاهتمامات الأولية للآباء أو المعلمين. من خلال استخدامه على نطاق واسع، يساهم CAST في زيادة الوعي والفهم على نطاق أوسع لاضطراب طيف التوحد، وتعزيز نهج أكثر شمولاً وداعمة لدعم الأطفال ذوي الملامح التنموية المتنوعة.إن تصميم اختبار طيف التوحد في مرحلة الطفولة باعتباره استبيانًا مملوءًا من قبل الوالدين يجعله أداة سهلة الوصول وعملية للفحص المبكر لاضطراب طيف التوحد. من خلال تمكين التحديد والتدخل المبكر، يساهم CAST في تحقيق نتائج إيجابية للأطفال الذين يعانون من اضطراب طيف التوحد، ودعم تطورهم وتكاملهم داخل البيئات التعليمية والمجتمع الأوسع.التعليمات يرجى قراءة كل سؤال بعناية واختيار الإجابة الأكثر دقة.",
+  "questions": [
+   {
+    "_id": "663e938d9b8cc071f6ab7104",
+    "question": "Does s/he join in playing games with other children easily?",
+    "ar_question": "هل يشارك في ممارسة الألعاب مع الأطفال الآخرين بسهولة؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab7105",
+    "question": "Does s/he come up to you spontaneously for a chat?",
+    "ar_question": "هل يأتي إليك تلقائيًا للدردشة؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab7106",
+    "question": "Was s/he speaking by 2 years old?",
+    "ar_question": "هل كان يتحدث عندما يبلغ من العمر عامين؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab7107",
+    "question": "Does s/he enjoy sports?",
+    "ar_question": "هل يستمتع بالرياضة؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab7108",
+    "question": "Is it important to him/her to fit in with the peer group?",
+    "ar_question": "هل من المهم بالنسبة له أن يندمج مع مجموعة الأقران؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab7109",
+    "question": "Does s/he appear to notice unusual details that others miss?",
+    "ar_question": "هل يبدو أنه يلاحظ تفاصيل غير عادية يغفل عنها الآخرون؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab710a",
+    "question": "Does s/he tend to take things literally?",
+    "ar_question": "هل يميل إلى أخذ الأمور حرفياً؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab710b",
+    "question": "When s/he was 3 years old, did s/he spend a lot of time pretending (e.g., play-acting being a\n                superhero, or holding teddy's tea parties)?",
+    "ar_question": "عندما كان عمره 3 سنوات، هل أمضى الكثير من الوقت في التظاهر (على سبيل المثال، تمثيل دور بطل خارق، أو إقامة حفلات شاي تيدي)؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab710c",
+    "question": "Does s/he like to do things over and over again, in the same way all the time?",
+    "ar_question": "هل يحب أن يفعل الأشياء مراراً وتكراراً وبنفس الطريقة طوال الوقت؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab710d",
+    "question": "Does s/he find it easy to interact with other children?",
+    "ar_question": "هل يجد أنه من السهل عليه التفاعل مع الأطفال الآخرين؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab710e",
+    "question": "Can s/he keep a two-way conversation going?",
+    "ar_question": "هل يمكنه مواصلة المحادثة الثنائية؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab710f",
+    "question": "Can s/he read appropriately for his/her age?",
+    "ar_question": "هل يستطيع القراءة بشكل مناسب لعمره؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab7110",
+    "question": "Does s/he mostly have the same interests as his/her peers?",
+    "ar_question": "هل لديه في الغالب نفس اهتمامات أقرانه؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab7111",
+    "question": "Does s/he have an interest which takes up so much time that s/he does little else?",
+    "ar_question": "هل لديه اهتمامات تستغرق الكثير من الوقت ولا يفعل سوى القليل منها؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab7112",
+    "question": "Does s/he have friends, rather than just acquaintances?",
+    "ar_question": "هل لديه أصدقاء، وليس مجرد معارف؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab7113",
+    "question": "Does s/he often bring you things s/he is interested in to show you?",
+    "ar_question": "هل يجلب لك في كثير من الأحيان الأشياء التي يهتم بها ليعرضها عليك؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab7114",
+    "question": "Does s/he enjoy joking around?",
+    "ar_question": "هل يستمتع بالمزاح؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab7115",
+    "question": "Does s/he have difficulty understanding the rules for polite behavior?",
+    "ar_question": "هل يواجه صعوبة في فهم قواعد السلوك المهذب؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab7116",
+    "question": "Does s/he appear to have an unusual memory for details?",
+    "ar_question": "هل يبدو أن لديه ذاكرة غير عادية للتفاصيل؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab7117",
+    "question": "Is his/her voice unusual (e.g., overly adult, flat, or very monotonous)?",
+    "ar_question": "هل صوته غير عادي (على سبيل المثال، بالغ جدًا، مسطح، أو رتيب جدًا)؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab7118",
+    "question": "Are people important to him/her?",
+    "ar_question": "هل الناس مهمون بالنسبة له؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab7119",
+    "question": "Can s/he dress him/herself?",
+    "ar_question": "هل يستطيع أن يرتدي ملابسه بنفسه؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab711a",
+    "question": "Is s/he good at turn-taking in conversation?",
+    "ar_question": "هل هو جيد في تبادل الأدوار في المحادثة؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab711b",
+    "question": "Does s/he play imaginatively with other children, and engage in role-play?",
+    "ar_question": "هل يلعب بشكل خيالي مع الأطفال الآخرين ويشارك في لعب الأدوار؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab711c",
+    "question": "Does s/he often do or say things that are tactless or socially inappropriate?",
+    "ar_question": "هل يفعل أو يقول في كثير من الأحيان أشياء غير لبقه أو غير لائقة اجتماعيا؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab711d",
+    "question": "Can s/he count to 50 without leaving out any numbers?",
+    "ar_question": "هل يستطيع العد حتى 50 دون ترك أي أرقام؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab711e",
+    "question": "Does s/he make normal eye-contact?",
+    "ar_question": "هل يقوم بالتواصل البصري بشكل طبيعي؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab711f",
+    "question": "Does s/he have any unusual and repetitive movements?",
+    "ar_question": "هل لديه أي حركات غير عادية ومتكررة؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab7120",
+    "question": "Is his/her social behavior very one-sided and always on his/her own terms?",
+    "ar_question": "هل سلوكه الاجتماعي أحادي الجانب للغاية ويتبع دائمًا شروطه الخاصة؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab7121",
+    "question": "Does s/he sometimes say “you” or “s/he” when s/he means “I”?",
+    "ar_question": "هل يقول أحيانًا \"أنت\" أو \"هو/هي\" عندما يقصد \"أنا\"؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab7122",
+    "question": "Does s/he prefer imaginative activities such as play-acting or story-telling, rather than numbers or\n                lists of facts?",
+    "ar_question": "هل يفضل الأنشطة الخيالية مثل التمثيل المسرحي أو رواية القصص، بدلاً من الأرقام أو قوائم الحقائق؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab7123",
+    "question": "Does s/he sometimes lose the listener because of not explaining what s/he is talking about?",
+    "ar_question": "هل يفقد المستمع أحياناً بسبب عدم شرحه لما يتحدث عنه؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab7124",
+    "question": "Can s/he ride a bicycle (even if with stabilizers)?",
+    "ar_question": "هل يستطيع ركوب الدراجة (حتى لو كانت مزودة بمثبتات)؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab7125",
+    "question": "Does s/he try to impose routines on him/herself, or on others, in such a way that it causes\n                problems?",
+    "ar_question": "هل يحاول فرض الروتين على نفسه أو على الآخرين بطريقة تسبب مشاكل؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab7126",
+    "question": "Does s/he care how s/he is perceived by the rest of the group?",
+    "ar_question": "هل يهتم بنظرة بقية المجموعة إليه؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab7127",
+    "question": "Does s/he often turn conversations to his/her favorite subject rather than following what the other\n                person wants to talk about?",
+    "ar_question": "هل يقوم في كثير من الأحيان بتحويل المحادثات إلى موضوعه المفضل بدلاً من متابعة ما يريد الشخص الآخر التحدث عنه؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab7128",
+    "question": "Does s/he have odd or unusual phrases?",
+    "ar_question": "هل لديه عبارات غريبة أو غير عادية؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab7129",
+    "question": "Have teachers/health visitors ever expressed any concerns about his/her development?",
+    "ar_question": "هل أعرب المعلمون/الزائرون الصحيون عن أي مخاوف بشأن تطوره؟"
+   },
+   {
+    "_id": "663e938d9b8cc071f6ab712a",
+    "question": "Has s/he ever been diagnosed with any of the following: Language delay, ADHD, hearing or visual\n                difficulties, Autism Spectrum Condition (including Asperger’s Syndrome, or a physical disability?",
+    "ar_question": "هل تم تشخيص إصابته بأي مما يلي: تأخر اللغة، اضطراب فرط الحركة ونقص الانتباه، صعوبات في السمع أو البصر، حالة طيف التوحد (بما في ذلك متلازمة أسبرجر، أو إعاقة جسدية؟)"
+   }
+  ],
+  "answers": [
+   {
+    "name": "Yes",
+    "ar_name": "نعم",
+    "weight": 1
+   },
+   {
+    "name": "No",
+    "ar_name": "لا",
+    "weight": 2
+   }
+  ],
+  "results": [
+   {
+    "form": 0,
+    "to": 5,
+    "case": "case",
+    "ar_case": "translation to arabic"
+   }
+  ]
+ }
+]
