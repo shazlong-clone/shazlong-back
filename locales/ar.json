@@ -48,6 +48,7 @@
   "no_doctor_found": "لايوجد دكتور",
   "some_slots_not_found": "لايوجد فترات",
   "some_slots_reserved": "هذه الفترات محجوزة من قبل",
-  "booking_ids_required":"الحجزوات مطلوبة",
-  "status_required":"الحالة مطلوبة"
+  "booking_ids_required": "الحجزوات مطلوبة",
+  "status_required": "الحالة مطلوبة",
+  "Test_Isnt_Available": "الاختبار غير متاح حاليا"
 }
