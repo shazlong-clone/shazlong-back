@@ -10,7 +10,7 @@ exports.getAllReviewes = catchAsync(async (req, res, next) => {
     params = { ...params, doctor: req.params.doctorId };
   }
   const featured = new APIFeatures(Review.find(), params).filter().paginate();
-  const reviews = await featured.query;
+  const reviews = await featured.query.populate({path:'doctor', select:'fullArName fullEnName _id photo'});
   const total = await Review.countDocuments(featured.excutedQyery);
   const data = getPagination(reviews, total, featured.page, featured.size);
   

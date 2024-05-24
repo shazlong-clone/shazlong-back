@@ -25,6 +25,10 @@ const reviewSchema = new mongoose.Schema(
       ref: 'Doctor',
       required: [true, 'doctor id is required']
     },
+    isActive:{
+      type:Boolean,
+      default: false
+    },
     isFake: {
       type: Boolean,
       default: false,

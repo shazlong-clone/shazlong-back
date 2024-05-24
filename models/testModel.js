@@ -37,20 +37,31 @@ const TestSchema = new Schema({
   },
   isFake: {
     type: Boolean,
-    default:true,
+    default: true
   },
-  duration:{
-    type:String,
-    default:'15 min'
+  duration: {
+    type: String,
+    default: '15 min'
+  },
+  ar_duration: {
+    type: String,
+    default: '15 دقيقة'
+  },
+  recommendation: {
+    type: String,
+    default: 'Every 2 Weeks'
+  },
+  ar_recommendation: {
+    type: String,
+    default: 'كل اسبوعين'
   },
   name: String,
   ar_name: String,
   description: String,
-  ar_description:String,
+  ar_description: String,
   questions: [QuestionSchema],
   answers: [AnswerSchema],
   results: [ResultSchema]
-
 });
 
 // Create and export the Test model

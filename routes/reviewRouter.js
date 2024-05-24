@@ -12,7 +12,7 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(protect, getAllReviewes)
+  .get(getAllReviewes)
   .post(protect, restrictTo(USER), createReview);
 
 module.exports = router;

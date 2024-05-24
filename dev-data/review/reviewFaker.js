@@ -6,7 +6,7 @@ const doctors = JSON.parse(fs.readFileSync('./dev-data/doctor/doctors.json'));
 const users = JSON.parse(fs.readFileSync('./dev-data/user/users.json'));
 
 const reviews = [];
-doctors.forEach(doctor => {
+doctors.forEach((doctor) => {
   const numOfReviews = faker.number.int({ min: 1, max: 10 });
   for (let i = 0; i <= numOfReviews; i++) {
     const userId =
@@ -22,6 +22,7 @@ doctors.forEach(doctor => {
       user: userId,
       doctor: doctorId,
       isFake: true,
+      isActive: i === 0   ,
       createdAt: faker.date.past()
     };
     reviews.push(randReview);
