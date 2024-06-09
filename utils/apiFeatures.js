@@ -4,7 +4,7 @@ class APIFeatures {
     this.queryString = queryString;
     this.excutedQyery = {};
     this.page = 1;
-    this.size = 100;
+    this.size = 10;
     this.skip = 0;
   }
 
@@ -46,7 +46,7 @@ class APIFeatures {
 
   paginate() {
     this.page = this.queryString.page * 1 || 1;
-    this.size = this.queryString.size * 1 || 100;
+    this.size = this.queryString.size * 1 || 10;
     this.skip = (this.page - 1) * this.size;
     this.query = this.query.skip(this.skip).limit(this.size);
     return this;
