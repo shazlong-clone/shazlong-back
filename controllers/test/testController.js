@@ -47,7 +47,7 @@ exports.getUserTests = catchAsync(async (req, res, next) => {
     .paginate();
   const userTests = await featured.query.populate({
     path: 'test',
-    select: '_id questions answers',
+    select: '_id nam ar_name questions answers'
   });
   const total = await UserTest.countDocuments(featured.excutedQyery);
   const data = getPagination(userTests, total, featured.page, featured.size);
@@ -55,5 +55,30 @@ exports.getUserTests = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: true,
     data: data
+  });
+});
+exports.deteUserTest = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+  await UserTest.deleteOne({ _id: id });
+  res.status(200).json({
+    status: true
+  });
+});
+
+exports.getUserTestById = catchAsync(async (req, res, next) => {
+  const userId = req.user._id;
+  const { id = '' } = req.params;
+
+  const featured = new APIFeatures(UserTest.findById(id), {
+    user: userId
+  }).filter();
+  const userTests = await featured.query.populate({
+    path: 'test',
+    select: '_id nam ar_name questions answers'
+  });
+
+  res.status(200).json({
+    status: true,
+    data: userTests
   });
 });
