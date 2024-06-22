@@ -50,5 +50,6 @@
   "some_slots_reserved": "some slots reserved",
   "booking_ids_required": "booking ids required",
   "status_required": "status required",
-  "Test_Isnt_Available": "Test Isnt Available"
+  "Test_Isnt_Available": "Test Isnt Available",
+  "No_Blog": "No Blog Exists"
 }

@@ -373,8 +373,7 @@ exports.getMe = catchAsync(async (req, res, next) => {
 exports.addOrUpdateDoctorExperience = catchAsync(async (req, res, next) => {
   if (req.file) {
     const resizedBuffer = await resizeBuffer(req.file.buffer, 40, 40);
-    const base64Photo = `${BASE64_STARTER}${resizedBuffer.toString('base64')}`;
-    req.body.company_logo = base64Photo;
+    req.body.company_logo = `${BASE64_STARTER}${resizedBuffer.toString('base64')}`;
   }
   let doctor;
   const params = {
