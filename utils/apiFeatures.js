@@ -17,8 +17,10 @@ class APIFeatures {
     let queryStr = JSON.stringify(queryObj);
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
     // parsing will remove undefined fileds
+    console.log(this.query);
     this.query = this.query.find(JSON.parse(queryStr));
-    this.excutedQyery = JSON.parse(queryStr);
+    this.excutedQyery = this.query.clone();
+
     return this;
   }
 

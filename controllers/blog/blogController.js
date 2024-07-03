@@ -2,7 +2,7 @@ const Blog = require('../../models/blogModel');
 const catchAsync = require('../../utils/catchAsync');
 const APIFeature = require('../../utils/apiFeatures');
 const getPagination = require('../../utils/getPagination');
-const resizeBuffer = require('../../utils/resizeBuffer');
+// const resizeBuffer = require('../../utils/resizeBuffer');
 const { BASE64_STARTER, PENDING, ACCEPTED } = require('../../utils/constants');
 
 exports.createBlog = catchAsync(async (req, res) => {
@@ -11,13 +11,14 @@ exports.createBlog = catchAsync(async (req, res) => {
   req.body.isFeatured = false;
 
   if (req.file) {
-    const resizedBuffer = await resizeBuffer(req.file.buffer, 40, 40);
-    req.body.cover = `${BASE64_STARTER}${resizedBuffer.toString('base64')}`;
+    // const resizedBuffer = await resizeBuffer(req.file.buffer, 40, 40);
+    req.body.cover = `${BASE64_STARTER}${req.file.buffer.toString('base64')}`;
   }
   if (req.body.id) {
     await Blog.updateOne({ _id: req.body.id }, req.body);
+  }else {
+    await Blog.create(req.body);
   }
-  await Blog.create(req.body);
   res.status(200).json({
     status: true
   });
@@ -48,9 +49,9 @@ exports.getBlogs = catchAsync(async (req, res, next) => {
     fields,
     sort = '-createdAt'
   } = req.query;
-  let blogQuery = Blog.find({ status: ACCEPTED });
+  let blogQuery = Blog.find({ status: ACCEPTED, isDeleted: false });
   if (name) {
-    blogQuery.find({
+    blogQuery = blogQuery.find({
       $or: [
         {
           title: {
@@ -69,7 +70,7 @@ exports.getBlogs = catchAsync(async (req, res, next) => {
   if (category) {
     blogQuery = blogQuery.find({
       category: {
-        $in: category.category.split(',')
+        $in: category.split(',')
       }
     });
   }
@@ -84,13 +85,16 @@ exports.getBlogs = catchAsync(async (req, res, next) => {
     sort,
     fields
   })
+    .filter()
     .limitFields()
-    .sort();
+    .sort()
+    .paginate();
+  const total = await Blog.countDocuments(featured.excutedQyery);
+
   const blogs = await featured.query.populate({
     path: 'publisher',
     select: 'fullArName fullEnName _id photo'
   });
-  const total = await Blog.countDocuments(featured.excutedQyery);
   const result = getPagination(blogs, total, featured.page, featured.size);
 
   res.status(200).json({
