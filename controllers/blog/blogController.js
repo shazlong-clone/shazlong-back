@@ -3,17 +3,12 @@ const catchAsync = require('../../utils/catchAsync');
 const APIFeature = require('../../utils/apiFeatures');
 const getPagination = require('../../utils/getPagination');
 // const resizeBuffer = require('../../utils/resizeBuffer');
-const { BASE64_STARTER, PENDING, ACCEPTED } = require('../../utils/constants');
+const { PENDING, ACCEPTED } = require('../../utils/constants');
 
 exports.createBlog = catchAsync(async (req, res) => {
   req.body.publisher = req.user._id;
   req.body.status = PENDING;
   req.body.isFeatured = false;
-
-  if (req.file) {
-    // const resizedBuffer = await resizeBuffer(req.file.buffer, 40, 40);
-    req.body.cover = `${BASE64_STARTER}${req.file.buffer.toString('base64')}`;
-  }
   if (req.body.id) {
     await Blog.updateOne({ _id: req.body.id }, req.body);
   }else {

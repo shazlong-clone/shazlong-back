@@ -12,7 +12,7 @@ router
   .post(
     protect,
     restrictTo(DOCTOR, ADMIN),
-    uploadImg.single('cover'),
+    uploadImg.none(),
     blogController.createBlog
   )
   .get(blogController.getBlogs)

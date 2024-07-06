@@ -15,7 +15,7 @@ for (let i = 0; i < 10; i++) {
 
   const genderText = gender === MALE ? 'male' : 'female';
   const user = {
-    _id: mongoose.mongo.ObjectId(),
+    _id: new mongoose.mongo.ObjectId(),
     name: faker.person.firstName(),
     email: faker.internet.email(),
     phone: faker.phone.number(),
