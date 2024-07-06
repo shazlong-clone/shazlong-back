@@ -1,5 +1,8 @@
 // genrate order 1
 const fs = require('fs');
+const dotenv = require('dotenv');
+
+dotenv.config({ path: '../../config.env' });
 
 const { fakerAR, faker } = require('@faker-js/faker');
 const mongoose = require('mongoose');
@@ -97,8 +100,8 @@ for (let i = 0; i < 50; i++) {
           ]
         };
       }),
-    password: 'doctor1234__',
-    passwordConfirm: 'doctor1234__',
+    password: process.env.DOCTOR_PASSWORD,
+    passwordConfirm: process.env.DOCTOR_PASSWORD,
     specialization: Array(faker.number.int({ min: 2, max: 8 }))
       .fill('')
       .map(el => {
