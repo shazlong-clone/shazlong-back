@@ -4,6 +4,7 @@ const { protect } = require('../middleware/authenticate');
 const { restrictTo } = require('../middleware/authorize');
 const { ADMIN, DOCTOR } = require('../utils/constants');
 const uploadImg = require('../middleware/uploadImg');
+const commentRouter = require('./commentsRoute');
 
 const router = express.Router();
 
@@ -20,5 +21,7 @@ router
 router
   .route('/my-blogs')
   .get(protect, restrictTo(DOCTOR), blogController.getDoctorBlogs);
+router.use('/:blogId/comments', commentRouter);
+
 router.route('/:blogId').get(blogController.getBlogById);
 module.exports = router;

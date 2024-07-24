@@ -7,3 +7,4 @@ exports.reviewRouter = require('./reviewRouter');
 exports.paymentRouter = require('./paymentRouter');
 exports.blogRouter = require('./blogRouter');
 exports.testRouter = require('./testRouter');
+exports.commentRouter = require('./commentsRoute');

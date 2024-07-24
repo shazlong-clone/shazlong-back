@@ -40,7 +40,7 @@ app.use(i18n.init);
 
 const whitelist = [process.env.FRONT_URL];
 const corsOptions = {
-  origin: function(origin, callback) {
+  origin: function (origin, callback) {
     if (
       whitelist.indexOf(origin) !== -1 ||
       process.env.NODE_ENV === 'development'
