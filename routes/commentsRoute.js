@@ -15,5 +15,8 @@ router
     )
     .get(commentsController.getBlogComments);
 
-
+router
+    .route('/:id/replies').get(protect, restrictTo(USER), commentsController.getCommentReplies)
+router
+    .route('/:id').post(protect, restrictTo(USER), commentsController.editComment)
 module.exports = router;

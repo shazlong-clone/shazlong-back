@@ -22,7 +22,8 @@ const {
   reviewRouter,
   paymentRouter,
   blogRouter,
-  testRouter
+  testRouter,
+  commentRouter
 } = require('./routes');
 
 const app = express();
@@ -117,6 +118,7 @@ app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/payment', paymentRouter);
 app.use('/api/v1/blogs', blogRouter);
 app.use('/api/v1/tests', testRouter);
+app.use('/api/v1/comments', commentRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
