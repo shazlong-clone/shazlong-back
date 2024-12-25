@@ -314,16 +314,18 @@ exports.updatePhoto = catchAsync(async (req, res, next) => {
 
   const base64Photo = `${BASE64_STARTER}${resizedBuffer.toString('base64')}`;
 
-  const doctor = await Doctor.findByIdAndUpdate(
+   await Doctor.findByIdAndUpdate(
     req.user._id,
     {
       photo: base64Photo
     },
-    { new: true, runValidators: true }
+    { runValidators: true }
   );
   res.status(200).json({
     status: true,
-    data: doctor
+    data: {
+      photo: base64Photo
+    }
   });
 });
 exports.uploadCv = catchAsync(async (req, res, next) => {

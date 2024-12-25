@@ -33,7 +33,10 @@ const handelValidationErrors = (err, res) => {
 
 const handleDuplicateFieldsDB = (err, res) => {
   const duplicatedkeys = Object.keys(err.keyPattern).join(res.__('and'));
-  const message = `${res.__('duplicated_err')} ${duplicatedkeys}.`;
+  let message = `${res.__('duplicated_err')} ${duplicatedkeys}.`;
+  if(duplicatedkeys === 'email'){
+    message = res.__('duplicated_mail', duplicatedkeys)
+  }
   return new AppError(message, 400);
 };
 

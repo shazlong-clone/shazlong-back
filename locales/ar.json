@@ -51,5 +51,6 @@
   "booking_ids_required": "الحجزوات مطلوبة",
   "status_required": "الحالة مطلوبة",
   "Test_Isnt_Available": "الاختبار غير متاح حاليا",
-  "No_Blog": "عفوا المدونة غير موجودة"
+  "No_Blog": "عفوا المدونة غير موجودة",
+  "duplicated_mail":"المستخدم  موجود مسبقا"
 }

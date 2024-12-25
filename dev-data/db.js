@@ -9,10 +9,10 @@ if (process.env.NODE_ENV === 'production') {
   console.log('DATA BASE TYPE => REMOTE DB');
   dbName = process.env.DATABASE_NAME;
 } else {
-  // console.log('DATA BASE TYPE => LOCALE DB');
   console.log('DATA BASE TYPE => DEV DB');
-  // DB = process.env.DATABASE_LOCALE;
   DB = process.env.DATABASE_DEV;
+  // console.log('DATA BASE TYPE => LOCALE DB');
+  // DB = process.env.DATABASE_LOCALE;
   dbName = process.env.DEV_DATABASE_NAME;
 }
 

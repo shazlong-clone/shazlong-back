@@ -51,5 +51,6 @@
   "booking_ids_required": "booking ids required",
   "status_required": "status required",
   "Test_Isnt_Available": "Test Isnt Available",
-  "No_Blog": "No Blog Exists"
+  "No_Blog": "No Blog Exists",
+  "duplicated_mail":"This %s Email  Exits"
 }
